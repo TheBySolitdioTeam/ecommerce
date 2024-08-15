@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose'
+import mongoose,{ Schema } from 'mongoose'
 
 
 const categorySchema = new Schema({
@@ -7,14 +7,11 @@ const categorySchema = new Schema({
         required: [true, 'Please enter ']
     },
     parent_id: {
-        type: mongoose.ObjectId,
+        type: mongoose.Types.ObjectId,
         default: null
     },
     image: {
-        type: String,
-        required: function () {
-            this.parent_id !== null ? [true, 'Please provide an image!']: false
-        }
+        type: String
     }
 })
 

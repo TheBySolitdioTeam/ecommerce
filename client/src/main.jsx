@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from './routes/root'
+import AdminRoot from './routes/admin/adminRoot'
 import Login, {action as loginAction} from './routes/login'
 import ErrorPage from './error-page'
 import './index.css'
@@ -19,6 +20,9 @@ const router = createBrowserRouter([{
       action: loginAction
     }
   ]
+}, {
+  path: "/admin",
+  element:<AdminRoot/>
 }])
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

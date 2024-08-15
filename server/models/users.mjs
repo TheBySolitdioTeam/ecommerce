@@ -15,8 +15,6 @@ const userSchema = new Schema({
         type: String
     }
 })
-
-
 export default mongoose.model('User', userSchema)
 
 

@@ -1,9 +1,9 @@
 import mongoose, { Schema } from 'mongoose'
 
-
+import userSubDoc from './subdocs/userSubDoc.mjs'
 const productSubDoc = new Schema({
     product_id: {
-        type: mongoose.ObjectId, 
+        type: mongoose.Types.ObjectId, 
         required: [true, 'Please enter the product id']
     },
     product_qty: {
@@ -12,19 +12,7 @@ const productSubDoc = new Schema({
     }
 })
 
-const userSubDoc = new Schema({
-    user_id: {
-        type: mongoose.ObjectId,
-        required: [true, 'Please provide a user id!']
-    },
-    fullName: {
-        type: String,
-        required: [true, 'The user\'s fullname is missing!']
-    },
-    picture: {
-        type: String
-    }
-})
+
 
 const orderSchema = new Schema({
     products: [productSubDoc],
@@ -36,6 +24,15 @@ const orderSchema = new Schema({
         type: String,
         default: 'Received'
     },
-    user: userSubDoc
+    user: userSubDoc,
+    products: [mongoose.Types.ObjectId],
+    payment: mongoose.Mixed,
+    address: {
+        type: String,
+        required: [true, 'Please provide an address']
+    }
 
 })
+
+
+export default mongoose.model('Orders', orderSchema)

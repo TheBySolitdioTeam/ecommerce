@@ -1,19 +1,7 @@
-import { Schema } from mongoose
+import mongoose, { Schema } from mongoose
+import userSubDoc from './subdocs/userSubDoc.mjs'
 
 
-const userSubDoc = new Schema({
-    user_id: {
-        type: mongoose.ObjectId,
-        required: [true, 'Please provide a user id!']
-    },
-    fullName: {
-        type: String,
-        required: [true, 'The user\'s fullname is missing!']
-    },
-    picture: {
-        type: String
-    }
-})
 
 const reviewSchema = new Schema({
     title: {
@@ -27,7 +15,7 @@ const reviewSchema = new Schema({
     // Using the Extended reference pattern to have access to needed field in user
     user: userSubDoc,
     product_id: {
-        type: mongoose.ObjectId,
+        type: mongoose.Types.ObjectId,
         required: [true, 'Please provide a product_id']
     },
    

@@ -6,6 +6,7 @@ import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import adminRouter from './routes/admin.mjs'
 
 
 
@@ -18,7 +19,7 @@ const corsOptions = {
 }
 
 try {
-    const connection = await mongoose.connect('mongodb://127.0.0.1:27017/bySolitdio')
+    const connection = await mongoose.connect(process.env.MONGO_URI)
     console.log('Database connected')
 } catch {
     console.log("Error occured");
@@ -43,6 +44,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 app.use('/auth', authRouter)
+app.use('/admin', adminRouter)
 
 const port = process.env.PORT || 5500
 

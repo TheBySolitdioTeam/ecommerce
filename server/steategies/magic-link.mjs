@@ -57,12 +57,13 @@ passport.use(
 )
 passport.serializeUser(function (user, cb) {
   process.nextTick(function () {
-    cb(null, { id: user.id, email: user.email })
+    cb(null, { id: user.id, email: user.email, isAdmin: user.isAdmin, fullName: user.fullName })
   })
 })
 
 passport.deserializeUser(function (user, cb) {
   process.nextTick(function () {
+    console.log(`Inside Deserializer:  ${JSON.stringify(user)}`);
     return cb(null, user)
   })
 })

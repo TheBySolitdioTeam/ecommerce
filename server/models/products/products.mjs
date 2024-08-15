@@ -7,7 +7,7 @@ const options = { discriminatoryKey: 'type' }
 // The subdocument for category for the extended reference pattern
 const categorySubDoc = new Schema({
     category_id: {
-        type: mongoose.ObjectId,
+        type: mongoose.Types.ObjectId,
         required: [true, 'Please provide the category id']
     },
     name: {
@@ -18,7 +18,7 @@ const categorySubDoc = new Schema({
 // The subdocument for sales
 const salesSubDoc = new Schema({
     sales_id: {
-        type: mongoose.ObjectId,
+        type: mongoose.Types.ObjectId,
         required: [true, 'Please provide a sales id!'],
     },
     discount_rate: {

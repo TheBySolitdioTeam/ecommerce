@@ -1,4 +1,11 @@
-import { FaChartArea, FaStore, FaTable, FaBars } from 'react-icons/fa6'
+import {
+  FaChartArea,
+  FaStore,
+  FaTable,
+  FaBars,
+  FaBagShopping,
+} from 'react-icons/fa6'
+import { NavLink } from 'react-router-dom'
 
 export default function AdminHeader() {
     return (
@@ -15,7 +22,7 @@ export default function AdminHeader() {
                 <FaBars className="h-5 w-5" />
               </label>
             </div>
-            <div className="drawer-side">
+            <div className="drawer-side z-40">
               <label
                 htmlFor="my-drawer"
                 aria-label="close sidebar"
@@ -23,22 +30,64 @@ export default function AdminHeader() {
               ></label>
               <ul className="menu bg-base-200 min-h-full w-56">
                 <li>
-                  <a className="text-lg">
+                  <NavLink
+                    to={'/admin/dashboard'}
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? 'text-lg bg-primary text-base-100'
+                        : isPending
+                        ? 'text-lg bg-secondary'
+                        : ''
+                    }
+                  >
                     <FaChartArea className="h-5 w-5" />
                     Dashboard
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="text-lg">
+                  <NavLink
+                    to={'/admin/products'}
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? 'text-lg bg-primary text-base-100'
+                        : isPending
+                        ? 'text-lg bg-secondary'
+                        : ''
+                    }
+                  >
                     <FaStore className="h-5 w-5" />
                     Products
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="text-lg">
+                  <NavLink
+                    to={'/admin/categories'}
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? 'text-lg bg-primary text-base-100'
+                        : isPending
+                        ? 'text-lg bg-secondary'
+                        : ''
+                    }
+                  >
                     <FaTable className="h-5 w-5" />
                     Categories
-                  </a>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to={'/admin/orders'}
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? 'text-lg bg-primary text-base-100'
+                        : isPending
+                        ? 'text-lg bg-secondary'
+                        : ''
+                    }
+                  >
+                    <FaBagShopping className="h-5 w-5" />
+                    Orders
+                  </NavLink>
                 </li>
               </ul>
             </div>

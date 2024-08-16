@@ -7,7 +7,8 @@ import Login, {action as loginAction} from './routes/login'
 import ErrorPage from './error-page'
 import './index.css'
 import CategoryRoot from './routes/admin/categoryRoot'
-import CreateCategory from './routes/admin/routes/createCategory'
+import CreateCategory, {action as createCategoryAction} from './routes/admin/routes/createCategory'
+import PrimeCategories, {loader as primeCategoriesLoader} from './routes/admin/routes/getPrimeCategories'
 
 
 
@@ -31,7 +32,14 @@ const router = createBrowserRouter([{
     element: <CategoryRoot />,
     children: [{
       path: '/admin/categories/create',
-      element: <CreateCategory/>
+      element: <CreateCategory />,
+      action: createCategoryAction
+    },
+      {
+        path: '/admin/categories/view',
+        element: <PrimeCategories />,
+        loader: primeCategoriesLoader
+        
     }]
   }]
 }])

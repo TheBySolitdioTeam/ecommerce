@@ -60,36 +60,42 @@ export default function AdminRoot() {
                       Dashboard
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink
-                      to={'/admin/products'}
-                      className={({ isActive, isPending }) =>
-                        isActive
-                          ? 'text-lg bg-primary text-base-100'
-                          : isPending
-                          ? 'text-lg bg-secondary'
-                          : ''
-                      }
-                    >
-                      <FaStore className="h-5 w-5" />
-                      Products
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={'/admin/categories'}
-                      className={({ isActive, isPending }) =>
-                        isActive
-                          ? 'text-lg bg-primary text-base-100'
-                          : isPending
-                          ? 'text-lg bg-secondary'
-                          : ''
-                      }
-                    >
-                      <FaTable className="h-5 w-5" />
-                      Categories
-                    </NavLink>
-                  </li>
+                  {user.isAdmin ? (
+                    <>
+                      <li>
+                        <NavLink
+                          to={'/admin/products'}
+                          className={({ isActive, isPending }) =>
+                            isActive
+                              ? 'text-lg bg-primary text-base-100'
+                              : isPending
+                              ? 'text-lg bg-secondary'
+                              : ''
+                          }
+                        >
+                          <FaStore className="h-5 w-5" />
+                          Products
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink
+                          to={'/admin/categories'}
+                          className={({ isActive, isPending }) =>
+                            isActive
+                              ? 'text-lg bg-primary text-base-100'
+                              : isPending
+                              ? 'text-lg bg-secondary'
+                              : ''
+                          }
+                        >
+                          <FaTable className="h-5 w-5" />
+                          Categories
+                        </NavLink>
+                      </li>
+                    </>
+                  ) : (
+                    ''
+                  )}
                   <li>
                     <NavLink
                       to={'/admin/orders'}

@@ -33,11 +33,11 @@ export async function action({request}) {
 }
 export default function Login() {
   const fetcher = useFetcher()
-  const toastOptions = {
-    duration: 5000,
-   
-  }
+ 
   useEffect(() => {
+     const toastOptions = {
+       duration: 5000,
+     }
    
     fetcher.data
       ? fetcher.data.msg

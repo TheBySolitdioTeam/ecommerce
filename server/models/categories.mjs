@@ -8,7 +8,7 @@ const categorySchema = new Schema({
     },
     parent_id: {
         type: mongoose.Types.ObjectId,
-        default: null
+        
     },
     image: {
         type: String

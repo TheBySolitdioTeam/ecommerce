@@ -11,11 +11,11 @@ export async function action({ request }) {
   if (fileName.trim() === "") {
     const bodyObject = Object.fromEntries(formData)
     delete bodyObject.image
-    url = 'http://localhost:5500/admin/category/create'
+    url = 'http://localhost:5500/admin/category'
     bodyForm = JSON.stringify(bodyObject)
 
   } else {
-     url = 'http://localhost:5500/admin/multer/createCategory'
+     url = 'http://localhost:5500/admin/multer'
      bodyForm = formData
   }
   console.log(bodyForm)

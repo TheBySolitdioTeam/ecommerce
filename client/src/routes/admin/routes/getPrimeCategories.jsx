@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom"
+import { useLoaderData, Form, useNavigation } from "react-router-dom"
 import { FaX, FaPen } from "react-icons/fa6"
 export async function loader() {
     try {
@@ -25,6 +25,7 @@ export async function loader() {
 
 
 export default function PrimeCategories() {
+  const navigation = useNavigation()
     const primeCategories = useLoaderData()
     return (
       <div className="flex flex-col justify-between">
@@ -52,7 +53,6 @@ export default function PrimeCategories() {
                   <figure>
                     <img
                       src={
-                       
                         'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp'
                       }
                       alt="Shoes"
@@ -63,9 +63,28 @@ export default function PrimeCategories() {
                       <button className="btn bg-yellow-500 btn-rounded border-none btn-sm">
                         <FaPen className="h-6 w-6 text-white" />
                       </button>
-                      <button className="btn bg-red-700 btn-rounded border-none btn-sm">
-                        <FaX className="h-6 w-6 text-white" />
-                      </button>
+
+                      <Form
+                        method="post"
+                        action={`/admin/categories/delete/${item._id}`}
+                        /*onSubmit={(event) => {
+                          if (
+                            !confirm(
+                              'Please confirm you want to delete this record.'
+                            )
+                          ) {
+                            event.preventDefault()
+                          }
+                        }}*/
+                      >
+                        <button className="btn bg-red-700 btn-rounded border-none btn-sm">
+                          {navigation.state === 'submitting' ? (
+                            <span className="loading loading-infinity loading-sm"></span>
+                          ) : (
+                            <FaX className="h-6 w-6 text-white" />
+                          )}
+                        </button>
+                      </Form>
                     </div>
                     <p className="text-white text-4xl">{item.name}</p>
                   </div>

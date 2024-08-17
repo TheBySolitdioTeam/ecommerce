@@ -1,16 +1,22 @@
+import { useEffect } from 'react'
 import { useRouteError } from 'react-router-dom'
+import toast, {Toaster} from 'react-hot-toast'
 
 export default function ErrorPage() {
   const error = useRouteError()
   console.error(error)
 
+  useEffect(() => {
+    const toastOptions = {
+      duration: 5000
+    }
+
+    toast.error(error.message, toastOptions)
+  })
+
   return (
-    <div id="error-page">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p>
-        <i>{error.statusText || error.message}</i>
-      </p>
-    </div>
+   
+        <Toaster/>
+      
   )
 }

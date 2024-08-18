@@ -63,7 +63,7 @@ passport.serializeUser(function (user, cb) {
 
 passport.deserializeUser(function (user, cb) {
   process.nextTick(function () {
-    console.log(`Inside Deserializer:  ${JSON.stringify(user)}`);
+    //console.log(`Inside Deserializer:  ${JSON.stringify(user)}`);
     return cb(null, user)
   })
 })

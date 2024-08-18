@@ -10,6 +10,8 @@ import CategoryRoot from './routes/admin/categoryRoot'
 import CreateCategory, {action as createCategoryAction} from './routes/admin/routes/createCategory'
 import PrimeCategories, { loader as primeCategoriesLoader } from './routes/admin/routes/getPrimeCategories'
 import {action as deleteCategoryAction} from './routes/admin/routes/deleteCategory'
+import EditCategory, {loader as editCategoryLoader, action as editCategoryAction} from './routes/admin/routes/editCategory'
+import GetSubCategories, {loader as subCategoriesLoader} from './routes/admin/routes/getSubCategories'
 
 
 
@@ -54,6 +56,19 @@ const router = createBrowserRouter([
             action:  deleteCategoryAction,
             errorElement: <ErrorPage />
           },
+          {
+            path: '/admin/categories/edit/:id',
+            element: <EditCategory />,
+            loader: editCategoryLoader,
+            action: editCategoryAction,
+            errorElement: <ErrorPage/>
+          },
+          {
+            path: '/admin/categories/subs/:parent_id',
+            element: <GetSubCategories />,
+            loader: subCategoriesLoader,
+            errorElement: <ErrorPage/>
+          }
         ],
       },
     ],

@@ -1,9 +1,9 @@
-import { useLoaderData, Form, useNavigation } from "react-router-dom"
+import { useLoaderData, Form, useNavigation,Link } from "react-router-dom"
 import { FaX, FaPen } from "react-icons/fa6"
 export async function loader() {
     try {
          const response = await fetch(
-           'http://localhost:5500/admin/category/primary',
+           `http://localhost:5500/admin/category/primary`,
            {
              method: 'GET',
              credentials: 'include',
@@ -60,9 +60,18 @@ export default function PrimeCategories() {
                   </figure>
                   <div className="card-body">
                     <div className="card-actions justify-end">
-                      <button className="btn bg-yellow-500 btn-rounded border-none btn-sm">
+                      <Link
+                        to={`/admin/categories/subs/${item._id}`}
+                        className="btn btn-info btn-rounded border-none btn-sm"
+                      >
+                        View Subs
+                      </Link>
+                      <Link
+                        to={`/admin/categories/edit/${item._id}`}
+                        className="btn bg-yellow-500 btn-rounded border-none btn-sm"
+                      >
                         <FaPen className="h-6 w-6 text-white" />
-                      </button>
+                      </Link>
 
                       <Form
                         method="post"

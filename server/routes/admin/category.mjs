@@ -81,6 +81,59 @@ router.post(
   categoryAfterImgUpload
 )
 
+// Edit category with image
+router.put(
+  '/:id',
+  upload.single('image'),
+  checkSchema(categoryValidationSchema, ['body']), async (req, res) => {
+    const { id } = req.params
+    
+    const results = validationResult(req)
+    if (!results.isEmpty()) return res.status(403).send(results.array())
+    
+    const data = matchedData(req)
+     data.image = req.file.filename 
+     data.parent_id = req.body.parent_id || null
+    
+    try {
+      const checkCategory = await Category.findById(id)
+      if (!checkCategory) return res.status(404).send({ error: 'Category not found!' })
+      // Delete previous image if exists
+      checkCategory.image ? fs.unlinkSync(destinacion + checkCategory.image) : ''
+      
+      
+      await Category.findByIdAndUpdate(id,data)
+      res.status(200).send({msg: 'Category updated successfully!'})
+      
+    } catch (error) {
+      return res.send({error: error.message})
+    }
+  }
+)
+// Edit Category without image
+
+router.patch('/:id', checkSchema(categoryValidationSchema,['body']), async (req, res) => {
+  const { id } = req.params
+  console.log(req.body)
+  const results = validationResult(req)
+  if (!results.isEmpty()) return res.status(400).send({error: results.array()[0].msg})
+  const data = matchedData(req)
+  data.parent_id = req.body.parent_id || null
+
+   try {
+     const checkCategory = await Category.findById(id)
+     if (!checkCategory)
+       return res.status(404).send({ error: 'Category not found!' })
+     
+     const updatedCategory = {...data, image: checkCategory.image}
+     
+     await Category.findByIdAndUpdate(id, updatedCategory)
+     res.status(200).send({ msg: 'Category updated successfully!' })
+   } catch (error) {
+     return res.send({ error: error.message })
+   }
+})
+
 // Get all categories
 router.get('/', async (req, res) => {
   try {
@@ -91,8 +144,8 @@ router.get('/', async (req, res) => {
   }
 })
 // Get all the parentless categories
-
 router.get('/primary', async (req, res) => {
+  
   try {
     const primeCategories = await Category.find({ parent_id: null })
     return res.send({ data: primeCategories })
@@ -100,6 +153,35 @@ router.get('/primary', async (req, res) => {
     return res.status(404).send({ error: error.msg })
   }
 })
+
+// Get One Categorie
+router.get('/:id', async (req, res) => {
+  const {id} = req.params
+  try {
+    const singleCategorie = await Category.findById(id)
+    console.log(JSON.stringify(singleCategorie))
+    if (!singleCategorie) return res.status(404).send({ error: 'Categorie not found' })
+    return res.status(200).send(singleCategorie)
+    
+  } catch (error) {
+    return res.status(404).send({error: error.message})
+  }
+})
+
+// Get sub categories
+router.get("/subs/:parent_id", async (req, res) => {
+  const { parent_id } = req.params
+  try {
+    const subs = await Category.find({ parent_id })
+    return res.send(subs)
+    
+  } catch (error) {
+    return res.send({error: error.message})
+  }
+})
+
+
+
 
 //Delete category endpoint
 router.delete('/:id', async (req, res) => {

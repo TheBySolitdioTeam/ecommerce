@@ -15,5 +15,9 @@ const categorySchema = new Schema({
     }
 })
 
+categorySchema.post('findOneAndDelete', async function (doc) {
+    await this.model.deleteMany({parent_id: doc._id})
+    console.log('%s has been deleted', doc._id)
+})
 
 export default mongoose.model('Category', categorySchema)

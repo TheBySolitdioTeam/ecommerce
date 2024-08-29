@@ -153,7 +153,39 @@ router.get('/primary', async (req, res) => {
     return res.status(404).send({ error: error.msg })
   }
 })
+// Get Serach
+router.get("/search", async (req, res) => {
+  const { q } = req.query
+  
+  try {
+    const searchResults = await Category.find({ name: { $regex: new RegExp(`${q}`, 'i') } })
+    return res.send(searchResults)
+    
+  } catch (error) {
+    return res.send({error: error.message})
+  }
+})
+//
+router.get('/infiniteScroll', async (req, res) => {
+  const { cursor, limit } = req.query
 
+  const query = {}
+      
+  if (cursor) {
+    query._id={$gt:cursor}
+  }
+
+  try {
+    const primaries = await Category.find(query).limit(Number(limit))
+    return res.send(primaries)
+  } catch (error) {
+    return res.send({error: error.message})
+  }
+
+  /*const prevCursor = cursor && primaries.length > 0 ? primaries[0]._id : null
+  const nextCursor = primaries.length > 0 ? primaries[primaries.length -1]._id: null */
+  
+})
 // Get One Categorie
 router.get('/:id', async (req, res) => {
   const {id} = req.params
@@ -167,6 +199,8 @@ router.get('/:id', async (req, res) => {
     return res.status(404).send({error: error.message})
   }
 })
+
+
 
 // Get sub categories
 router.get("/subs/:parent_id", async (req, res) => {

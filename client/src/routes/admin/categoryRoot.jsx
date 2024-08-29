@@ -41,6 +41,7 @@ export default function CategoryRoot() {
           </li>
         </ul>
       </div>
+      
       <Outlet className="w-full" />
     </div>
   )

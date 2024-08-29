@@ -8,10 +8,15 @@ import ErrorPage from './error-page'
 import './index.css'
 import CategoryRoot from './routes/admin/categoryRoot'
 import CreateCategory, {action as createCategoryAction} from './routes/admin/routes/createCategory'
-import PrimeCategories, { loader as primeCategoriesLoader } from './routes/admin/routes/getPrimeCategories'
+import PrimeCategories from './routes/admin/routes/getPrimeCategories'
+import InfinitePrimes, { loader as infiniteCategoryLoader } from './routes/admin/routes/InfinitePrimes'
+import GetCategorySearch, {loader as searchCategoryLoader} from './routes/admin/routes/getCategorySearch'
 import {action as deleteCategoryAction} from './routes/admin/routes/deleteCategory'
 import EditCategory, {loader as editCategoryLoader, action as editCategoryAction} from './routes/admin/routes/editCategory'
-import GetSubCategories, {loader as subCategoriesLoader} from './routes/admin/routes/getSubCategories'
+import GetSubCategories, { loader as subCategoriesLoader } from './routes/admin/routes/getSubCategories'
+import {loader as specialPrimaryLoader} from './routes/admin/routes/getPrimariesLoader'
+//import loader from 'css-loader'
+//import loader from 'css-loader'
 
 
 
@@ -40,6 +45,10 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
           {
+            path: '/admin/categories/loader',
+            loader: specialPrimaryLoader,
+          },
+          {
             path: '/admin/categories/create',
             element: <CreateCategory />,
             action: createCategoryAction,
@@ -48,27 +57,40 @@ const router = createBrowserRouter([
           {
             path: '/admin/categories/view',
             element: <PrimeCategories />,
-            loader: primeCategoriesLoader,
             errorElement: <ErrorPage />,
+            children: [
+              {
+                index: true,
+                element: <InfinitePrimes />,
+                loader: infiniteCategoryLoader,
+                errorElement: <ErrorPage />,
+              },
+              {
+                path: '/admin/categories/view/search',
+                element: <GetCategorySearch />,
+                loader: searchCategoryLoader,
+                errorElement: <ErrorPage />,
+              },
+            ],
           },
           {
             path: '/admin/categories/delete/:id',
-            action:  deleteCategoryAction,
-            errorElement: <ErrorPage />
+            action: deleteCategoryAction,
+            errorElement: <ErrorPage />,
           },
           {
             path: '/admin/categories/edit/:id',
             element: <EditCategory />,
             loader: editCategoryLoader,
             action: editCategoryAction,
-            errorElement: <ErrorPage/>
+            errorElement: <ErrorPage />,
           },
           {
             path: '/admin/categories/subs/:parent_id',
             element: <GetSubCategories />,
             loader: subCategoriesLoader,
-            errorElement: <ErrorPage/>
-          }
+            errorElement: <ErrorPage />,
+          },
         ],
       },
     ],

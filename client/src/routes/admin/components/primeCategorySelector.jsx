@@ -8,7 +8,7 @@ export default function PrimeCategorySelector({name}) {
 
   useEffect(() => {
     if (fetcher.state === 'idle' && !fetcher.data) {
-      fetcher.load('/admin/categories/view')
+      fetcher.load('/admin/categories/loader')
     }
   }, [fetcher])
 

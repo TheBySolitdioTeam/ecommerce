@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useFetcher, useLoaderData } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
-import PrimeCategorySelector from '../components/primeCategorySelector'
+import PrimeCategorySelector from '../../components/primeCategorySelector'
 
 
 export async function loader({ params }) {
@@ -63,6 +63,7 @@ export default function  EditCategory(){
          duration: 5000,
          id: Math.round(Math.random() * 1e9),
        }
+       toast.dismiss()
 
        fetcher.data
          ? fetcher.data.error

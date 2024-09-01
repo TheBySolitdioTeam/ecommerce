@@ -2,7 +2,7 @@ import { Schema } from 'mongoose'
 import Product from './products.mjs'
 const options = { discriminatoryKey: 'type' }
 const Furniture = Product.discriminator(
-  'Product',
+  'Furniture',
   new Schema({
     color: {
       type: String, 

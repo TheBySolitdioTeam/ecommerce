@@ -50,10 +50,13 @@ const productSchema = new Schema({
     },
     type: {
         type: String,
-        required: [true, 'Please provide a type of the product!']
+        default: 'Product'
     },
     category: categorySubDoc,
-    additional_info: String,
+    additional_info: {
+        type: String,
+        default: 'No additional infos!'
+    },
     rating: {
         numberOfReviews: {
             type: Number,
@@ -65,8 +68,9 @@ const productSchema = new Schema({
         }
     },
     onSale: {
-        salesSubDoc,
+        type: Boolean,
         default: false
+       
     }
 }, options)
 

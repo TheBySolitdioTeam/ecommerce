@@ -6,15 +6,25 @@ import AdminRoot from './routes/admin/adminRoot'
 import Login, {action as loginAction} from './routes/login'
 import ErrorPage from './error-page'
 import './index.css'
-import CategoryRoot from './routes/admin/categoryRoot'
-import CreateCategory, {action as createCategoryAction} from './routes/admin/routes/createCategory'
-import PrimeCategories from './routes/admin/routes/getPrimeCategories'
-import InfinitePrimes, { loader as infiniteCategoryLoader } from './routes/admin/routes/InfinitePrimes'
-import GetCategorySearch, {loader as searchCategoryLoader} from './routes/admin/routes/getCategorySearch'
-import {action as deleteCategoryAction} from './routes/admin/routes/deleteCategory'
-import EditCategory, {loader as editCategoryLoader, action as editCategoryAction} from './routes/admin/routes/editCategory'
-import GetSubCategories, { loader as subCategoriesLoader } from './routes/admin/routes/getSubCategories'
-import {loader as specialPrimaryLoader} from './routes/admin/routes/getPrimariesLoader'
+import CategoryRoot from './routes/admin/routes/categories/categoryRoot'
+import CreateCategory, {
+  action as createCategoryAction,
+} from './routes/admin/routes/categories/createCategory'
+import PrimeCategories from './routes/admin/routes/categories/getPrimeCategories'
+import InfinitePrimes, {
+  loader as infiniteCategoryLoader,
+} from './routes/admin/routes/categories/InfinitePrimes'
+import GetCategorySearch, {
+  loader as searchCategoryLoader,
+} from './routes/admin/routes/categories/getCategorySearch'
+import { action as deleteCategoryAction } from './routes/admin/routes/categories/deleteCategory'
+import EditCategory, {loader as editCategoryLoader, action as editCategoryAction} from './routes/admin/routes/categories/editCategory'
+import GetSubCategories, {
+  loader as subCategoriesLoader,
+} from './routes/admin/routes/categories/getSubCategories'
+import { loader as specialPrimaryLoader } from './routes/admin/routes/categories/getPrimariesLoader'
+import ProductRoot from './routes/admin/routes/products/productRoot'
+import CreateProduct, {action as createProductAction} from './routes/admin/routes/products/createProduct'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -40,6 +50,17 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: '/admin/products',
+        element: <ProductRoot />,
+        errorElement: <ErrorPage />,
+        children: [{
+          index: true,
+          element: <CreateProduct />,
+          action: createProductAction,
+          errorElement: <ErrorPage/>
+        }]
+      },
+      {
         path: '/admin/categories',
         element: <CategoryRoot />,
         errorElement: <ErrorPage />,
@@ -49,7 +70,7 @@ const router = createBrowserRouter([
             loader: specialPrimaryLoader,
           },
           {
-            path: '/admin/categories/create',
+            index: true,
             element: <CreateCategory />,
             action: createCategoryAction,
             errorElement: <ErrorPage />,

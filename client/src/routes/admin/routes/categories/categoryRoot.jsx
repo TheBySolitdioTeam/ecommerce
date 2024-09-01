@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { UserContext } from './UserContext'
+import { UserContext } from '../../UserContext'
 export default function CategoryRoot() {
   const user = useContext(UserContext)
   const navigate = useNavigate()
@@ -13,7 +13,7 @@ export default function CategoryRoot() {
         <ul className="flex mb-3 flex-row text-center justify-between menu menu-horizontal min-w-full bg-base-200">
           <li className="mx-auto">
             <NavLink
-              to={'/admin/categories/create'}
+              to={'/admin/categories/'}
               className={({ isActive, isPending }) =>
                 isActive
                   ? 'bg-primary text-base-100'

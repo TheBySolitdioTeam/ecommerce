@@ -17,7 +17,7 @@ export default function PrimeCategorySelector({name}) {
     className="select select-bordered w-full max-w-xs"
     name={name}
     >
-      <option value={""}>No Parent</option>
+      <option value={""}>No Category</option>
       {fetcher.data.map((item) => (
         <option key={item._id} value={item._id}>
           {' '}

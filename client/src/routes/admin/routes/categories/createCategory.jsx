@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useFetcher } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
-import PrimeCategorySelector from '../components/primeCategorySelector'
+import PrimeCategorySelector from '../../components/primeCategorySelector'
 
 
 export async function action({ request }) {
@@ -48,7 +48,7 @@ export default function CreateCategory() {
       duration: 5000,
       id: Math.round(Math.random()*1E9)
     }
-
+toast.dismiss()
     fetcher.data
       ? fetcher.data.error
         ? toast.error(fetcher.data.error, toastOptions)
@@ -83,6 +83,7 @@ export default function CreateCategory() {
                 type="file"
                 className="file-input file-input-bordered w-full max-w-xs"
                 name="image"
+                
               />
             </div>
             <div className="form-control">

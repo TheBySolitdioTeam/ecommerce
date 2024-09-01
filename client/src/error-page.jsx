@@ -10,8 +10,10 @@ export default function ErrorPage() {
     const toastOptions = {
       duration: 5000
     }
-
+toast.dismiss()
     toast.error(error.message, toastOptions)
+
+    
   })
 
   return (

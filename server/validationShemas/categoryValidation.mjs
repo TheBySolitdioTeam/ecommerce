@@ -6,7 +6,7 @@ export default {
         },
 
         isLength: {
-            options: { min: 5 },
+            options: { min: 3 },
             errorMessage: 'The category name must have at least 5 characters!'
         },
         escape: true

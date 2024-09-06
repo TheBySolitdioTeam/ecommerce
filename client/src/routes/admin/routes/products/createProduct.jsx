@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useFetcher } from 'react-router-dom'
+import { useFetcher, redirect } from 'react-router-dom'
 import toast, {Toaster} from 'react-hot-toast'
 import PrimeCategorySelector from '../../components/primeCategorySelector'
 import ProductTypeSelector from '../../components/productTypeSelector'
@@ -40,6 +40,7 @@ export default function CreateProduct() {
             ? toast.error(fetcher.data.error, toastOptions)
             : toast.success(fetcher.data.msg, toastOptions)
           : ''
+      redirect('/admin/product/view')
     },[fetcher])
    
     

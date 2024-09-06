@@ -153,7 +153,7 @@ router.get('/primary', async (req, res) => {
     return res.status(404).send({ error: error.msg })
   }
 })
-// Get Serach
+// Get Search
 router.get("/search", async (req, res) => {
   const { q } = req.query
   

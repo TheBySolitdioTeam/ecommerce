@@ -32,7 +32,7 @@ export default function GetCategorySearch() {
     const [query, setQuery] = useOutletContext()
     //console.log(query);
     const [items, q] = useLoaderData()
-    console.log(JSON.stringify(items));
+    //console.log(JSON.stringify(items));
     const navigation = useNavigation()
     useEffect(() => {
         setQuery(q)

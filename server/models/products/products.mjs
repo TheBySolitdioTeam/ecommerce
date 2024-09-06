@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
 
 // Setting a discriminatory key for the inheritance pattern
-const options = { discriminatoryKey: 'type' }
+const options = { discriminatoryKey: 'type', timestamps: true }
 
 
 // The subdocument for category for the extended reference pattern

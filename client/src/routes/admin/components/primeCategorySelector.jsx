@@ -3,7 +3,7 @@ import { useFetcher } from "react-router-dom";
 
 
 // eslint-disable-next-line react/prop-types
-export default function PrimeCategorySelector({name}) {
+export default function PrimeCategorySelector({defaultValue, name}) {
   const fetcher = useFetcher() 
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function PrimeCategorySelector({name}) {
   }, [fetcher])
 
   return (fetcher.data ? <select 
-      defaultValue={null}
+      defaultValue={defaultValue || null}
     className="select select-bordered w-full max-w-xs"
     name={name}
     >

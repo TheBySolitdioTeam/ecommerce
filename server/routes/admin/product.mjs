@@ -140,7 +140,7 @@ router.get('/:id', async (req, res) => {
   const { id } = req.params
   const { type } = req.query
 
-  console.log(id)
+  //console.log(id)
 
   let productType
   switch (type) {
@@ -176,19 +176,21 @@ router.put("/:id", upload.array('images', 4), checkSchema(productSchema, ["body"
 
   // Get the product to be modified
   let productType
+  let tobeUpdated
   switch (data.type) {
     case 'furniture':
       productType = Furniture
 
       break
     case 'clothing':
-      productType= Clothing
+      productType = Clothing
       break
     default:
       productType = Product
   }
   try {
-     const tobeUpdated = await productType.findById(id)
+    tobeUpdated = await productType.findById(id)
+    console.log(tobeUpdated)
      if (!tobeUpdated)
        return res.send({ error: `No product found with ID: ${id}` })
   } catch (error) {
@@ -217,13 +219,19 @@ router.put("/:id", upload.array('images', 4), checkSchema(productSchema, ["body"
   data.images = req.files.map((item) => item.filename).join(';')
 
   // Delete previous images
-  tobeUpdated.images.split(";").forEach(element => {
+  try {
+     tobeUpdated.images.split(";").forEach(element => {
     fs.unlinkSync(destination + element)
-  });
+  })
+} catch (error) {
+   
+  }
+    
+  
   // Update the data of the product
   try {
-    const updatedProduct = productType.findByIdAndUpdate(id, data)
-    return res.send({message: `Product ${updatedProduct._id} updated with success`})
+    const updatedProduct = await productType.findByIdAndUpdate(id, data)
+    return res.send({msg: `Product ${updatedProduct._id} updated with success`})
     
   } catch (error) {
     return res.send({error: error.message})
@@ -231,12 +239,15 @@ router.put("/:id", upload.array('images', 4), checkSchema(productSchema, ["body"
 
   
 })
-
+router.use(express.json())
 router.patch("/:id", async (req, res) => {
   const { id } = req.params
   const data = req.body
+  //console.log(data);
+
   // Get product to be updated
   let productType
+  let tobeUpdated
   switch (data.type) {
     case 'furniture':
       productType = Furniture
@@ -249,7 +260,7 @@ router.patch("/:id", async (req, res) => {
       productType = Product
   }
   try {
-    const tobeUpdated = await productType.findById(id)
+    tobeUpdated = await productType.findById(id)
     if (!tobeUpdated)
       return res.send({ error: `No product found with ID: ${id}` })
   } catch (error) {
@@ -272,15 +283,51 @@ router.patch("/:id", async (req, res) => {
   } else {
     data.category = tobeUpdated.category
   }
-
+ 
   // Update the data of the product
+  data.images = tobeUpdated.images
+  console.log(data)
   try {
-    const updatedProduct = productType.findByIdAndUpdate(id, data)
+    const updatedProduct = await productType.findByIdAndUpdate(id, {...data})
     return res.send({
-      message: `Product ${updatedProduct._id} updated with success`,
+      msg: `Product ${updatedProduct._id} updated with success`,
     })
   } catch (error) {
     return res.send({ error: error.message })
+  }
+})
+
+
+router.delete('/:id', async (req, res) => {
+  // Get product to be deletes
+  const { id } = req.params
+  const { type } = req.query
+  try {
+
+    // Get the appropriate type
+    let productType = ''
+    switch (type) {
+      case 'furniture':
+        toBeDeleted = Furniture
+        break
+      case 'clothing':
+        toBeDeleted = Clothing
+        break
+      default:
+        toBeDeleted = Product
+    }
+    const toBeDeleted = await productType.findById(id)
+    if (!toBeDeleted) return res.send({ error: `Product with ID: ${id} not found` })
+    
+    // Delete product
+    await productType.findByIdAndDelete(id)
+    toBeDeleted.images.split(';').forEach(el => {fs.unlinkSync(destination + el)}) 
+
+    return res.send({msg: `Product ID ${id} is deleted`})
+    
+    
+  } catch (error) {
+    return res.send({error: error.message})
   }
 })
 export default router

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-export default function ProductTypeSelector({type}) {
+export default function ProductTypeSelector({type, dValues}) {
     return type === 'furniture' ? (
       <div className="bg-secondary text-white p-5 m-3">
         <div className="form-control">
@@ -9,8 +9,9 @@ export default function ProductTypeSelector({type}) {
           <input
             type="text"
             placeholder="color"
-            className="input input-bordered text-white"
+            className="input input-bordered text-black"
             name="color"
+            defaultValue={dValues.color || null}
             required
           />
         </div>
@@ -21,8 +22,9 @@ export default function ProductTypeSelector({type}) {
           <input
             type="text"
             placeholder="Material"
-            className="input input-bordered text-white"
+            className="input input-bordered text-black"
             name="material"
+            defaultValue={dValues.material || null}
             required
           />
         </div>
@@ -33,8 +35,9 @@ export default function ProductTypeSelector({type}) {
           <input
             type="number"
             placeholder="width"
-            className="input input-bordered text-white"
+            className="input input-bordered text-black"
             name="width"
+            defaultValue={dValues.width || null}
             step=".1"
             min="0"
             required
@@ -47,8 +50,9 @@ export default function ProductTypeSelector({type}) {
           <input
             type="number"
             placeholder="width"
-            className="input input-bordered text-white"
+            className="input input-bordered text-black"
             name="length"
+            defaultValue={dValues.length || null}
             step=".1"
             min="0"
             required
@@ -65,8 +69,9 @@ export default function ProductTypeSelector({type}) {
           <input
             type="text"
             placeholder="color"
-            className="input input-bordered text-white"
+            className="input input-bordered  text-black"
             name="color"
+            defaultValue={dValues.color || null}
             required
           />
         </div>
@@ -77,7 +82,8 @@ export default function ProductTypeSelector({type}) {
           <input
             type="text"
             placeholder="Size"
-            className="input input-bordered text-white"
+            className="input input-bordered text-black"
+            defaultValue={dValues.size || null}
             name="size"
             required
           />

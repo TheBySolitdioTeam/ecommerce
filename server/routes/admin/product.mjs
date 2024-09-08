@@ -300,6 +300,7 @@ router.patch("/:id", async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   // Get product to be deletes
+  console.log('Inside delete')
   const { id } = req.params
   const { type } = req.query
   try {
@@ -308,13 +309,13 @@ router.delete('/:id', async (req, res) => {
     let productType = ''
     switch (type) {
       case 'furniture':
-        toBeDeleted = Furniture
+        productType = Furniture
         break
       case 'clothing':
-        toBeDeleted = Clothing
+        productType = Clothing
         break
       default:
-        toBeDeleted = Product
+        productType = Product
     }
     const toBeDeleted = await productType.findById(id)
     if (!toBeDeleted) return res.send({ error: `Product with ID: ${id} not found` })

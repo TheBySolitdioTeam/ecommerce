@@ -1,17 +1,22 @@
 import { redirect } from "react-router-dom"
-import toast from 'react-hot-toast'
+import toast, {Toaster} from 'react-hot-toast'
 
 
-export async function action({ params, request }) {
+export async function action({request, params }) {
+    console.log('Inside action');
     const { id } = params
-    const {type} = request.query
+    const url = new URL(request.url)
+    const type = url.searchParams.get('type') || 'product'
     
     try {
-        const response = await fetch(`http://loacalhost:5500/admin/product/${id}?type=${type}`, {
+        const response = await fetch(
+          `http://localhost:5500/admin/product/${id}?type=${type}`,
+          {
             method: 'DELETE',
             credentials: 'include',
-            headers: { 'Content-Type': 'application/json'}
-        })
+            headers: { 'Content-Type': 'application/json' },
+          }
+        )
 
         const msg = await response.json()
         if (msg.msg) {
@@ -23,10 +28,16 @@ export async function action({ params, request }) {
             toast.success(msg.msg, toastOptions)
             return redirect('/admin/products/view')
         } 
-        throw new Error('An Error occured!')
+        throw new Error(msg.error)
         
     } catch (error) {
         throw new Error(error.message)
     }
 
+}
+
+
+
+export default function DeleteProduct() {
+    return (<Toaster/>)
 }

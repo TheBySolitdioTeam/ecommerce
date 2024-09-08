@@ -28,7 +28,8 @@ import CreateProduct, {action as createProductAction} from './routes/admin/route
 import ViewProductRoot from './routes/admin/routes/products/viewProductRoot'
 import GetAllProducts, {loader as getAllProductsLoader} from './routes/admin/routes/products/getallProducts'
 import ProductSearch, {loader as productSearchLoader} from './routes/admin/routes/products/productSearch'
-import EditProduct, {loader as editProductLoader, action as editProdcutAction} from './routes/admin/routes/products/editProduct'
+import EditProduct, { loader as editProductLoader, action as editProdcutAction } from './routes/admin/routes/products/editProduct'
+import DeleteProduct, {action as deleteAction} from './routes/admin/routes/products/deleteProduct'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -62,6 +63,12 @@ const router = createBrowserRouter([
           element: <CreateProduct />,
           action: createProductAction,
           errorElement: <ErrorPage/>
+        }, {
+          path: '/admin/products/delete/:id',
+          element: <DeleteProduct/>,
+          action: deleteAction,
+          errorElement: <ErrorPage/>
+          
         }, {
           path: '/admin/products/edit/:id',
           element: <EditProduct />,

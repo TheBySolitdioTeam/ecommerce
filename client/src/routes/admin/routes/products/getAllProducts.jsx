@@ -52,25 +52,29 @@ export default function GetAllProducts() {
             console.log(error)
         }
     }
-    return (
-      <InfiniteScroll
-        dataLength={items.length || 0}
-            next={() => setCursor(itemsIds[itemsIds.length-1])}
-        hasMore={hasMore}
-        loader={<span className="loading loading-infinity loading-lg"></span>}
-        endMessage={
-          <p style={{ textAlign: 'center' }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      >
-        <div className="flex flex-row flex-wrap">
-          {items.length > 0
-            ? items.map((item) => (
-                <ProductCard key={item._id} item={item}/>
-              ))
-            : ''}
-        </div> 
-      </InfiniteScroll>
-    )
+  return (
+    <div>
+      {items.length > 0 ? (
+        <InfiniteScroll
+          dataLength={items.length || 0}
+          next={() => setCursor(itemsIds[itemsIds.length - 1])}
+          hasMore={hasMore}
+          loader={<span className="loading loading-infinity loading-lg"></span>}
+          endMessage={
+            <p style={{ textAlign: 'center' }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          <div className="flex flex-row flex-wrap">
+            {items.map((item) => (
+              <ProductCard key={item._id} item={item} />
+            ))}
+          </div>
+        </InfiniteScroll>
+      ) : (
+        'No Products!'
+      )}
+    </div>
+  )
 }

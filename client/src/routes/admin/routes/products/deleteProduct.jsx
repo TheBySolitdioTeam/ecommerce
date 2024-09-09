@@ -1,8 +1,9 @@
-import { redirect } from "react-router-dom"
+import { useNavigation, redirect } from "react-router-dom"
 import toast, {Toaster} from 'react-hot-toast'
 
 
-export async function action({request, params }) {
+export async function action({ request, params }) {
+   
     console.log('Inside action');
     const { id } = params
     const url = new URL(request.url)
@@ -26,6 +27,8 @@ export async function action({request, params }) {
             }
             toast.dismiss()
             toast.success(msg.msg, toastOptions)
+
+            //setTimeout(() => redirect('/admin/products/view'), 5000)
             return redirect('/admin/products/view')
         } 
         throw new Error(msg.error)
@@ -39,5 +42,11 @@ export async function action({request, params }) {
 
 
 export default function DeleteProduct() {
-    return (<Toaster/>)
+    const navigation = useNavigation()
+    return (
+        <div className="flex flex-col m-5">
+            {navigation.state === 'submitting' ? <span className="loading loading-infinity loading-lg"></span>: ''}
+        <Toaster />
+      </div>
+    )
 }

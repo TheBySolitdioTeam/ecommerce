@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-export default function ProductTypeSelector({type, dValues}) {
+export default function ProductTypeSelector({ type, dValues }) {
+    if(!dValues) dValues = {}
     return type === 'furniture' ? (
       <div className="bg-secondary text-white p-5 m-3">
         <div className="form-control">

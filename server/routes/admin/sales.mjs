@@ -6,9 +6,8 @@ import { checkSchema, validationResult, matchedData } from 'express-validator'
 import salesSchema from '../../validationShemas/salesValidationSchema.mjs'
 import salesValidationSchema from '../../validationShemas/salesValidationSchema.mjs'
 
-
-// const root = path.resolve()
-// const destination = path.join(root, "/public/sales/")
+const root = path.resolve()
+const destination = path.join(root, "/public/sales/")
 
 
 // Initialize multer diskStorage
@@ -54,26 +53,41 @@ router.post('/', upload.single('image'), checkSchema(salesValidationSchema, ['bo
 
 // Create a Sale without an image
 router.post(
-  '/imageless',
-  upload.none('image'),
+  '/imageless', upload.none('image'),
   checkSchema(salesValidationSchema, ['body']),
   async (req, res) => {
+    console.log('Inside Imageless')
+     console.log('reqBody: ' + JSON.stringify(req.body))
     // Get the errors
     const results = validationResult(req)
-    if (!results.isEmpty()) return res.send({ error: results.array()[0].nsg })
+    if (!results.isEmpty()) return res.send({ error: results.array()[0].msg })
 
     // Get the body content
     const data = matchedData(req)
+    console.log(data)
+   
     // set the image field
-    data.image = destination + 'default.webp'
+    data.image ='default.webp'
 
     try {
       const newSales = new Sales(data)
       await newSales.save()
-      res.send({ msg: 'Sales created with success!' })
+      return res.send({ msg: 'Sales created with success!' })
     } catch (error) {
       return res.send({ error: error.message })
     }
   }
 )
+
+// Get all SALES
+router.get("/", async (req, res) => {
+  try {
+    const allSales = await Sales.find()
+    return res.send(allSales)
+  } catch (error) {
+    return res.send({error: error.message})
+  }
+})
+
+export default router
 

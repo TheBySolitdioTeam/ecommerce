@@ -1,6 +1,37 @@
 import {useEffect} from 'react'
 import { useFetcher, } from 'react-router-dom'
-import toast, {Toaster} from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
+
+export async function action({ request }) {
+    console.log('Inside Sales action')
+    // Get the formData from the form
+    const formData = await request.formData()
+    let url = 'http://localhost:5500/admin/sales/imageless'
+   
+
+    // Get the image name 
+    const imageName = formData.get('image').name
+
+    if (imageName !== '') {
+        url = 'http://localhost:5500/admin/sales/'
+    }
+
+     try {
+       const response = await fetch(url, {
+         method: 'POST',
+         credentials: 'include',
+         body: formData,
+       })
+         const data = await response.json()
+         console.log(data)
+       return data
+     } catch (error) {
+       return { error: error.message }
+     }
+}
+
+
+
 export default function  CreateSales(){
     const fetcher = useFetcher()
     useEffect(() => {
@@ -58,7 +89,6 @@ export default function  CreateSales(){
               type="file"
               className="file-input file-input-bordered file-input-primary w-full max-w-xs"
               name="image"
-              required
             />
           </div>
           <div className="form-control mb-5">

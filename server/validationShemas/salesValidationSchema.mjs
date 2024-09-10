@@ -2,7 +2,7 @@ export default {
   name: {
     trim: true,
     notEmpty: {
-      errorMessage: 'The product name should not be empty',
+      errorMessage: 'The sales name should not be empty',
     },
     isLength: {
       options: { min: 5 },

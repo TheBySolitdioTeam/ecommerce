@@ -17,14 +17,18 @@ const categorySubDoc = new Schema({
 })
 // The subdocument for sales
 const salesSubDoc = new Schema({
-    sales_id: {
-        type: mongoose.Types.ObjectId,
-        required: [true, 'Please provide a sales id!'],
-    },
-    discount_rate: {
-        type: mongoose.Decimal128,
-        required: [true, 'Please provide a discount rate!']
-    }
+  name: {
+    type: String,
+    required: [true, 'Please provide a sales name!'],
+  },
+  sales_id: {
+    type: mongoose.Types.ObjectId,
+    required: [true, 'Please provide a sales id!'],
+  },
+  discount_rate: {
+    type: mongoose.Decimal128,
+    required: [true, 'Please provide a discount rate!'],
+  },
 })
 
 const productSchema = new Schema({

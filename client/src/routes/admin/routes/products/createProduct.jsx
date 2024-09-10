@@ -40,7 +40,7 @@ export default function CreateProduct() {
             ? toast.error(fetcher.data.error, toastOptions)
             : toast.success(fetcher.data.msg, toastOptions)
           : ''
-      redirect('/admin/product/view')
+      redirect('/admin/products/view')
     },[fetcher])
    
     

@@ -17,7 +17,7 @@ import InfinitePrimes, {
 import GetCategorySearch, {
   loader as searchCategoryLoader,
 } from './routes/admin/routes/categories/getCategorySearch'
-import { action as deleteCategoryAction } from './routes/admin/routes/categories/deleteCategory'
+import DeleteCategory, { action as deleteCategoryAction } from './routes/admin/routes/categories/deleteCategory'
 import EditCategory, {loader as editCategoryLoader, action as editCategoryAction} from './routes/admin/routes/categories/editCategory'
 import GetSubCategories, {
   loader as subCategoriesLoader,
@@ -30,6 +30,7 @@ import GetAllProducts, {loader as getAllProductsLoader} from './routes/admin/rou
 import ProductSearch, {loader as productSearchLoader} from './routes/admin/routes/products/productSearch'
 import EditProduct, { loader as editProductLoader, action as editProdcutAction } from './routes/admin/routes/products/editProduct'
 import DeleteProduct, {action as deleteAction} from './routes/admin/routes/products/deleteProduct'
+import SalesRoot from './routes/admin/routes/sales/salesRoot'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -130,6 +131,7 @@ const router = createBrowserRouter([
           {
             path: '/admin/categories/delete/:id',
             action: deleteCategoryAction,
+            element: <DeleteCategory/>,
             errorElement: <ErrorPage />,
           },
           {
@@ -147,6 +149,11 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: '/admin/sales',
+        element: <SalesRoot />,
+        errorElement: <ErrorPage/>
+      }
     ],
   },
 ])

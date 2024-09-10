@@ -11,6 +11,7 @@ const salesSchema = new Schema({
     },
     image: {
         type: String,
+        required: [true, 'Please provide a sales image']
     },
     expires: {
         type: Date,

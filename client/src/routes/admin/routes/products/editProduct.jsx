@@ -100,7 +100,7 @@ export default function EditProduct() {
            : toast.success(fetcher.data.msg, toastOptions)
            : ''
         
-        redirect('/admin/product/view')
+        redirect('/admin/products/view')
      }, [fetcher])
 
      return (

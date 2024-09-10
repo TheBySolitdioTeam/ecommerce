@@ -98,7 +98,7 @@ export default function AdminRoot() {
                   )}
                   <li>
                     <NavLink
-                      to={'/admin/orders'}
+                      to={'/admin/sales'}
                       className={({ isActive, isPending }) =>
                         isActive
                           ? 'text-lg bg-primary text-base-100'
@@ -108,7 +108,7 @@ export default function AdminRoot() {
                       }
                     >
                       <FaBagShopping className="h-5 w-5" />
-                      Orders
+                      Sales
                     </NavLink>
                   </li>
                 </ul>

@@ -33,7 +33,7 @@ const router = Router()
 router.post('/', upload.single('image'), checkSchema(salesValidationSchema, ['body']), async (req, res) => {
     // Get the errors
     const results = validationResult(req)
-    if (!results.isEmpty()) return res.send({ error: results.array()[0].nsg })
+    if (!results.isEmpty()) return res.send({ error: results.array()[0].msg })
     
     // Get the body content
     const data = matchedData(req)
@@ -82,12 +82,28 @@ router.post(
 // Get all SALES
 router.get("/", async (req, res) => {
   try {
-    const allSales = await Sales.find()
+    const allSales = await Sales.find({
+      expires: { $gt: new Date(Date.now()).toISOString() },
+    })
     return res.send(allSales)
   } catch (error) {
     return res.send({error: error.message})
   }
 })
-
+// Get sales Infnity scroll
+router.get("/infinity", async (req, res) => {
+  const { cursor, limit } = req.query
+  const query = {}
+  if (cursor) {
+    query._id = {$gt: cursor}
+  }
+  try {
+    const nextItems = await Sales.find(query).limit(Number(limit))
+    return res.send(nextItems)
+    
+  } catch (error) {
+    return res.send({error: error.message})
+  }
+})
 export default router
 

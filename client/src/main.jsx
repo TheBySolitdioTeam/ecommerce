@@ -33,6 +33,8 @@ import DeleteProduct, {action as deleteAction} from './routes/admin/routes/produ
 import SalesRoot from './routes/admin/routes/sales/salesRoot'
 import CreateSales, { action as createSalesAction } from './routes/admin/routes/sales/createSales'
 import {loader as getAllSalesLoader} from './routes/admin/routes/sales/getAllSalesLoader'
+import ViewSalesRoot from './routes/admin/routes/sales/viewSalesRoot'
+import InfinitySales, {loader as infinitySalesLoader} from './routes/admin/routes/sales/infinitySales'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -163,6 +165,16 @@ const router = createBrowserRouter([
         }, {
           path: '/admin/sales/loader',
           loader: getAllSalesLoader
+          }, {
+          path: '/admin/sales/view',
+          element: <ViewSalesRoot />,
+          errorElement: <ErrorPage />,
+          children: [{
+            index: true,
+            element: <InfinitySales />,
+            loader:infinitySalesLoader
+          }]
+          
         }]
       }
     ],

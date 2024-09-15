@@ -21,8 +21,8 @@ export default function AdminRoot() {
                    }
                  )
                 const potUser = await response.json()
-                console.log(potUser);
-                  potUser.msg ? navigate('/login') : setUser(potUser)
+                //console.log(potUser);
+                potUser.msg ? navigate('/login') : setUser(potUser)
                 
             } catch (error) {
                 return {msg : error.message}

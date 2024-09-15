@@ -3,9 +3,9 @@ import Sales from '../../models/sales.mjs'
 import path from 'node:path'
 import multer from 'multer'
 import { checkSchema, validationResult, matchedData } from 'express-validator'
-import salesSchema from '../../validationShemas/salesValidationSchema.mjs'
+//import salesSchema from '../../validationShemas/salesValidationSchema.mjs'
 import salesValidationSchema from '../../validationShemas/salesValidationSchema.mjs'
-
+import fs from 'node:fs'
 const root = path.resolve()
 const destination = path.join(root, "/public/sales/")
 
@@ -105,5 +105,96 @@ router.get("/infinity", async (req, res) => {
     return res.send({error: error.message})
   }
 })
+// Search sales
+router.get('/search', async (req, res) => {
+  const { q } = req.query
+  try {
+    const searchResults = await Sales.find({
+      name: { $regex: new RegExp(`${q}`, 'i') },
+    })
+    return res.send(searchResults)
+  } catch (error) {
+    return res.send({ error: error.message })
+  }
+})
+// Get single sales
+router.get('/:id', async (req, res) => {
+  const { id } = req.params
+  
+  try {
+    const singleSale = await Sales.findById(id)
+    if (!singleSale) return res.send({ error: `Sales with ID:${id} does not exist!` })
+    return res.send(singleSale)
+  } catch (error) {
+    return res.send({error: error.message})
+  }
+})
+
+// Edit Sales with image
+router.put("/:id", upload.single("image"), checkSchema(salesValidationSchema), async (req, res) => {
+  const { id } = req.params
+  // Get the sale to be modified
+  const toBeModified = await Sales.findById(id)
+  if (!toBeModified) return res.send({ error: `No sales with ID: ${id}` })
+  
+  // delete the image
+  toBeModified.image !== "default.webp" ? fs.unlinkSync(destination + toBeModified.image) : ''
+  // validation results
+  const results = validationResult(req)
+
+  if (!results.isEmpty()) return res.send({ error: results.array()[0].msg })
+ 
+  // Get the sale to be modified
+  await modifySales(req, res, id, req.file.filename)
+
+})
+// Edit sales without image
+
+router.patch("/:id", upload.none("image"), checkSchema(salesValidationSchema),async (req, res) => {
+  const { id } = req.params
+  // Get the sale to be modified
+  const toBeModified = await Sales.findById(id)
+  if (!toBeModified) return res.send({ error: `No sales with ID: ${id}` })
+  //results of the validation
+  const results = validationResult(req)
+  if (!results.isEmpty()) return res.send({ error: results.array()[0].msg })
+
+  // Modify sales
+  await modifySales(req, res, id,  toBeModified.image)
+})
+
+// Delete Sales by id
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params
+  // Get the sales to be deleted
+  try {
+    const sales = await Sales.findById(id)
+    if (!sales) return res.send({ error: `Sales with ID:${id} does not exist!` })
+    
+    await Sales.findByIdAndDelete(id)
+    sales.image !== "default.webp" ? fs.unlinkSync(destination + sales.image) : ''
+    return res.send({msg: `Sales with ID:${id} deleted!`})
+  } catch (error) {
+    res.send({error: error.message})
+  }
+})
+
+
+const modifySales = async function(req,res,id,image){
+ 
+  
+  // Get the data for after validation
+  const data = matchedData(req)
+  data.image = image
+  //console.log(data)
+  // Modify the data
+  try {
+    await Sales.findByIdAndUpdate(id, data)
+    return res.send({ msg: `Sales ID${id} has been modified with success!` })
+  } catch (error) {
+    return res.send({ error: error.message })
+  }
+
+}
 export default router
 

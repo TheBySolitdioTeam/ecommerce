@@ -3,6 +3,7 @@ import { useFetcher, redirect } from 'react-router-dom'
 import toast, {Toaster} from 'react-hot-toast'
 import PrimeCategorySelector from '../../components/primeCategorySelector'
 import ProductTypeSelector from '../../components/productTypeSelector'
+import SalesSelector from '../../components/salesSelector'
 
 
 export async function action({request}) {
@@ -129,6 +130,7 @@ export default function CreateProduct() {
           </div>
           <ProductTypeSelector type={type} />
           <PrimeCategorySelector name="category" />
+          <SalesSelector name="onSale"/>
           <Toaster />
           <div className="form-control mt-6">
             <button className="btn btn-primary">

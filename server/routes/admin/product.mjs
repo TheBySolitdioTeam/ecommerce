@@ -7,6 +7,7 @@ import path from 'node:path'
 import Product from '../../models/products/products.mjs'
 import Furniture from '../../models/products/furniture.mjs'
 import Clothing from '../../models/products/clothing.mjs'
+import Sales from '../../models/sales.mjs'
 import fs from 'node:fs'
 
 // Setting the destination path for product photos
@@ -52,18 +53,29 @@ const router = Router()
 // The post route for creating products
 
 router.post('/', upload.array('images', 4), checkSchema(productSchema, ["body"]), async (req, res) => {
-    // Get the validation results and check whether or not there is an error
-    const results = validationResult(req)
+  // Get the validation results and check whether or not there is an error
+  const results = validationResult(req)
 
-    if (!results.isEmpty()) return res.send({error: results.array()[0].msg})
+  if (!results.isEmpty()) return res.send({error: results.array()[0].msg})
     
     // Retrieve the validated data 
   const data ={...req.body,  ...matchedData(req)}
- // console.log(data)
+  // console.log(data)
 
     // Get category of the products
-    const categoryId = data.category
-    try {
+  const categoryId = data.category
+   // Get Sales Id
+   const salesId = data.onSale
+  try {
+    // setting the onsales if exists
+    if (salesId) {
+      const sales = await Sales.findById(salesId)
+      data.onSale = {name: sales.name, sales_id: sales._id, discount_rate: sales.discount_rate}
+    } else {
+      delete data.onSale
+    }
+
+    // Setting the category
       const categoryObj = await Category.findById(categoryId)
       if (!categoryObj) return res.send({ error: 'No category found!' })
 
@@ -196,6 +208,21 @@ router.put("/:id", upload.array('images', 4), checkSchema(productSchema, ["body"
   } catch (error) {
     return res.send({error: error.message})
   }
+
+  // Comparing the onSale properties of the product and the edit
+  if (data.onSale && tobeUpdated.onSale.sales_id !== data.onSale) {
+    try {
+      const sales = await Sales.findById(data.onSale)
+      data.onSale = {
+        name: sales.name,
+        sales_id: sales._id,
+        discount_rate: sales.discount_rate,
+      }
+    } catch (error) {
+      return res.send({error: error.message})
+    }
+       
+  }
  
   // Compare categories and get the new one if necessary
 
@@ -266,6 +293,23 @@ router.patch("/:id", async (req, res) => {
   } catch (error) {
     return res.send({ error: error.message })
   }
+  // Comparing the onSale properties of the product and the edit
+  if (
+    data.onSale &&
+    (!tobeUpdated.onSale ||
+      tobeUpdated.onSale.sales_id !== data.onSale)
+  ) {
+    try {
+      const sales = await Sales.findById(data.onSale)
+      data.onSale = {
+        name: sales.name,
+        sales_id: sales._id,
+        discount_rate: sales.discount_rate,
+      }
+    } catch (error) {
+      return res.send({ error: error.message })
+    }
+  }
 
   // Compare categories and get the new one if necessary
 
@@ -283,12 +327,12 @@ router.patch("/:id", async (req, res) => {
   } else {
     data.category = tobeUpdated.category
   }
- 
+
   // Update the data of the product
   data.images = tobeUpdated.images
   console.log(data)
   try {
-    const updatedProduct = await productType.findByIdAndUpdate(id, {...data})
+    const updatedProduct = await productType.findByIdAndUpdate(id, { ...data })
     return res.send({
       msg: `Product ${updatedProduct._id} updated with success`,
     })

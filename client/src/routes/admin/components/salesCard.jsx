@@ -1,10 +1,10 @@
 import Countdown from 'react-countdown'
-
+import {Link, Form} from 'react-router-dom'
 /* eslint-disable react/prop-types */
 export default function SalesCard({ item }) {
     let today = new Date(Date.now())
     let expiryDate = new Date(item.expires)
-    let difference = today.getTime() - expiryDate.getTime()
+    let difference = expiryDate.getTime()-today.getTime() 
  
    
     return (
@@ -26,8 +26,19 @@ export default function SalesCard({ item }) {
           <Countdown className="text-4xl" date={Date.now() + difference}>
             <span className="text-2xl">Expired</span>
           </Countdown>
+
           <div className="card-actions justify-end">
-            <button className="btn btn-warning">Edit</button>
+            <div className="flex flex-row justify-end w-full">
+              <Link
+                to={`/admin/sales/edit/${item._id}`}
+                className="btn btn-warning m-2"
+              >
+                Edit
+              </Link>
+              <Form method="post" action={`/admin/sales/delete/${item._id}`}>
+                <button type="submit" className="btn btn-error m-2">Delete</button>
+              </Form>
+            </div>
           </div>
         </div>
       </div>

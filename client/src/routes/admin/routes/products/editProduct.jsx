@@ -3,6 +3,7 @@ import { useFetcher, useLoaderData, redirect } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
 import PrimeCategorySelector from '../../components/primeCategorySelector'
 import ProductTypeSelector from '../../components/productTypeSelector'
+import SalesSelector from '../../components/salesSelector'
 
 export async function loader({ request,params }) {
     const {id} = params
@@ -81,7 +82,7 @@ export default function EditProduct() {
          ? {
              color: product.color,
              material: product.material,
-             weight: product.wieght,
+             width: product.width,
              length: product.length,
            }
          : product.type === 'clothing' ? {color:product.color, size: product.size}:''
@@ -195,6 +196,7 @@ export default function EditProduct() {
            </div>
            <ProductTypeSelector type={type} dValues={details} />
            <PrimeCategorySelector defaultValue={product.category.category_id} name="category" />
+           <SalesSelector defaultValue={product.onSale ? product.onSale.sales_id: null} name="onSale"/>
            <Toaster />
            <div className="form-control mt-6">
              <button className="btn btn-warning">

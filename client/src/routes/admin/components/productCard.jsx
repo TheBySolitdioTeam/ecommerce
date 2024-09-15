@@ -17,12 +17,29 @@ export default function ProductCard({ item }) {
             {item.name}
             <div className="badge badge-secondary">NEW</div>
           </h2>
-          <p> {item.description} </p>
+
           <div className="card-actions flex flex-col justify-end">
+            <p> {item.description} </p>
+            <div>
+              <span
+                className={item.onSale ? 'line-through' : 'text-xl font-bold'}
+              >
+                ${item.price.$numberDecimal}
+              </span>
+              {item.onSale ? (
+                <span className="text-xl font-bold mx-2">
+                 ${((item.price.$numberDecimal)-((item.onSale.discount_rate.$numberDecimal / 100) *
+                    item.price.$numberDecimal)).toFixed(2)}
+                </span>
+              ) : (
+                ''
+              )}
+            </div>
             <div className="flex flex-row w-full justify-end m-3">
               <div className="badge badge-outline"> {item.category.name} </div>
               <div className="badge badge-outline"> {item.type} </div> <br />
             </div>
+
             <div className="flex flex-row w-full justify-between">
               <Link
                 to={`/admin/products/edit/${item._id}?type=${item.type}`}

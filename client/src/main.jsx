@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Root from './routes/root'
+import Root, {loader as rootUserLoader} from './routes/root'
 import AdminRoot from './routes/admin/adminRoot'
-import Login, {action as loginAction} from './routes/login'
+import Login, { action as loginAction } from './routes/login'
+import {action as logoutAction} from './routes/logout'
 import ErrorPage from './error-page'
 import './index.css'
 import CategoryRoot from './routes/admin/routes/categories/categoryRoot'
@@ -35,6 +36,10 @@ import CreateSales, { action as createSalesAction } from './routes/admin/routes/
 import {loader as getAllSalesLoader} from './routes/admin/routes/sales/getAllSalesLoader'
 import ViewSalesRoot from './routes/admin/routes/sales/viewSalesRoot'
 import InfinitySales, {loader as infinitySalesLoader} from './routes/admin/routes/sales/infinitySales'
+import EditSales, {loader as editSalesLoader, action as editSalesAction} from './routes/admin/routes/sales/editSales'
+import DeleteSales, {action as deleteSalesAction} from './routes/admin/routes/sales/deleteSales'
+import SearchSales, {loader as searchSalesLoader} from './routes/admin/routes/sales/searchSales'
+import ProductRootClient from './routes/product/productRoot'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -44,14 +49,24 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    loader: rootUserLoader,
     errorElement: <ErrorPage />,
-    children: [
+    children: [{
+      path: "/product",
+      element: <ProductRootClient/>,
+      errorElement: <ErrorPage/>
+    },
       {
         path: '/login',
         element: <Login />,
         action: loginAction,
         errorElement: <ErrorPage />,
       },
+      {
+        path: "/logout",
+        errorElement: <ErrorPage />,
+        action:logoutAction,
+      }
     ],
   },
   {
@@ -173,8 +188,23 @@ const router = createBrowserRouter([
             index: true,
             element: <InfinitySales />,
             loader:infinitySalesLoader
+          }, {
+            path: '/admin/sales/view/search',
+            element: <SearchSales />,
+            loader: searchSalesLoader
           }]
           
+          }, {
+          path: '/admin/sales/edit/:id',
+          element: <EditSales />,
+          loader: editSalesLoader,
+          action: editSalesAction,
+            errorElement: <ErrorPage/>
+          }, {
+          path: '/admin/sales/delete/:id',
+          element: <DeleteSales />,
+          errorElement: <ErrorPage />,
+          action: deleteSalesAction  
         }]
       }
     ],

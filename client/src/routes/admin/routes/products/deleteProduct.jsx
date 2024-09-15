@@ -1,4 +1,5 @@
-import { useNavigation, Link } from "react-router-dom"
+import {useEffect} from 'react'
+import { useNavigation, Link, useFetcher } from "react-router-dom"
 import toast, {Toaster} from 'react-hot-toast'
 
 
@@ -18,29 +19,13 @@ export async function action({ request, params }) {
             headers: { 'Content-Type': 'application/json' },
           }
         )
- const toastOptions = {
-   duration: 5000,
-   id: Math.round(Math.random() * 1e9),
- }
-        const msg = await response.json()
-        if (msg.msg) {
-           
-            //toast.dismiss()
-            toast.success(msg.msg, toastOptions)
-
-            setTimeout(()=>{ console.log('Waiting')}, 5000)
-            return null
-        } else {
-            toast.error(msg.error, toastOptions)
-            setTimeout(() => {
-              console.log('Waiting')
-            }, 5000)
-            return null
-        }
+ 
+      const msg = await response.json()
+      return msg
         
         
     } catch (error) {
-        throw new Error(error.message)
+        return {error: error.message}
     }
 
 }
@@ -48,7 +33,23 @@ export async function action({ request, params }) {
 
 
 export default function DeleteProduct() {
-    const navigation = useNavigation()
+  const navigation = useNavigation()
+  const fetcher = useFetcher()
+
+   useEffect(() => {
+     const toastOptions = {
+       duration: 5000,
+       id: Math.round(Math.random() * 1e9),
+     }
+     toast.dismiss()
+
+     fetcher.data
+       ? fetcher.data.error
+         ? toast.error(fetcher.data.error, toastOptions)
+         : toast.success(fetcher.data.msg, toastOptions)
+       : ''
+    
+   }, [fetcher])
     return (
       <div className="flex flex-col m-5">
         <div className="hero bg-base-200 min-h-screen">

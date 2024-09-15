@@ -72,8 +72,8 @@ const productSchema = new Schema({
         }
     },
     onSale: {
-        type: Boolean,
-        default: false
+        type: salesSubDoc,
+        default: null
        
     }
 }, options)

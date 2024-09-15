@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 
-import {NavLink} from 'react-router-dom'
+import {NavLink, Form} from 'react-router-dom'
 
-export default function Navbar() {
+export default function Navbar({ user }) {
     return (
       <div className="navbar bg-base-100">
         <div className="navbar-start">
@@ -27,21 +28,36 @@ export default function Navbar() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <NavLink to="/login">Login</NavLink>
+                {user.msg ? (
+                  <NavLink
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? ' bg-primary text-base-100'
+                        : isPending
+                        ? ' bg-secondary'
+                        : ''
+                    }
+                    to="/login"
+                  >
+                    Login
+                  </NavLink>
+                ) : (
+                  <NavLink to="/admin">Account</NavLink>
+                )}
               </li>
               <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <NavLink to="/admin">Admin</NavLink>
+                <NavLink
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? ' bg-primary text-base-100'
+                      : isPending
+                      ? ' bg-secondary'
+                      : ''
+                  }
+                  to="/product"
+                >
+                  Product
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -50,16 +66,47 @@ export default function Navbar() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <NavLink to="/login">Login</NavLink>
+              {user.msg ? (
+                <NavLink
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? ' bg-primary text-base-100'
+                      : isPending
+                      ? ' bg-secondary'
+                      : ''
+                  }
+                  to="/login"
+                >
+                  Login
+                </NavLink>
+              ) : (
+                <NavLink to="/admin">Account</NavLink>
+              )}
             </li>
-
             <li>
-              <NavLink to="/admin">Admin</NavLink>
+              <NavLink
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? ' bg-primary text-base-100'
+                    : isPending
+                    ? ' bg-secondary'
+                    : ''
+                }
+                to="/product"
+              >
+                Product
+              </NavLink>
             </li>
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {user.msg ? (
+            <a className="btn">Button</a>
+          ) : (
+            <Form method="post" action="/logout">
+              <button className="btn btn-base btn-sm">Logout</button>
+            </Form>
+          )}
         </div>
       </div>
     )

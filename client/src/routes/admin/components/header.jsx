@@ -5,7 +5,7 @@ import {
   FaBars,
   FaBagShopping,
 } from 'react-icons/fa6'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 export default function AdminHeader() {
     return (
@@ -76,7 +76,7 @@ export default function AdminHeader() {
                 </li>
                 <li>
                   <NavLink
-                    to={'/admin/orders'}
+                    to={'/admin/sales'}
                     className={({ isActive, isPending }) =>
                       isActive
                         ? 'text-lg bg-primary text-base-100'
@@ -86,7 +86,7 @@ export default function AdminHeader() {
                     }
                   >
                     <FaBagShopping className="h-5 w-5" />
-                    Orders
+                    Sales
                   </NavLink>
                 </li>
               </ul>
@@ -94,7 +94,7 @@ export default function AdminHeader() {
           </div>
         </div>
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <Link to="/" className="btn btn-ghost text-xl">daisyUI</Link>
         </div>
         <div className="flex-none">
           <div className="dropdown dropdown-end">

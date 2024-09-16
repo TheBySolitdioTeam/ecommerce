@@ -40,6 +40,9 @@ import EditSales, {loader as editSalesLoader, action as editSalesAction} from '.
 import DeleteSales, {action as deleteSalesAction} from './routes/admin/routes/sales/deleteSales'
 import SearchSales, {loader as searchSalesLoader} from './routes/admin/routes/sales/searchSales'
 import ProductRootClient from './routes/product/productRoot'
+import ProductType, { loader as productTypeLoader } from './routes/product/productType'
+import {action as addToCartAction} from './routes/addToCart'
+import {action as changeQtyAction} from './routes/changeQty'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -54,7 +57,22 @@ const router = createBrowserRouter([
     children: [{
       path: "/product",
       element: <ProductRootClient/>,
-      errorElement: <ErrorPage/>
+      errorElement: <ErrorPage />,
+      children: [{
+        path: "/product/type",
+        element: <ProductType />,
+        errorElement: <ErrorPage />,
+        loader: productTypeLoader
+      }, {
+        path: "/product/addToCart",
+        action: addToCartAction,
+        errorElement: <ErrorPage/>
+        }, {
+        path: "/product/changeQty",
+        action: changeQtyAction,
+        errorElement: <ErrorPage/>
+          
+      }]
     },
       {
         path: '/login',

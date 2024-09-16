@@ -7,7 +7,8 @@ import MongoStore from 'connect-mongo'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import adminRouter from './routes/admin.mjs'
-
+import productRouter from './routes/product.mjs'
+import cartRouter from './routes/cart.mjs'
 
 
 const corsOptions = {
@@ -46,6 +47,8 @@ app.use(passport.session())
 app.use(express.static('public'))
 app.use('/auth', authRouter)
 app.use('/admin', adminRouter)
+app.use('/product', productRouter)
+app.use('/cart', cartRouter)
 
 const port = process.env.PORT || 5500
 

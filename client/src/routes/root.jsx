@@ -12,15 +12,25 @@ export async function loader() {
         },
       })
         const potUser = await response.json()
-        return potUser
+      if (potUser.msg) return [potUser, {}]
+      const cartResponse = await fetch(`http://localhost:5500/cart/${potUser.id}`, {
+        method: "GET",
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const cart = await cartResponse.json()
+      console.log(cart)
+      return [potUser, cart[0]||{}]
     } catch (error) {
       return { msg: error.message }
     }
 }
 export default function Root() {
-    const user = useLoaderData()
+    const [user,cart] = useLoaderData()
     return (<>
-        <Navbar user={user} />
+        <Navbar user={user} cart={cart} />
         <Outlet context={[user]}/>
         <Footer/>
     </>)

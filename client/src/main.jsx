@@ -43,7 +43,9 @@ import ProductRootClient from './routes/product/productRoot'
 import ProductType, { loader as productTypeLoader } from './routes/product/productType'
 import {action as addToCartAction} from './routes/addToCart'
 import {action as changeQtyAction} from './routes/changeQty'
-import {action as deleteItemAction} from './routes/deleteCartItem'
+import { action as deleteItemAction } from './routes/deleteCartItem'
+import {loader as allCategoriesLoader} from './routes/getAllCategories'
+import CategoryProducts, {loader as categoryProductsLoader} from './routes/product/categoryProducts'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -64,6 +66,11 @@ const router = createBrowserRouter([
         element: <ProductType />,
         errorElement: <ErrorPage />,
         loader: productTypeLoader
+      },{
+        path: '/product/categoryProducts/:category_id',
+        element: <CategoryProducts />,
+        loader: categoryProductsLoader,
+        errorElement:<ErrorPage/>
       }, {
         path: "/product/addToCart",
         action: addToCartAction,
@@ -76,6 +83,9 @@ const router = createBrowserRouter([
         }, {
         path: "/product/deleteCartItem/:id",
         action: deleteItemAction
+        }, {
+        path: "/product/allCategories/loader",
+        loader: allCategoriesLoader
       }]
     },
       {

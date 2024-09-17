@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useFetcher, useSubmit } from 'react-router-dom'
+import { useFetcher } from 'react-router-dom'
 import { FaCartShopping, FaX } from 'react-icons/fa6'
 export default function CartDropdown({ cart }) {
     const fetcher = useFetcher()
-    const submit = useSubmit()
+    //const submit = useSubmit()
     return (
       <details className="dropdown dropdown-hover dropdown-end">
         <summary>
@@ -82,7 +82,7 @@ export default function CartDropdown({ cart }) {
                                 name="qty"
                                 defaultValue={item.qty}
                                 onChange={(e) => {
-                                  submit(e.currentTarget.form)
+                                  fetcher.submit(e.currentTarget.form)
                                 }}
                               />
                             </fetcher.Form>

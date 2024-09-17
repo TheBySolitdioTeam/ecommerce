@@ -1,4 +1,5 @@
 import {Form, useSubmit, Outlet} from 'react-router-dom'
+import AllCategoriesVertical from '../../components/allCategoriesVertical'
 export default function ProductRootClient() {
     const submit = useSubmit()
     return (
@@ -69,12 +70,14 @@ export default function ProductRootClient() {
                       </a>
                     </li>
                   </Form>
+
                 </ul>
               </li>
+              <AllCategoriesVertical/>
             </ul>
           </div>
         </div>
-        <Outlet className="w-full" />
+        <Outlet />
       </div>
     )
 }

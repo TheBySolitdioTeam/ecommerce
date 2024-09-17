@@ -9,6 +9,8 @@ import cors from 'cors'
 import adminRouter from './routes/admin.mjs'
 import productRouter from './routes/product.mjs'
 import cartRouter from './routes/cart.mjs'
+import categoriesRouter from './routes/categories.mjs'
+
 
 
 const corsOptions = {
@@ -49,6 +51,7 @@ app.use('/auth', authRouter)
 app.use('/admin', adminRouter)
 app.use('/product', productRouter)
 app.use('/cart', cartRouter)
+app.use('/categories', categoriesRouter)
 
 const port = process.env.PORT || 5500
 

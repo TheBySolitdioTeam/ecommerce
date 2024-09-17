@@ -20,6 +20,8 @@ const pickType = (type) => {
     }
 }
 
+
+
 router.get("/", async (req, res) => {
     const { cursor, limit, type } = req.query
     const query = {}
@@ -35,6 +37,27 @@ router.get("/", async (req, res) => {
         return res.send({error: error.message})
     }
 })
+
+
+// get all product from categories
+
+router.get("/:categoryId", async (req, res) => {
+    const { categoryId } = req.params
+    const { cursor, limit } = req.query
+    const query = {category: {category_id: categoryId}}
+    if (cursor) {
+        query._id = {$gt: cursor}
+    }
+    try {
+        const products = await Product.find(query).limit(Number(limit))
+        console.log(products)
+        return res.send(products)
+        
+    } catch (error) {
+        return res.send({error: error.message})
+    }
+})
+
 
 
 

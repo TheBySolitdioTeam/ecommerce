@@ -43,6 +43,7 @@ import ProductRootClient from './routes/product/productRoot'
 import ProductType, { loader as productTypeLoader } from './routes/product/productType'
 import {action as addToCartAction} from './routes/addToCart'
 import {action as changeQtyAction} from './routes/changeQty'
+import {action as deleteItemAction} from './routes/deleteCartItem'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -72,6 +73,9 @@ const router = createBrowserRouter([
         action: changeQtyAction,
         errorElement: <ErrorPage/>
           
+        }, {
+        path: "/product/deleteCartItem/:id",
+        action: deleteItemAction
       }]
     },
       {

@@ -22,7 +22,7 @@ export async function loader({ request }) {
 export default function ProductType() {
     const items = useLoaderData()
     
-    return (<div className="flex w-full flex-row items-start flex-wrap">
+    return (<div className="flex w-full flex-row items-start flex-wrap lg:p-5 lg:m-5">
         {items.length > 0 ? items.map(item => (<ProductCardClient key={item._id} item={item} />)): 'No Product Found!'}
     </div>)
     

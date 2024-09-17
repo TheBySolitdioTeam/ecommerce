@@ -7,10 +7,10 @@ export default function CartDropdown({ cart }) {
     return (
       <details className="dropdown dropdown-hover dropdown-end">
         <summary>
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle m-2">
             <div className="indicator">
-              <FaCartShopping className="z-10 text-sm" />
-              <span className="badge badge-sm indicator-item">
+              <FaCartShopping className="text-xl" />
+              <span className="badge badge-sm bg-primary text-white indicator-item">
                 {cart.items ? cart.items.length : 0}
               </span>
             </div>
@@ -18,7 +18,7 @@ export default function CartDropdown({ cart }) {
         </summary>
         <div
           tabIndex={0}
-          className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-96 shadow"
+          className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-108 shadow"
         >
           <div className="card-body">
             <span className="text-lg font-bold">
@@ -91,13 +91,11 @@ export default function CartDropdown({ cart }) {
                           <td>
                             {' '}
                             $
-                            {fetcher.state !== 'idle' ? (
-                              <span className="loading loading-infinity loading-md"></span>
-                            ) : (
+                            {
                               parseFloat(
                                 item.price.$numberDecimal || item.price
                               ).toFixed()
-                            )}
+                            }
                           </td>
                           <td>
                             {' '}
@@ -112,7 +110,15 @@ export default function CartDropdown({ cart }) {
                             )}{' '}
                           </td>
                           <td>
-                            <fetcher.Form>
+                            <fetcher.Form
+                              method="post"
+                              action={`/product/deleteCartItem/${cart._id}`}
+                            >
+                              <input
+                                type="hidden"
+                                value={item.id}
+                                name="itemId"
+                              />
                               <button
                                 className="btn btn-sm btn-error"
                                 type="submit"
@@ -132,7 +138,7 @@ export default function CartDropdown({ cart }) {
               </table>
             </div>
             <span className="font-semibold text-xl">
-              Subtotal: ${cart.items ? cart.subtotal.$numberDecimal : 0}{' '}
+              Subtotal: ${cart.items ? parseFloat(cart.subtotal.$numberDecimal).toFixed(2) : 0}{' '}
             </span>
             <div className="card-actions">
               <button className="btn btn-primary btn-block">

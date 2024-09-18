@@ -43,14 +43,16 @@ router.get("/", async (req, res) => {
 
 router.get("/:categoryId", async (req, res) => {
     const { categoryId } = req.params
+    //console.log(categoryId)
     const { cursor, limit } = req.query
-    const query = {category: {category_id: categoryId}}
+    console.log(cursor)
+    const query = {'category.category_id': categoryId}
     if (cursor) {
         query._id = {$gt: cursor}
     }
     try {
-        const products = await Product.find(query).limit(Number(limit))
-        console.log(products)
+        const products = await Product.find(query).limit(Number(limit)) 
+        //console.log(products)
         return res.send(products)
         
     } catch (error) {

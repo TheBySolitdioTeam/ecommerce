@@ -70,7 +70,7 @@ const router = createBrowserRouter([
         path: '/product/categoryProducts/:category_id',
         element: <CategoryProducts />,
         loader: categoryProductsLoader,
-        errorElement:<ErrorPage/>
+        errorElement: <ErrorPage />
       }, {
         path: "/product/addToCart",
         action: addToCartAction,

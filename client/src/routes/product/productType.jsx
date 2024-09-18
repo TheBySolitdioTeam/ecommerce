@@ -1,5 +1,5 @@
-import {useState, useEffect} from 'react'
-import { useLoaderData } from "react-router-dom"
+import {useState, useEffect, useRef} from 'react'
+import { useLoaderData, useLocation } from "react-router-dom"
 import ProductCardClient from "../../components/productCardClient"
 import InfiniteScroll from 'react-infinite-scroll-component'
 export async function loader({ request }) {
@@ -21,8 +21,25 @@ export async function loader({ request }) {
         return {error: error.message}
     }
 }
+//THIS IS THE CUSTOM HOOK
+
+const usePrevLocation = (location) => {
+
+const prevLocRef = useRef(location)
+
+useEffect(()=>{
+
+prevLocRef.current = location
+
+},[location])
+
+return prevLocRef.current
+
+}
 
 export default function ProductType() {
+   const location = useLocation()
+   const prevLocation = usePrevLocation(location)
     const [initialItems, name] = useLoaderData()
     const [cursor, setCursor] = useState(null)
     const [items, setItems] = useState(initialItems)
@@ -30,10 +47,17 @@ export default function ProductType() {
 
 
     useEffect(() => {
-        if(cursor) fetchMoreData()
-    }, [cursor])
+      //console.log(prevLocation, location)
+      if (prevLocation !== location) {
+        setItems([])
+        fetchMoreData(null)
+      } else {
+        console.log('same', cursor)
+        if (cursor) fetchMoreData(cursor)
+      }
+    }, [cursor,location])
 
-    const fetchMoreData = async () => {
+    const fetchMoreData = async (cursor) => {
         try {
             const response = await fetch(
               `http://localhost:5500/product/?type=${name}&cursor=${

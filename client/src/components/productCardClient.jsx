@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line react/prop-types
-import {useFetcher} from 'react-router-dom'
+import {useFetcher, useLocation} from 'react-router-dom'
 import {FaCartShopping} from 'react-icons/fa6'
 
 export default function ProductCardClient({ item }) {
+  const location = useLocation()
   const fetcher= useFetcher()
   return (
     <div className="card m-3  bg-base-100 w-60 lg:w-72 shadow-xl">
@@ -47,6 +48,7 @@ export default function ProductCardClient({ item }) {
           </div>
           <fetcher.Form method="post" action="/product/addToCart" className="w-full">
             <input type="hidden" value={item._id} name="itemId" />
+            <input type='hidden' value={location.pathname} name="prevLocation"/>
             <input type="hidden" value={1} name="qty" />
             <button type="submit" className="btn btn-primary text-white w-full">
               <FaCartShopping />

@@ -1,13 +1,18 @@
 /* eslint-disable react/prop-types */
-import { useFetcher } from 'react-router-dom'
+import { useFetcher, useLocation } from 'react-router-dom'
 import { FaCartShopping, FaX } from 'react-icons/fa6'
 export default function CartDropdown({ cart }) {
+    const location = useLocation()
     const fetcher = useFetcher()
     //const submit = useSubmit()
     return (
       <details className="dropdown dropdown-hover dropdown-end">
         <summary>
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle m-2">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle m-2"
+          >
             <div className="indicator">
               <FaCartShopping className="text-xl" />
               <span className="badge badge-sm bg-primary text-white indicator-item">
@@ -70,6 +75,11 @@ export default function CartDropdown({ cart }) {
                               />
                               <input
                                 type="hidden"
+                                value={location.pathname}
+                                name="prevLocation"
+                              />
+                              <input
+                                type="hidden"
                                 value={cart._id}
                                 name="cartId"
                               />
@@ -91,11 +101,9 @@ export default function CartDropdown({ cart }) {
                           <td>
                             {' '}
                             $
-                            {
-                              parseFloat(
-                                item.price.$numberDecimal || item.price
-                              ).toFixed()
-                            }
+                            {parseFloat(
+                              item.price.$numberDecimal || item.price
+                            ).toFixed()}
                           </td>
                           <td>
                             {' '}
@@ -114,6 +122,11 @@ export default function CartDropdown({ cart }) {
                               method="post"
                               action={`/product/deleteCartItem/${cart._id}`}
                             >
+                              <input
+                                type="hidden"
+                                value={location.pathname}
+                                name="prevLocation"
+                              />
                               <input
                                 type="hidden"
                                 value={item.id}
@@ -138,7 +151,10 @@ export default function CartDropdown({ cart }) {
               </table>
             </div>
             <span className="font-semibold text-xl">
-              Subtotal: ${cart.items ? parseFloat(cart.subtotal.$numberDecimal).toFixed(2) : 0}{' '}
+              Subtotal: $
+              {cart.items
+                ? parseFloat(cart.subtotal.$numberDecimal).toFixed(2)
+                : 0}{' '}
             </span>
             <div className="card-actions">
               <button className="btn btn-primary btn-block">

@@ -67,7 +67,7 @@ export default function AllCategoriesVertical() {
                                   : ''
                               }
                               to={`/product/categoryProducts/${item._id}`}
-                            >
+                             end>
                               {' '}
                               {item.name}{' '}
                             </NavLink>

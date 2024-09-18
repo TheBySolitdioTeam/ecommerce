@@ -11,7 +11,7 @@ export async function action({ request }) {
             body: JSON.stringify(bodyObj)
         })
         const msg = await response.json()
-        if (!msg.error) return redirect("/product/type?name=product")
+        if (!msg.error) return redirect(bodyObj.prevLocation)
         throw new Error(msg.error)
     } catch (error) {
         throw new Error(error.message)

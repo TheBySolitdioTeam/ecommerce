@@ -210,7 +210,10 @@ router.put("/:id", upload.array('images', 4), checkSchema(productSchema, ["body"
   }
 
   // Comparing the onSale properties of the product and the edit
-  if (data.onSale && tobeUpdated.onSale.sales_id !== data.onSale) {
+  if (
+    data.onSale &&
+    (!tobeUpdated.onSale || tobeUpdated.onSale.sales_id !== data.onSale)
+  ) {
     try {
       const sales = await Sales.findById(data.onSale)
       data.onSale = {
@@ -219,9 +222,10 @@ router.put("/:id", upload.array('images', 4), checkSchema(productSchema, ["body"
         discount_rate: sales.discount_rate,
       }
     } catch (error) {
-      return res.send({error: error.message})
+      return res.send({ error: error.message })
     }
-       
+  } else {
+    data.onSale = null
   }
  
   // Compare categories and get the new one if necessary
@@ -309,6 +313,8 @@ router.patch("/:id", async (req, res) => {
     } catch (error) {
       return res.send({ error: error.message })
     }
+  } else {
+    data.onSale = null
   }
 
   // Compare categories and get the new one if necessary

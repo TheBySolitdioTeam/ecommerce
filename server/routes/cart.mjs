@@ -39,7 +39,10 @@ router.post('/', async (req, res) => {
         price: price,
         qty: qty,
         image: item.images.split(';')[0],
-      }
+    }
+  if (item.size) {
+      newItem.size = item.size
+    }
     if (existingCart.length > 0) {
         // Check if product already exists
 
@@ -109,7 +112,36 @@ router.patch("/:id", async (req, res) => {
     }
 })
 
+// Update item size
+router.patch('/size/:id', async (req, res) => {
+  const { id } = req.params
+  const { itemId, size } = req.body
 
+  //Get the cart
+  const existingCart = await Cart.findById(id)
+  if (!existingCart)
+    return res.send({ error: `No cart found with the ID: ${id}` })
+
+  // Get the item index from cart
+  const itemIndex = existingCart.items.findIndex((item) => item.id === itemId)
+  // Update the quantity for the item
+  existingCart.items[itemIndex].size = size
+  // Update the subtotal to reflect the new quantity
+  existingCart.subtotal = existingCart.items
+    .map((item) => parseFloat(item.price * parseFloat(item.qty)))
+    .reduce((acc, curr) => (acc += curr), 0)
+
+  // update cart
+  try {
+    await Cart.findByIdAndUpdate(id, existingCart)
+    return res.send({ msg: 'Size updated with success!' })
+  } catch (error) {
+    return res.send({ error: error.message })
+  }
+})
+
+
+// Delete item form cart
 router.delete("/:id", async (req, res) => {
   const { id } = req.params
   const { itemId } = req.query

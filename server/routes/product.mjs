@@ -71,7 +71,21 @@ router.get("/search", async (req, res) => {
         return res.send({error: error.message})
     }
 })
-
+//
+router.get("/single/:id", async (req, res) => {
+  const { id } = req.params
+  
+  try {
+     const singleProduct =
+       (await Product.findById(id)) ||
+       (await Clothing.findById(id)) ||
+       (await Furniture.findById(id))
+    if (!singleProduct) res.send({ error: `No product with ID:${id}` })
+    return res.send(singleProduct)
+  } catch (error) {
+    return res.send({error: error.message})
+  }
+})
 // get Product by sales
 router.get('/sales/:salesId', async (req, res) => {
   const {salesId} = req.params
@@ -88,6 +102,7 @@ router.get('/sales/:salesId', async (req, res) => {
   if (price === 'desc') {
     filter.sort = { price: -1 }
   }
+  console.log(query)
   try {
     const salesProducts = await Product.find(query, null, filter)
     return res.send(salesProducts)

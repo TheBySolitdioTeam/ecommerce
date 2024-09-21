@@ -103,7 +103,7 @@ export default function Navbar({ user, cart }) {
         </ul>
       </div>
       <div className="navbar-end mx-5">
-       <CartDropdown cart={cart} />
+       <CartDropdown user={user} cart={cart} />
         {user.msg ? (
           <a className="btn">Button</a>
         ) : (

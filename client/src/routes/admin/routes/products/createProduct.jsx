@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useFetcher, redirect } from 'react-router-dom'
+import { useFetcher, useNavigate } from 'react-router-dom'
 import toast, {Toaster} from 'react-hot-toast'
 import PrimeCategorySelector from '../../components/primeCategorySelector'
 import ProductTypeSelector from '../../components/productTypeSelector'
@@ -28,6 +28,7 @@ export async function action({request}) {
 
 export default function CreateProduct() {
   const fetcher = useFetcher()
+  const navigate = useNavigate()
    const [type, setType] = useState('')
     useEffect(() => {
         const toastOptions = {
@@ -41,7 +42,7 @@ export default function CreateProduct() {
             ? toast.error(fetcher.data.error, toastOptions)
             : toast.success(fetcher.data.msg, toastOptions)
           : ''
-      redirect('/admin/products/view')
+      navigate('/admin/products/view')
     },[fetcher])
    
     
@@ -120,7 +121,12 @@ export default function CreateProduct() {
             <label className="label">
               <span className="label-text">Type</span>
             </label>
-            <select name="type" onChange={(e)=> setType(e.target.value)} defaultValue="product" className="select select-bordered w-full max-w-xs">
+            <select
+              name="type"
+              onChange={(e) => setType(e.target.value)}
+              defaultValue="product"
+              className="select select-bordered w-full max-w-xs"
+            >
               <option value="product" disabled>
                 Product
               </option>
@@ -130,7 +136,18 @@ export default function CreateProduct() {
           </div>
           <ProductTypeSelector type={type} />
           <PrimeCategorySelector name="category" />
-          <SalesSelector name="onSale"/>
+          <SalesSelector name="onSale" />
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Additional Infos</span>
+            </label>
+            <textarea
+              placeholder="Desc"
+              className="textarea textarea-bordered textarea-lg w-full max-w-xs"
+              name="additional_info"
+              
+            ></textarea>
+          </div>
           <Toaster />
           <div className="form-control mt-6">
             <button className="btn btn-primary">

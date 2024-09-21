@@ -1,13 +1,14 @@
 import {useState, useEffect, useRef} from 'react'
-import { useLoaderData, useLocation } from "react-router-dom"
+import { useLoaderData, useLocation,useOutletContext } from "react-router-dom"
 import ProductCardClient from "../../components/productCardClient"
 import InfiniteScroll from 'react-infinite-scroll-component'
 export async function loader({ request }) {
     const url = new URL(request.url)
+    
     const name = url.searchParams.get('name')
-
+    const price = url.searchParams.get('price')
     try {
-        const response = await fetch(`http://localhost:5500/product/?type=${name}&cursor=&limit=5`, {
+        const response = await fetch(`http://localhost:5500/product/?type=${name}&cursor=&limit=5&price=${price||''}`, {
             method: 'GET',
             credentials: 'include',
             headers: {
@@ -16,7 +17,7 @@ export async function loader({ request }) {
         })
         const items = await response.json()
         console.log(items)
-        return [items,name]
+        return [items,name,price]
     } catch (error) {
         return {error: error.message}
     }
@@ -38,31 +39,36 @@ return prevLocRef.current
 }
 
 export default function ProductType() {
+   const [price, setPrice] = useOutletContext()[0]
    const location = useLocation()
    const prevLocation = usePrevLocation(location)
-    const [initialItems, name] = useLoaderData()
+  const [initialItems, name, initPrice] = useLoaderData()
+   
     const [cursor, setCursor] = useState(null)
     const [items, setItems] = useState(initialItems)
+    const itemIds = items.map(item => item._id).sort()
     const [hasMore, setHasMore] = useState(true)
 
 
-    useEffect(() => {
+  useEffect(() => {
+       if (!price) setPrice(initPrice)
       //console.log(prevLocation, location)
-      if (prevLocation !== location) {
+    if (prevLocation !== location) {
         setItems([])
-        fetchMoreData(null)
-      } else {
+        fetchMoreData(null,price)
+    } else {
+      
         console.log('same', cursor)
-        if (cursor) fetchMoreData(cursor)
+        if (cursor) fetchMoreData(cursor,price)
       }
-    }, [cursor,location])
+    }, [cursor,location,price])
 
-    const fetchMoreData = async (cursor) => {
+    const fetchMoreData = async (cursor,price) => {
         try {
             const response = await fetch(
               `http://localhost:5500/product/?type=${name}&cursor=${
                 cursor || ''
-              }&limit=5`,
+              }&limit=5&price=${price||''}`,
               {
                 method: 'GET',
                 credentials: 'include',
@@ -86,7 +92,7 @@ export default function ProductType() {
                     className='w-full'
             dataLength={items.length}
             hasMore={hasMore}
-            next={()=> setCursor(items[items.length - 1]._id)}
+            next={()=> setCursor(itemIds[itemIds.length - 1])}
             loader={
               <span className="loading loading-infinity loading-lg"></span>
             }

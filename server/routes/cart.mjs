@@ -78,11 +78,10 @@ router.post('/', async (req, res) => {
 
 })
 
-router.get("/:user_id", async (req, res) => {
-    const { user_id } = req.params
+router.get("/", async (req, res) => {
     
     try {
-        const cart = await Cart.find({ user_id })
+        const cart = await Cart.find({ user_id: req.user.id })
         return res.send(cart)
     } catch (error) {
         return res.send({error: error.message})

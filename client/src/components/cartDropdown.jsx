@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { useFetcher, useLocation } from 'react-router-dom'
+import { useFetcher, useLocation, Link } from 'react-router-dom'
 import { FaCartShopping, FaX } from 'react-icons/fa6'
-export default function CartDropdown({ cart }) {
+export default function CartDropdown({ cart,user }) {
     const location = useLocation()
     const fetcher = useFetcher()
     //const submit = useSubmit()
@@ -23,7 +23,7 @@ export default function CartDropdown({ cart }) {
         </summary>
         <div
           tabIndex={0}
-          className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-108 shadow"
+          className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-120 shadow"
         >
           <div className="card-body">
             <span className="text-lg font-bold">
@@ -38,6 +38,7 @@ export default function CartDropdown({ cart }) {
                     <td>Qty</td>
                     <td>Price</td>
                     <td>Sub</td>
+                    <td>Size</td>
                     <td>Del</td>
                   </tr>
                 </thead>
@@ -118,6 +119,54 @@ export default function CartDropdown({ cart }) {
                             )}{' '}
                           </td>
                           <td>
+                            {' '}
+                            {item.size ? (
+                              <fetcher.Form
+                                method="post"
+                                action={'/product/changeSize'}
+                              >
+                                <input
+                                  type="hidden"
+                                  value={item.id}
+                                  name="itemId"
+                                />
+                                <input
+                                  type="hidden"
+                                  value={location.pathname}
+                                  name="prevLocation"
+                                />
+                                <input
+                                  type="hidden"
+                                  value={cart._id}
+                                  name="cartId"
+                                />
+                              <select
+                                
+                                name="size"
+                                  onChange={(e) => {
+                                    fetcher.submit(e.currentTarget.form)
+                                  }}
+                                  className="select select-bordered select-xs w-full max-w-xs"
+                                >
+                                  {item.size.split(',').map((size) => (
+                                    <option 
+                                      key={
+                                        size + (Math.random() * 10e9).toString()
+                                      }
+                                      value={size}
+                                    >
+                                      {' '}
+                                      {size}{' '}
+                                    </option>
+                                  ))}
+                                </select>
+                               
+                              </fetcher.Form>
+                            ) : (
+                              'None'
+                            )}{' '}
+                          </td>
+                          <td>
                             <fetcher.Form
                               method="post"
                               action={`/product/deleteCartItem/${cart._id}`}
@@ -157,14 +206,14 @@ export default function CartDropdown({ cart }) {
                 : 0}{' '}
             </span>
             <div className="card-actions">
-              <button className="btn btn-primary btn-block">
+              <Link to={user.msg ? "" : `/addresses`} className="btn btn-primary btn-block" disabled={user.msg}>
                 {' '}
                 {fetcher.state !== 'idle' ? (
                   <span className="loading loading-infinity loading-md"></span>
                 ) : (
                   'Checkout'
                 )}{' '}
-              </button>
+              </Link>
             </div>
           </div>
         </div>

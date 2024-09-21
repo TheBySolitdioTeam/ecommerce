@@ -43,9 +43,15 @@ import ProductRootClient from './routes/product/productRoot'
 import ProductType, { loader as productTypeLoader } from './routes/product/productType'
 import {action as addToCartAction} from './routes/addToCart'
 import {action as changeQtyAction} from './routes/changeQty'
+import {action as changeSizeAction} from './routes/changeSize'
 import { action as deleteItemAction } from './routes/deleteCartItem'
 import {loader as allCategoriesLoader} from './routes/getAllCategories'
 import CategoryProducts, {loader as categoryProductsLoader} from './routes/product/categoryProducts'
+import SearchProductsClient, {loader as searchProductClientLoader} from './routes/product/searchProducts'
+import SalesProductsClient, {loader as salesProductsClientLoader} from './routes/product/salesProducts'
+import SingleProduct, {loader as singleProductLoader} from './routes/product/singleProduct'
+import Addresses, {action as addAddressAction, loader as userAddressesLoader} from './routes/addresses'
+import Checkout, {loader as checkoutCartLoader} from './routes/checkout'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -57,37 +63,77 @@ const router = createBrowserRouter([
     element: <Root />,
     loader: rootUserLoader,
     errorElement: <ErrorPage />,
-    children: [{
-      path: "/product",
-      element: <ProductRootClient/>,
-      errorElement: <ErrorPage />,
-      children: [{
-        path: "/product/type",
-        element: <ProductType />,
+    children: [
+      {
+        path: '/product',
+        element: <ProductRootClient />,
         errorElement: <ErrorPage />,
-        loader: productTypeLoader
-      },{
-        path: '/product/categoryProducts/:category_id',
-        element: <CategoryProducts />,
-        loader: categoryProductsLoader,
-        errorElement: <ErrorPage />
+        children: [
+          {
+            path: '/product/type',
+            element: <ProductType />,
+            errorElement: <ErrorPage />,
+            loader: productTypeLoader,
+          },
+          {
+            path: '/product/search',
+            element: <SearchProductsClient />,
+            errorElement: <ErrorPage />,
+            loader: searchProductClientLoader,
+          },
+          {
+            path: '/product/sales/:sales_id',
+            element: <SalesProductsClient />,
+            errorElement: <ErrorPage />,
+            loader: salesProductsClientLoader,
+          },
+          {
+            path: '/product/categoryProducts/:category_id',
+            element: <CategoryProducts />,
+            loader: categoryProductsLoader,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: '/product/addToCart',
+            action: addToCartAction,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: '/product/changeQty',
+            action: changeQtyAction,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: '/product/changeSize',
+            action: changeSizeAction,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: '/product/deleteCartItem/:id',
+            action: deleteItemAction,
+          },
+          {
+            path: '/product/allCategories/loader',
+            loader: allCategoriesLoader,
+          },
+        ],
       }, {
-        path: "/product/addToCart",
-        action: addToCartAction,
+        path: "/addresses",
+        element: <Addresses />,
+        action: addAddressAction,
+        loader: userAddressesLoader
+      }, {
+        path: "/checkout/:address",
+        element: <Checkout />,
+        errorElement: <ErrorPage />,
+        loader: checkoutCartLoader
+      },
+      {
+        path: '/singleProduct/:id',
+        element: <SingleProduct />,
+        loader: singleProductLoader,
         errorElement: <ErrorPage/>
-        }, {
-        path: "/product/changeQty",
-        action: changeQtyAction,
-        errorElement: <ErrorPage/>
-          
-        }, {
-        path: "/product/deleteCartItem/:id",
-        action: deleteItemAction
-        }, {
-        path: "/product/allCategories/loader",
-        loader: allCategoriesLoader
-      }]
-    },
+      },
       {
         path: '/login',
         element: <Login />,
@@ -95,10 +141,10 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
-        path: "/logout",
+        path: '/logout',
         errorElement: <ErrorPage />,
-        action:logoutAction,
-      }
+        action: logoutAction,
+      },
     ],
   },
   {
@@ -110,40 +156,46 @@ const router = createBrowserRouter([
         path: '/admin/products',
         element: <ProductRoot />,
         errorElement: <ErrorPage />,
-        children: [{
-          index: true,
-          element: <CreateProduct />,
-          action: createProductAction,
-          errorElement: <ErrorPage/>
-        }, {
-          path: '/admin/products/delete/:id',
-          element: <DeleteProduct/>,
-          action: deleteAction,
-          errorElement: <ErrorPage/>
-          
-        }, {
-          path: '/admin/products/edit/:id',
-          element: <EditProduct />,
-          errorElement: <ErrorPage />,
-          loader: editProductLoader,
-          action: editProdcutAction
-        },
+        children: [
           {
-          path: "/admin/products/view",
-          element: <ViewProductRoot />,
-          errorElement: <ErrorPage />,
-          children: [{
             index: true,
-            element: <GetAllProducts />,
-            loader: getAllProductsLoader,
-            errorElement: <ErrorPage/>
-          }, {
-            path: '/admin/products/view/search',
-            element: <ProductSearch />,
-            loader: productSearchLoader,
-            errorElement: <ErrorPage/>
-          }]
-        }]
+            element: <CreateProduct />,
+            action: createProductAction,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: '/admin/products/delete/:id',
+            element: <DeleteProduct />,
+            action: deleteAction,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: '/admin/products/edit/:id',
+            element: <EditProduct />,
+            errorElement: <ErrorPage />,
+            loader: editProductLoader,
+            action: editProdcutAction,
+          },
+          {
+            path: '/admin/products/view',
+            element: <ViewProductRoot />,
+            errorElement: <ErrorPage />,
+            children: [
+              {
+                index: true,
+                element: <GetAllProducts />,
+                loader: getAllProductsLoader,
+                errorElement: <ErrorPage />,
+              },
+              {
+                path: '/admin/products/view/search',
+                element: <ProductSearch />,
+                loader: productSearchLoader,
+                errorElement: <ErrorPage />,
+              },
+            ],
+          },
+        ],
       },
       {
         path: '/admin/categories',
@@ -182,7 +234,7 @@ const router = createBrowserRouter([
           {
             path: '/admin/categories/delete/:id',
             action: deleteCategoryAction,
-            element: <DeleteCategory/>,
+            element: <DeleteCategory />,
             errorElement: <ErrorPage />,
           },
           {
@@ -204,41 +256,49 @@ const router = createBrowserRouter([
         path: '/admin/sales',
         element: <SalesRoot />,
         errorElement: <ErrorPage />,
-        children: [{
-          index: true,
-          element: <CreateSales />,
-          errorElement: <ErrorPage />,
-          action: createSalesAction
-        }, {
-          path: '/admin/sales/loader',
-          loader: getAllSalesLoader
-          }, {
-          path: '/admin/sales/view',
-          element: <ViewSalesRoot />,
-          errorElement: <ErrorPage />,
-          children: [{
+        children: [
+          {
             index: true,
-            element: <InfinitySales />,
-            loader:infinitySalesLoader
-          }, {
-            path: '/admin/sales/view/search',
-            element: <SearchSales />,
-            loader: searchSalesLoader
-          }]
-          
-          }, {
-          path: '/admin/sales/edit/:id',
-          element: <EditSales />,
-          loader: editSalesLoader,
-          action: editSalesAction,
-            errorElement: <ErrorPage/>
-          }, {
-          path: '/admin/sales/delete/:id',
-          element: <DeleteSales />,
-          errorElement: <ErrorPage />,
-          action: deleteSalesAction  
-        }]
-      }
+            element: <CreateSales />,
+            errorElement: <ErrorPage />,
+            action: createSalesAction,
+          },
+          {
+            path: '/admin/sales/loader',
+            loader: getAllSalesLoader,
+          },
+          {
+            path: '/admin/sales/view',
+            element: <ViewSalesRoot />,
+            errorElement: <ErrorPage />,
+            children: [
+              {
+                index: true,
+                element: <InfinitySales />,
+                loader: infinitySalesLoader,
+              },
+              {
+                path: '/admin/sales/view/search',
+                element: <SearchSales />,
+                loader: searchSalesLoader,
+              },
+            ],
+          },
+          {
+            path: '/admin/sales/edit/:id',
+            element: <EditSales />,
+            loader: editSalesLoader,
+            action: editSalesAction,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: '/admin/sales/delete/:id',
+            element: <DeleteSales />,
+            errorElement: <ErrorPage />,
+            action: deleteSalesAction,
+          },
+        ],
+      },
     ],
   },
 ])

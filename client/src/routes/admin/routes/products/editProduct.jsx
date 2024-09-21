@@ -119,8 +119,8 @@ export default function EditProduct() {
                type="text"
                placeholder="Name"
                className="input input-bordered"
-                name="name"
-                defaultValue={product.name}
+               name="name"
+               defaultValue={product.name}
                required
              />
            </div>
@@ -134,8 +134,8 @@ export default function EditProduct() {
                min="0"
                placeholder="0.00"
                className="input input-bordered"
-                         name="price"
-                         defaultValue={product.price['$numberDecimal']}
+               name="price"
+               defaultValue={product.price['$numberDecimal']}
                required
              />
            </div>
@@ -146,8 +146,8 @@ export default function EditProduct() {
              <textarea
                placeholder="Desc"
                className="textarea textarea-bordered textarea-lg w-full max-w-xs"
-                name="description"
-                defaultValue={product.description}
+               name="description"
+               defaultValue={product.description}
                required
              ></textarea>
            </div>
@@ -176,7 +176,6 @@ export default function EditProduct() {
                className="file-input file-input-bordered file-input-primary w-full max-w-xs"
                name="images"
                multiple
-              
              />
            </div>
            <div className="form-control mb-5">
@@ -195,8 +194,26 @@ export default function EditProduct() {
              </select>
            </div>
            <ProductTypeSelector type={type} dValues={details} />
-           <PrimeCategorySelector defaultValue={product.category.category_id} name="category" />
-           <SalesSelector defaultValue={product.onSale ? product.onSale.sales_id: null} name="onSale"/>
+           <PrimeCategorySelector
+             defaultValue={product.category.category_id}
+             name="category"
+           />
+           <SalesSelector
+             defaultValue={product.onSale ? product.onSale.sales_id : null}
+             name="onSale"
+           />
+           <div className="form-control">
+             <label className="label">
+               <span className="label-text">Additional Infos</span>
+             </label>
+             <textarea
+               placeholder="Desc"
+               className="textarea textarea-bordered textarea-lg w-full max-w-xs"
+               name="additional_info"
+             >
+               {product.additional_info}
+             </textarea>
+           </div>
            <Toaster />
            <div className="form-control mt-6">
              <button className="btn btn-warning">

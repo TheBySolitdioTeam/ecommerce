@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
     try {
         const newAddress = new Addresses(req.body)
         await newAddress.save()
-        console.log(newAddress)
+       // console.log(newAddress)
         return res.send({msg: 'Address Created with success', id:newAddress._id})
         
     } catch (error) {

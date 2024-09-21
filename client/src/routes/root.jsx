@@ -13,7 +13,7 @@ export async function loader() {
       })
         const potUser = await response.json()
       if (potUser.msg) return [potUser, {}]
-      const cartResponse = await fetch(`http://localhost:5500/cart/${potUser.id}`, {
+      const cartResponse = await fetch(`http://localhost:5500/cart/`, {
         method: "GET",
         credentials: 'include',
         headers: {

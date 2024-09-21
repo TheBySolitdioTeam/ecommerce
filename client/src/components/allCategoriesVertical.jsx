@@ -10,7 +10,7 @@ export default function AllCategoriesVertical() {
     }, [fetcher])
     return (
         <ul className="menu bg-base-200 rounded-box w-56 my-3">
-            <li> <hr/> </li>
+          
             {
                 fetcher.data ? fetcher.data.map(item => {
                    

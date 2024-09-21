@@ -4,6 +4,7 @@ import toast, {Toaster} from 'react-hot-toast'
 
 export default function ErrorPage() {
   const error = useRouteError()
+ 
   console.error(error)
 
   useEffect(() => {
@@ -12,7 +13,7 @@ export default function ErrorPage() {
     }
 toast.dismiss()
     toast.error(error.message, toastOptions)
-
+  
     
   })
 

@@ -10,6 +10,7 @@ import adminRouter from './routes/admin.mjs'
 import productRouter from './routes/product.mjs'
 import cartRouter from './routes/cart.mjs'
 import categoriesRouter from './routes/categories.mjs'
+import addressesRouter from './routes/addresses.mjs'
 
 
 
@@ -52,6 +53,7 @@ app.use('/admin', adminRouter)
 app.use('/product', productRouter)
 app.use('/cart', cartRouter)
 app.use('/categories', categoriesRouter)
+app.use('/addresses', addressesRouter)
 
 const port = process.env.PORT || 5500
 

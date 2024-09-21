@@ -40,9 +40,12 @@ router.post('/', async (req, res) => {
         qty: qty,
         image: item.images.split(';')[0],
     }
-  if (item.size) {
+    if (item.size) {
       newItem.size = item.size
     }
+  if (req.body.size && Boolean(req.body.size) === true) {
+    newItem.size = req.body.size
+  }
     if (existingCart.length > 0) {
         // Check if product already exists
 

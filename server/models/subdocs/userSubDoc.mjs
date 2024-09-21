@@ -6,7 +6,11 @@ export default new Schema({
   },
   fullName: {
     type: String,
-    required: [true, "The user's fullname is missing!"],
+    default: null,
+  },
+  email: {
+    type: String,
+    required: [true, 'Please provide an email!'],
   },
   picture: {
     type: String,

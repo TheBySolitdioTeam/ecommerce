@@ -11,6 +11,7 @@ import productRouter from './routes/product.mjs'
 import cartRouter from './routes/cart.mjs'
 import categoriesRouter from './routes/categories.mjs'
 import addressesRouter from './routes/addresses.mjs'
+import stripeRouter from './routes/stripe.mjs'
 
 
 
@@ -21,6 +22,8 @@ const corsOptions = {
   credentials: true,
   optionsSuccessStatus: 200,
 }
+
+
 
 try {
     const connection = await mongoose.connect(process.env.MONGO_URI)
@@ -54,6 +57,7 @@ app.use('/product', productRouter)
 app.use('/cart', cartRouter)
 app.use('/categories', categoriesRouter)
 app.use('/addresses', addressesRouter)
+app.use('/stripe', stripeRouter)
 
 const port = process.env.PORT || 5500
 

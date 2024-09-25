@@ -52,6 +52,8 @@ import SalesProductsClient, {loader as salesProductsClientLoader} from './routes
 import SingleProduct, {loader as singleProductLoader} from './routes/product/singleProduct'
 import Addresses, {action as addAddressAction, loader as userAddressesLoader} from './routes/addresses'
 import Checkout, {loader as checkoutCartLoader} from './routes/checkout'
+import CheckoutForm from './routes/checkoutForm'
+import CompletePage from './routes/completePage'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -126,7 +128,15 @@ const router = createBrowserRouter([
         path: "/checkout/:address",
         element: <Checkout />,
         errorElement: <ErrorPage />,
-        loader: checkoutCartLoader
+        loader: checkoutCartLoader,
+        children: [{
+          index: true,
+          element: <CheckoutForm />,
+          errorElement:<ErrorPage/>
+        }, {
+          path: "/checkout/:address/complete",
+          element:<CompletePage/>
+        }]
       },
       {
         path: '/singleProduct/:id',

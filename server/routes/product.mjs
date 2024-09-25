@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
     if (price === 'desc') {
      filter = { sort: { price: -1 } }
     }
-    console.log(filter);
+    //console.log(filter);
     try {
         const items = await pickType(type).find(query,null,filter).limit(Number(limit))
         return res.send(items)
@@ -62,7 +62,7 @@ router.get("/search", async (req, res) => {
      if (price === 'desc') {
        filter.sort = { price: -1 } 
      }
-    console.log(filter)
+    //console.log(filter)
     try {
         const searchResults = await Product.find(query, null, filter)
         return res.send(searchResults)
@@ -102,7 +102,7 @@ router.get('/sales/:salesId', async (req, res) => {
   if (price === 'desc') {
     filter.sort = { price: -1 }
   }
-  console.log(query)
+  //console.log(query)
   try {
     const salesProducts = await Product.find(query, null, filter)
     return res.send(salesProducts)
@@ -117,7 +117,7 @@ router.get("/:categoryId", async (req, res) => {
     const { categoryId } = req.params
     //console.log(categoryId)
     const { cursor, limit, price } = req.query
-    console.log(cursor)
+    //console.log(cursor)
     const query = { 'category.category_id': categoryId }
     let filter = null
     if (cursor) {

@@ -59,7 +59,10 @@ const orderSchema = new Schema({
     type: String,
     default: 'Order Received',
   },
-  user: userSubDoc,
+  user: {
+    type: userSubDoc,
+    required: [true, 'The order needs a user']
+   },
   payment: mongoose.Mixed,
   address: {
     type: addressSubDoc,

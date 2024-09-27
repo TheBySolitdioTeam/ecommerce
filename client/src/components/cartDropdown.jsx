@@ -89,7 +89,7 @@ export default function CartDropdown({ cart,user }) {
                                 type="number"
                                 step="1"
                                 min="1"
-                                max="10"
+                                max={item.maxQty}
                                 name="qty"
                                 defaultValue={item.qty}
                                 onChange={(e) => {
@@ -206,7 +206,7 @@ export default function CartDropdown({ cart,user }) {
                 : 0}{' '}
             </span>
             <div className="card-actions">
-              <Link to={user.msg ? "" : `/addresses`} className="btn btn-primary btn-block" disabled={user.msg}>
+              <Link to={user.msg ? "" : `/addresses`} className="btn btn-primary btn-block" disabled={user.msg || !cart.items.length > 0}>
                 {' '}
                 {fetcher.state !== 'idle' ? (
                   <span className="loading loading-infinity loading-md"></span>

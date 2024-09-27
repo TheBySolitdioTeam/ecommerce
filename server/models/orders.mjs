@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
 
 import userSubDoc from './subdocs/userSubDoc.mjs'
+import Product from './products/products.mjs'
 const cartSubDoc = new Schema({
   user_id: {
     type: mongoose.Types.ObjectId,
@@ -74,5 +75,14 @@ const orderSchema = new Schema({
   },
 })
 
+orderSchema.post("save", async function (doc) {
+  const items = doc.cart.items
+  items.forEach(async (item) => {
+    const product = await Product.findById(item.id)
+    product.qty -= Number(item.qty)
+    product.qty = product.qty > 0 ? product.qty : 0
+    await Product.findByIdAndUpdate(product._id, product)
+  })
+})
 
 export default mongoose.model('Orders', orderSchema)

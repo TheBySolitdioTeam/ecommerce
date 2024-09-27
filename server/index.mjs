@@ -35,7 +35,7 @@ try {
 
 const app = express()
 app.use(cors(corsOptions))
-app.use(express.json())
+
 app.use(cookieParser('yes'))
 app.use(
   session({
@@ -51,14 +51,14 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.static('public'))
+app.use('/stripe', stripeRouter)
+app.use(express.json())
 app.use('/auth', authRouter)
 app.use('/admin', adminRouter)
 app.use('/product', productRouter)
 app.use('/cart', cartRouter)
 app.use('/categories', categoriesRouter)
 app.use('/addresses', addressesRouter)
-app.use('/stripe', stripeRouter)
-
 const port = process.env.PORT || 5500
 
 app.get("/", (req, res) => {

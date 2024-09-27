@@ -120,14 +120,14 @@ export default function ProductRootClient() {
                   {q ? <input type="hidden" name="q" value={q} /> : ''}
                   {name ? <input type="hidden" name="name" value={name} /> : ''}
                   <select
-                    value={sortBy}
+                    
                     name="price"
                     onChange={(e) => {
                       setSortBy(e.target.value)
                       submit(e.currentTarget.form)
                     }}
                     className="select select-bordered w-full max-w-xs"
-                    defaultValue={''}
+                    defaultValue={sortBy || ''}
                   >
                     <option value={''}>Sort by (None)</option>
                     <option value="asc">Price Asc</option>

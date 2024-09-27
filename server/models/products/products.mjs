@@ -28,7 +28,10 @@ const salesSubDoc = new Schema({
   discount_rate: {
     type: mongoose.Decimal128,
     required: [true, 'Please provide a discount rate!'],
-  },
+    },
+    expiry_date: {
+      type: Date
+  }
 })
 
 const productSchema = new Schema({
@@ -77,6 +80,19 @@ const productSchema = new Schema({
        
     }
 }, options)
+
+productSchema.pre("find", async function () {
+  const products = await this.model.aggregate([{
+       $match: { onSale: {$ne: null}}
+    }, {
+       $match: {"onSale.expiry_date": {$lt: new Date(Date.now())}}
+       }])
+       
+       products.forEach(async (product) => {
+        product.onSale = null
+        await this.model.findByIdAndUpdate(product._id, product)
+    })
+})
 
 const Product = mongoose.model('Product', productSchema)
 

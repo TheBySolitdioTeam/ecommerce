@@ -45,7 +45,7 @@ export default function Navbar({ user, cart }) {
                   Login
                 </NavLink>
               ) : (
-                <NavLink to="/admin">Account</NavLink>
+                <NavLink to="/admin/products/">Account</NavLink>
               )}
             </li>
             <li>
@@ -83,7 +83,7 @@ export default function Navbar({ user, cart }) {
                 Login
               </NavLink>
             ) : (
-              <NavLink to="/admin">Account</NavLink>
+              <NavLink to="/admin/products/">Account</NavLink>
             )}
           </li>
           <li>
@@ -95,7 +95,7 @@ export default function Navbar({ user, cart }) {
                   ? ' bg-secondary'
                   : ''
               }
-              to="/product"
+              to="/product/type?name=product"
             >
               Product
             </NavLink>
@@ -103,7 +103,7 @@ export default function Navbar({ user, cart }) {
         </ul>
       </div>
       <div className="navbar-end mx-5">
-       <CartDropdown user={user} cart={cart} />
+        <CartDropdown user={user} cart={cart} />
         {user.msg ? (
           <a className="btn">Button</a>
         ) : (

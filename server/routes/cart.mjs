@@ -38,7 +38,8 @@ router.post('/', async (req, res) => {
         name: item.name,
         price: price,
         qty: qty,
-        image: item.images.split(';')[0],
+      image: item.images.split(';')[0],
+        maxQty: item.qty
     }
     if (item.size) {
       newItem.size = item.size
@@ -97,6 +98,10 @@ router.patch("/:id", async (req, res) => {
     //Get the cart
     const existingCart = await Cart.findById(id)
     if (!existingCart) return res.send({ error: `No cart found with the ID: ${id}` })
+  
+    //Check if qty is available
+    //const product = await Product.findById(itemId)
+    if(Number(existingCart.maxQty) < Number(qty)) return res.send({error: `This quantity is not in stock`})
     
     // Get the item index from cart
     const itemIndex = existingCart.items.findIndex(item => item.id === itemId)

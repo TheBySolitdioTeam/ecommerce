@@ -70,7 +70,12 @@ router.post('/', upload.array('images', 4), checkSchema(productSchema, ["body"])
     // setting the onsales if exists
     if (salesId) {
       const sales = await Sales.findById(salesId)
-      data.onSale = {name: sales.name, sales_id: sales._id, discount_rate: sales.discount_rate}
+      data.onSale = {
+        name: sales.name,
+        sales_id: sales._id,
+        discount_rate: sales.discount_rate,
+        expiry_date: new Date(sales.expires),
+      }
     } else {
       delete data.onSale
     }
@@ -220,6 +225,7 @@ router.put("/:id", upload.array('images', 4), checkSchema(productSchema, ["body"
         name: sales.name,
         sales_id: sales._id,
         discount_rate: sales.discount_rate,
+        expiry_date: new Date(sales.expires),
       }
     } catch (error) {
       return res.send({ error: error.message })
@@ -309,6 +315,7 @@ router.patch("/:id", async (req, res) => {
         name: sales.name,
         sales_id: sales._id,
         discount_rate: sales.discount_rate,
+        expiry_date: new Date(sales.expires)
       }
     } catch (error) {
       return res.send({ error: error.message })

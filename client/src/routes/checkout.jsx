@@ -36,7 +36,7 @@ export default function Checkout() {
  console.log(dpmCheckerLink);
   useEffect(() => {
      if (cart.items.length <= 0) {
-       navigate(-1)
+       setTimeout(()=> navigate("/product/type?name=product") , 2000)
      }
     // Create PaymentIntent as soon as the page loads
     fetch(`http://localhost:5500/stripe/create-payment-intent?addressId=${address}`, {

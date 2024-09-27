@@ -59,7 +59,7 @@ export default function ProductCardClient({ item }) {
               name="prevLocation"
             />
             <input type="hidden" value={1} name="qty" />
-            <button type="submit" className="btn btn-primary text-white w-full">
+            <button disabled={item.qty <= 0 } type="submit" className="btn btn-primary text-white w-full">
               <FaCartShopping />
               {fetcher.state !== 'submitting' ? (
                 'Add To Cart'

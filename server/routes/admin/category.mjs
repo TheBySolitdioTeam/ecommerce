@@ -33,7 +33,7 @@ const categoryAfterImgUpload = async (req, res) => {
   const data = matchedData(req)
   data.image = req.body.image || null
   data.parent_id = req.body.parent_id || null
-  console.log(`Data: ${JSON.stringify(data)},Body: ${JSON.stringify(req.body)}`)
+  //console.log(`Data: ${JSON.stringify(data)},Body: ${JSON.stringify(req.body)}`)
   try {
     // Check for duplicates of name
     const duplicate = await Category.find({
@@ -114,7 +114,7 @@ router.put(
 
 router.patch('/:id', checkSchema(categoryValidationSchema,['body']), async (req, res) => {
   const { id } = req.params
-  console.log(req.body)
+  //console.log(req.body)
   const results = validationResult(req)
   if (!results.isEmpty()) return res.status(400).send({error: results.array()[0].msg})
   const data = matchedData(req)
@@ -191,7 +191,7 @@ router.get('/:id', async (req, res) => {
   const {id} = req.params
   try {
     const singleCategorie = await Category.findById(id)
-    console.log(JSON.stringify(singleCategorie))
+    //console.log(JSON.stringify(singleCategorie))
     if (!singleCategorie) return res.status(404).send({ error: 'Categorie not found' })
     return res.status(200).send(singleCategorie)
     

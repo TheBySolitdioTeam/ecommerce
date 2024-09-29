@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import AdminHeader from "./components/header";
 import {Outlet, useNavigate, NavLink} from 'react-router-dom'
-import { FaChartArea, FaStore, FaTable, FaBagShopping } from 'react-icons/fa6'
+import { FaChartArea, FaStore, FaTable, FaBagShopping, FaTags} from 'react-icons/fa6'
 import { UserContext } from './UserContext';
 export default function AdminRoot() {
     const navigate = useNavigate()
@@ -107,8 +107,23 @@ export default function AdminRoot() {
                           : ''
                       }
                     >
-                      <FaBagShopping className="h-5 w-5" />
+                      <FaTags className="h-5 w-5" />
                       Sales
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to={'/admin/orders'}
+                      className={({ isActive, isPending }) =>
+                        isActive
+                          ? 'text-lg bg-primary text-base-100'
+                          : isPending
+                          ? 'text-lg bg-secondary'
+                          : ''
+                      }
+                    >
+                      <FaBagShopping className="h-5 w-5" />
+                      Orders
                     </NavLink>
                   </li>
                 </ul>

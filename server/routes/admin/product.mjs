@@ -146,7 +146,7 @@ router.get("/search", async (req, res) => {
   try {
     // Get all the discriminants items
     const searchResults = await Product.find({ name: { $regex: new RegExp(`${q}`, 'i') } })
-    console.log(q)
+    //console.log(q)
     //console.log(searchResults)
     return res.send(searchResults)
   } catch (error) {
@@ -207,7 +207,7 @@ router.put("/:id", upload.array('images', 4), checkSchema(productSchema, ["body"
   }
   try {
     tobeUpdated = await productType.findById(id)
-    console.log(tobeUpdated)
+    //console.log(tobeUpdated)
      if (!tobeUpdated)
        return res.send({ error: `No product found with ID: ${id}` })
   } catch (error) {
@@ -343,7 +343,7 @@ router.patch("/:id", async (req, res) => {
 
   // Update the data of the product
   data.images = tobeUpdated.images
-  console.log(data)
+  //console.log(data)
   try {
     const updatedProduct = await productType.findByIdAndUpdate(id, { ...data })
     return res.send({
@@ -357,7 +357,7 @@ router.patch("/:id", async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   // Get product to be deletes
-  console.log('Inside delete')
+  //console.log('Inside delete')
   const { id } = req.params
   const { type } = req.query
   try {

@@ -12,6 +12,7 @@ import cartRouter from './routes/cart.mjs'
 import categoriesRouter from './routes/categories.mjs'
 import addressesRouter from './routes/addresses.mjs'
 import stripeRouter from './routes/stripe.mjs'
+import ordersRouter from './routes/orders.mjs'
 
 
 
@@ -59,6 +60,7 @@ app.use('/product', productRouter)
 app.use('/cart', cartRouter)
 app.use('/categories', categoriesRouter)
 app.use('/addresses', addressesRouter)
+app.use('/orders', ordersRouter)
 const port = process.env.PORT || 5500
 
 app.get("/", (req, res) => {

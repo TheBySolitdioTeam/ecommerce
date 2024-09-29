@@ -71,9 +71,9 @@ const orderSchema = new Schema({
   },
   shipping: {
     type: String,
-    default: 'Company',
+    default: 'https://google.com/',
   },
-})
+}, {timestamps: true})
 
 orderSchema.post("save", async function (doc) {
   const items = doc.cart.items

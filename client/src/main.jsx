@@ -54,6 +54,8 @@ import Addresses, {action as addAddressAction, loader as userAddressesLoader} fr
 import Checkout, {loader as checkoutCartLoader} from './routes/checkout'
 import CheckoutForm from './routes/checkoutForm'
 import CompletePage from './routes/completePage'
+import OrderRoot from './routes/orders/orderRoot'
+import ViewOrder, {loader as viewOrderLoader, action as viewOrderAction} from './routes/orders/ordersView'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -162,6 +164,20 @@ const router = createBrowserRouter([
     element: <AdminRoot />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "/admin/orders",
+        element: <OrderRoot />,
+        errorElement: <ErrorPage />,
+        children: [{
+          index: true,
+          element: <ViewOrder />,
+          loader: viewOrderLoader,
+          action: viewOrderAction,
+          errorElement: <ErrorPage/>
+          
+
+        }]
+    },
       {
         path: '/admin/products',
         element: <ProductRoot />,

@@ -92,25 +92,26 @@ export default function AdminRoot() {
                           Categories
                         </NavLink>
                       </li>
+                      <li>
+                        <NavLink
+                          to={'/admin/sales'}
+                          className={({ isActive, isPending }) =>
+                            isActive
+                              ? 'text-lg bg-primary text-base-100'
+                              : isPending
+                              ? 'text-lg bg-secondary'
+                              : ''
+                          }
+                        >
+                          <FaTags className="h-5 w-5" />
+                          Sales
+                        </NavLink>
+                      </li>
                     </>
                   ) : (
                     ''
                   )}
-                  <li>
-                    <NavLink
-                      to={'/admin/sales'}
-                      className={({ isActive, isPending }) =>
-                        isActive
-                          ? 'text-lg bg-primary text-base-100'
-                          : isPending
-                          ? 'text-lg bg-secondary'
-                          : ''
-                      }
-                    >
-                      <FaTags className="h-5 w-5" />
-                      Sales
-                    </NavLink>
-                  </li>
+
                   <li>
                     <NavLink
                       to={'/admin/orders'}

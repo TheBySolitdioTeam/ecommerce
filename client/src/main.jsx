@@ -56,6 +56,10 @@ import CheckoutForm from './routes/checkoutForm'
 import CompletePage from './routes/completePage'
 import OrderRoot from './routes/orders/orderRoot'
 import ViewOrder, {loader as viewOrderLoader, action as viewOrderAction} from './routes/orders/ordersView'
+import FilterOrders, {
+  loader as filterOrderLoader,
+  action as filterOrderAction,
+} from './routes/orders/filterOrders'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -176,6 +180,13 @@ const router = createBrowserRouter([
           errorElement: <ErrorPage/>
           
 
+        }, {
+          path: "/admin/orders/filter",
+          element: <FilterOrders />,
+          loader: filterOrderLoader,
+          action: filterOrderAction,
+          errorElement: <ErrorPage/>
+          
         }]
     },
       {

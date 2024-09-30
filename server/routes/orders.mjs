@@ -24,6 +24,7 @@ router.get("/", async (req, res) => {
         return res.send({error: error.message})
     }
 })
+
 router.get("/:userId", async  (req, res)=> {
     const { userId } = req.params
      const { cursor, limit } = req.query
@@ -40,6 +41,29 @@ router.get("/:userId", async  (req, res)=> {
     
 })
 
+// Get order according to date
+router.get("/filter/:date", async (req, res) => {
+      let { date } = req.params
+      date = new Date(date)
+    let datePlusOne = new Date(date)
+    datePlusOne.setDate(date.getDate() + 1)
+    console.log(date ,datePlusOne)
+    const { cursor, limit } = req.query
+     const query = { createdAt: { $gte: date, $lt: datePlusOne.toISOString() } }
+     if (!req.user.isAdmin) {
+       query['user.user_id'] = req.user.id
+     }
+  
+    if (cursor) {
+        query._id = {$gt: cursor}
+    }
+    try {
+        const orders = await Orders.find(query, null, { limit: Number(limit) })
+        return res.send(orders)
+    } catch (error) {
+        return res.send({error: error.message})
+    }
+})
 
 router.patch("/:id", async (req, res) => {
     const {id} = req.params

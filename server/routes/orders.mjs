@@ -47,7 +47,7 @@ router.get("/filter/:date", async (req, res) => {
       date = new Date(date)
     let datePlusOne = new Date(date)
     datePlusOne.setDate(date.getDate() + 1)
-    console.log(date ,datePlusOne)
+    //console.log(date ,datePlusOne)
     const { cursor, limit } = req.query
      const query = { createdAt: { $gte: date, $lt: datePlusOne.toISOString() } }
      if (!req.user.isAdmin) {

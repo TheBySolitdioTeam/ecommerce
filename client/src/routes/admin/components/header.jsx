@@ -1,14 +1,18 @@
+import { useContext } from 'react'
 import {
   FaChartArea,
   FaStore,
   FaTable,
   FaBars,
   FaBagShopping,
-  FaTags
+  FaTags,
+  FaUser
 } from 'react-icons/fa6'
+import { UserContext } from '../UserContext'
 import { NavLink, Link } from 'react-router-dom'
 
 export default function AdminHeader() {
+  const user = useContext(UserContext)
     return (
       <div className="navbar bg-base-100 px-2  lg:px-10">
         <div className="flex-none">
@@ -45,9 +49,60 @@ export default function AdminHeader() {
                     Dashboard
                   </NavLink>
                 </li>
+                {user.isAdmin ? (
+                  <>
+                    <li>
+                      <NavLink
+                        to={'/admin/products'}
+                        className={({ isActive, isPending }) =>
+                          isActive
+                            ? 'text-lg bg-primary text-base-100'
+                            : isPending
+                            ? 'text-lg bg-secondary'
+                            : ''
+                        }
+                      >
+                        <FaStore className="h-5 w-5" />
+                        Products
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={'/admin/categories'}
+                        className={({ isActive, isPending }) =>
+                          isActive
+                            ? 'text-lg bg-primary text-base-100'
+                            : isPending
+                            ? 'text-lg bg-secondary'
+                            : ''
+                        }
+                      >
+                        <FaTable className="h-5 w-5" />
+                        Categories
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={'/admin/sales'}
+                        className={({ isActive, isPending }) =>
+                          isActive
+                            ? 'text-lg bg-primary text-base-100'
+                            : isPending
+                            ? 'text-lg bg-secondary'
+                            : ''
+                        }
+                      >
+                        <FaTags className="h-5 w-5" />
+                        Sales
+                      </NavLink>
+                    </li>
+                  </>
+                ) : (
+                  ''
+                )}
                 <li>
                   <NavLink
-                    to={'/admin/products'}
+                    to={'/admin/profile'}
                     className={({ isActive, isPending }) =>
                       isActive
                         ? 'text-lg bg-primary text-base-100'
@@ -56,38 +111,8 @@ export default function AdminHeader() {
                         : ''
                     }
                   >
-                    <FaStore className="h-5 w-5" />
-                    Products
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to={'/admin/categories'}
-                    className={({ isActive, isPending }) =>
-                      isActive
-                        ? 'text-lg bg-primary text-base-100'
-                        : isPending
-                        ? 'text-lg bg-secondary'
-                        : ''
-                    }
-                  >
-                    <FaTable className="h-5 w-5" />
-                    Categories
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to={'/admin/sales'}
-                    className={({ isActive, isPending }) =>
-                      isActive
-                        ? 'text-lg bg-primary text-base-100'
-                        : isPending
-                        ? 'text-lg bg-secondary'
-                        : ''
-                    }
-                  >
-                    <FaTags className="h-5 w-5" />
-                    Sales
+                    <FaUser className="h-5 w-5" />
+                    Profile
                   </NavLink>
                 </li>
                 <li>

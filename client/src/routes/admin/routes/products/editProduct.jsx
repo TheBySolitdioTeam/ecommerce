@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import { useFetcher, useLoaderData, redirect } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
-import PrimeCategorySelector from '../../components/primeCategorySelector'
+import AllCategorySelector from '../../components/allCategoryselector'
 import ProductTypeSelector from '../../components/productTypeSelector'
 import SalesSelector from '../../components/salesSelector'
 
@@ -194,7 +194,7 @@ export default function EditProduct() {
              </select>
            </div>
            <ProductTypeSelector type={type} dValues={details} />
-           <PrimeCategorySelector
+           <AllCategorySelector
              defaultValue={product.category.category_id}
              name="category"
            />

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useFetcher, useNavigate } from 'react-router-dom'
+import { useFetcher} from 'react-router-dom'
 import toast, {Toaster} from 'react-hot-toast'
-import PrimeCategorySelector from '../../components/primeCategorySelector'
+
 import ProductTypeSelector from '../../components/productTypeSelector'
 import SalesSelector from '../../components/salesSelector'
+import AllCategorySelector from '../../components/allCategoryselector'
 
 
 export async function action({request}) {
@@ -28,7 +29,7 @@ export async function action({request}) {
 
 export default function CreateProduct() {
   const fetcher = useFetcher()
-  const navigate = useNavigate()
+ // const navigate = useNavigate()
    const [type, setType] = useState('')
     useEffect(() => {
         const toastOptions = {
@@ -42,7 +43,7 @@ export default function CreateProduct() {
             ? toast.error(fetcher.data.error, toastOptions)
             : toast.success(fetcher.data.msg, toastOptions)
           : ''
-      navigate('/admin/products/view')
+      //navigate('/admin/products/view')
     },[fetcher])
    
     
@@ -135,7 +136,7 @@ export default function CreateProduct() {
             </select>
           </div>
           <ProductTypeSelector type={type} />
-          <PrimeCategorySelector name="category" />
+         <AllCategorySelector name="category"/>
           <SalesSelector name="onSale" />
           <div className="form-control">
             <label className="label">

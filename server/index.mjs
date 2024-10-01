@@ -13,6 +13,7 @@ import categoriesRouter from './routes/categories.mjs'
 import addressesRouter from './routes/addresses.mjs'
 import stripeRouter from './routes/stripe.mjs'
 import ordersRouter from './routes/orders.mjs'
+import profileRouter from './routes/userProfile.mjs'
 
 
 
@@ -53,10 +54,12 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.static('public'))
 app.use('/stripe', stripeRouter)
+app.use('/profile', profileRouter)
 app.use(express.json())
 app.use('/auth', authRouter)
 app.use('/admin', adminRouter)
 app.use('/product', productRouter)
+
 app.use('/cart', cartRouter)
 app.use('/categories', categoriesRouter)
 app.use('/addresses', addressesRouter)

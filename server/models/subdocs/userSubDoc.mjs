@@ -15,4 +15,7 @@ export default new Schema({
   picture: {
     type: String,
   },
+  phone: {
+    type: String
+  }
 })

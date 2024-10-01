@@ -110,9 +110,18 @@ router.get('/sales/:salesId', async (req, res) => {
     return res.send({ error: error.message })
   }
 })
+// Get last 6 products
+router.get("/last6", async (req, res) => {
+  try {
+    const last6 = await Product.find().sort({ _id: -1 }).limit(6)
+    return res.send(last6)
+    
+  } catch (error) {
+    return res.send({error: error.message})
+  }
+})
 
 // get all product from categories
-
 router.get("/:categoryId", async (req, res) => {
     const { categoryId } = req.params
     //console.log(categoryId)

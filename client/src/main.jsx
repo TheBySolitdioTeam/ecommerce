@@ -60,6 +60,9 @@ import FilterOrders, {
   loader as filterOrderLoader,
   action as filterOrderAction,
 } from './routes/orders/filterOrders'
+import UserProfile, {action as profileAction} from './routes/admin/userProfile'
+import HomePage from './routes/homePage'
+import {loader as last6Loader} from './routes/product/last6Loader'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -72,6 +75,11 @@ const router = createBrowserRouter([
     loader: rootUserLoader,
     errorElement: <ErrorPage />,
     children: [
+      {
+        index: true,
+        element: <HomePage />,
+        errorElement: <ErrorPage />,
+      },
       {
         path: '/product',
         element: <ProductRootClient />,
@@ -124,31 +132,40 @@ const router = createBrowserRouter([
             path: '/product/allCategories/loader',
             loader: allCategoriesLoader,
           },
+          {
+            path: '/product/last6/loader',
+            loader: last6Loader,
+          },
         ],
-      }, {
-        path: "/addresses",
+      },
+      {
+        path: '/addresses',
         element: <Addresses />,
         action: addAddressAction,
-        loader: userAddressesLoader
-      }, {
-        path: "/checkout/:address",
+        loader: userAddressesLoader,
+      },
+      {
+        path: '/checkout/:address',
         element: <Checkout />,
         errorElement: <ErrorPage />,
         loader: checkoutCartLoader,
-        children: [{
-          index: true,
-          element: <CheckoutForm />,
-          errorElement:<ErrorPage/>
-        }, {
-          path: "/checkout/:address/complete",
-          element:<CompletePage/>
-        }]
+        children: [
+          {
+            index: true,
+            element: <CheckoutForm />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: '/checkout/:address/complete',
+            element: <CompletePage />,
+          },
+        ],
       },
       {
         path: '/singleProduct/:id',
         element: <SingleProduct />,
         loader: singleProductLoader,
-        errorElement: <ErrorPage/>
+        errorElement: <ErrorPage />,
       },
       {
         path: '/login',
@@ -169,26 +186,32 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/admin/orders",
+        path: '/admin/profile',
+        element: <UserProfile />,
+        errorElement: <ErrorPage />,
+        action: profileAction,
+      },
+      {
+        path: '/admin/orders',
         element: <OrderRoot />,
         errorElement: <ErrorPage />,
-        children: [{
-          index: true,
-          element: <ViewOrder />,
-          loader: viewOrderLoader,
-          action: viewOrderAction,
-          errorElement: <ErrorPage/>
-          
-
-        }, {
-          path: "/admin/orders/filter",
-          element: <FilterOrders />,
-          loader: filterOrderLoader,
-          action: filterOrderAction,
-          errorElement: <ErrorPage/>
-          
-        }]
-    },
+        children: [
+          {
+            index: true,
+            element: <ViewOrder />,
+            loader: viewOrderLoader,
+            action: viewOrderAction,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: '/admin/orders/filter',
+            element: <FilterOrders />,
+            loader: filterOrderLoader,
+            action: filterOrderAction,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
       {
         path: '/admin/products',
         element: <ProductRoot />,

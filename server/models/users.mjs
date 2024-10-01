@@ -16,6 +16,9 @@ const userSchema = new Schema({
     default:
       'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp',
   },
+  phone: {
+    type: String
+  }
 })
 export default mongoose.model('User', userSchema)
 

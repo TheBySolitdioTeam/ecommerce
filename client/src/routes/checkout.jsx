@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
-import { useLoaderData, Outlet, useParams } from 'react-router-dom'
-import toast, {Toaster} from 'react-hot-toast'
+import { useLoaderData, Outlet, useParams, useNavigate } from 'react-router-dom'
+
 
 
 const stripePromise = loadStripe(
@@ -30,20 +30,14 @@ export default function Checkout() {
   //console.log(address)
   const cart = useLoaderData()[0]
   //console.log(cart)
-  //const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const [clientSecret, setClientSecret] = useState('')
   const [dpmCheckerLink, setDpmCheckerLink] = useState('')
  console.log(dpmCheckerLink);
   useEffect(() => {
     if (cart.items.length <= 0) {
-         const toastOptions = {
-           duration: 5000,
-           id: Math.round(Math.random() * 1e9),
-         }
-         toast.dismiss()
-
-        toast.error('No items in cart!', toastOptions)
+        navigate("/admin/orders")
      }
     // Create PaymentIntent as soon as the page loads
     fetch(`http://localhost:5500/stripe/create-payment-intent?addressId=${address}`, {
@@ -143,7 +137,7 @@ export default function Checkout() {
                <Outlet/>
               </Elements>
             )}
-            <Toaster/>
+           
           </div>
         </>
       ) : (

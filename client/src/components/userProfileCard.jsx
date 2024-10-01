@@ -26,6 +26,13 @@ export default function UserProfileCard({user}) {
               <span className="text-neutral"> {user.email} </span>
             </li>
 
+            {user.phone ? (
+              <li>
+                <span> {user.phone} </span>
+              </li>
+            ) : (
+              ''
+            )}
           </ul>
         </div>
       </div>

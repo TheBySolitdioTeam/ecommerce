@@ -132,6 +132,8 @@ router.post('/create-payment-intent', checkIfConnected, async (req, res) => {
     const user = {
       user_id: req.user.id,
       email: req.user.email,
+      picture: req.user.picture,
+      phone: req.user.phone
     }
 
     const cart = await Cart.find({ user_id: req.user.id })

@@ -27,7 +27,7 @@ import { loader as specialPrimaryLoader } from './routes/admin/routes/categories
 import ProductRoot from './routes/admin/routes/products/productRoot'
 import CreateProduct, {action as createProductAction} from './routes/admin/routes/products/createProduct'
 import ViewProductRoot from './routes/admin/routes/products/viewProductRoot'
-import GetAllProducts, {loader as getAllProductsLoader} from './routes/admin/routes/products/getallProducts'
+import GetAllProducts, {loader as getAllProductsLoader} from './routes/admin/routes/products/getAllProducts'
 import ProductSearch, {loader as productSearchLoader} from './routes/admin/routes/products/productSearch'
 import EditProduct, { loader as editProductLoader, action as editProdcutAction } from './routes/admin/routes/products/editProduct'
 import DeleteProduct, {action as deleteAction} from './routes/admin/routes/products/deleteProduct'

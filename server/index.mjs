@@ -18,9 +18,12 @@ import profileRouter from './routes/userProfile.mjs'
 
 
 const corsOptions = {
-  origin:['http://localhost:5173', 'https://mobilium.info']
+  origin: [
+    'https://mobilium.info',
+    'https://www.mobilium.info',
+    'http://localhost:5173',
+  ],
 
-  ,
   credentials: true,
   optionsSuccessStatus: 200,
 }

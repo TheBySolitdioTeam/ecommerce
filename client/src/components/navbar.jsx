@@ -66,7 +66,7 @@ export default function Navbar({ user, cart }) {
             </ul>
           </div>
           <Link to={'/'} className="btn btn-ghost text-xl">
-            <img width={120} src={'/logo.jpeg'} alt="logo" />
+            <img width={60} src={'/logo.png'} alt="logo" />
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">

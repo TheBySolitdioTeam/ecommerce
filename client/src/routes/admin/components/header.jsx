@@ -9,7 +9,7 @@ import {
   FaUser
 } from 'react-icons/fa6'
 import { UserContext } from '../UserContext'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link , Form} from 'react-router-dom'
 
 export default function AdminHeader() {
   const user = useContext(UserContext)
@@ -136,7 +136,7 @@ export default function AdminHeader() {
         </div>
         <div className="flex-1">
           <Link to="/" className="btn btn-ghost text-xl">
-            daisyUI
+            <img src={'/logo.jpeg'} alt="logo" />
           </Link>
         </div>
         <div className="flex-none">
@@ -167,7 +167,9 @@ export default function AdminHeader() {
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <Form method="post" action="/logout">
+                  <button className="btn btn-base btn-sm">Logout</button>
+                </Form>
               </li>
             </ul>
           </div>

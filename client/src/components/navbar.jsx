@@ -65,7 +65,7 @@ export default function Navbar({ user, cart }) {
               </li>
             </ul>
           </div>
-          <Link to={"/"} className="btn btn-ghost text-xl">daisyUI</Link>
+          <Link to={"/"} className="btn btn-ghost text-xl"><img src={"/logo.jpeg"} alt="logo" /></Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">

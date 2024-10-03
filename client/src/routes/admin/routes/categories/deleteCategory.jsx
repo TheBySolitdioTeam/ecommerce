@@ -7,13 +7,16 @@ export async function action({ params }) {
     const { id } = params
     
     try {
-        const response = await fetch(`http://localhost:5500/admin/category/${id}`, {
+        const response = await fetch(
+          `https://api.mobilium.info/admin/category/${id}`,
+          {
             method: 'DELETE',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/JSON'
-            }
-        })
+              'Content-Type': 'application/JSON',
+            },
+          }
+        )
 
        const msg =  await response.json()
 

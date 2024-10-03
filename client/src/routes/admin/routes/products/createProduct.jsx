@@ -13,11 +13,14 @@ export async function action({request}) {
    
 
     try {
-        const response = await fetch('http://localhost:5500/admin/product/', {
+        const response = await fetch(
+          'https://api.mobilium.info/admin/product/',
+          {
             method: 'POST',
             credentials: 'include',
-            body: formData
-        })
+            body: formData,
+          }
+        )
 
         const data = await response.json()
         return data

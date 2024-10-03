@@ -16,7 +16,7 @@ export async function loader({ params, request }) {
 
   try {
     const response = await fetch(
-      `http://localhost:5500/product/sales/${sales_id}?cursor=&limit=5&price=${
+      `https://api.mobilium.info/product/sales/${sales_id}?cursor=&limit=5&price=${
         price || ''
       }`,
       {
@@ -72,7 +72,7 @@ export default function SalesProductsClient() {
   const fetchMoreData = async (cursor, price) => {
     try {
       const response = await fetch(
-        `http://localhost:5500/product/sales/${sales_id}?cursor=${
+        `https://api.mobilium.info/product/sales/${sales_id}?cursor=${
           cursor || ''
         }&limit=5&price=${price || ''}`,
         {

@@ -9,7 +9,7 @@ export async function loader({ request }) {
   const price = url.searchParams.get('price')
   try {
     const response = await fetch(
-      `http://localhost:5500/product/search?q=${q}&cursor=&limit=5&price=${
+      `https://api.mobilium.info/product/search?q=${q}&cursor=&limit=5&price=${
         price || ''
       }`,
       {
@@ -73,7 +73,7 @@ export default function SearchProductsClient() {
   const fetchMoreData = async (cursor,price) => {
     try {
       const response = await fetch(
-        `http://localhost:5500/product/search?q=${q}&cursor=${
+        `https://api.mobilium.info/product/search?q=${q}&cursor=${
           cursor || ''
         }&limit=5&price=${price || ''}`,
         {

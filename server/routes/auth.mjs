@@ -18,7 +18,7 @@ router.post("/login/email", passport.authenticate('magiclink', { action: 'reques
 
 // verifying link send by email
 
-router.get("/login/email/verify", passport.authenticate('magiclink', { successReturnToOrRedirect: 'http://localhost:5173/' , failureMessage: 'Token Invalid'}))
+router.get("/login/email/verify", passport.authenticate('magiclink', { successReturnToOrRedirect: 'https://mobilium.info/' , failureMessage: 'Token Invalid'}))
 
 
 

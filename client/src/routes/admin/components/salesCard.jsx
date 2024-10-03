@@ -12,8 +12,8 @@ export default function SalesCard({ item }) {
         <figure>
           <img
             src={
-              'http://localhost:5500/sales/' + item.image ||
-              'http://localhost:5500/sales/default.webp'
+              'https://api.mobilium.info/sales/' + item.image ||
+              'https://api.mobilium.info//sales/default.webp'
             }
             alt="Shoes"
           />
@@ -36,7 +36,9 @@ export default function SalesCard({ item }) {
                 Edit
               </Link>
               <Form method="post" action={`/admin/sales/delete/${item._id}`}>
-                <button type="submit" className="btn btn-error m-2">Delete</button>
+                <button type="submit" className="btn btn-error m-2">
+                  Delete
+                </button>
               </Form>
             </div>
           </div>

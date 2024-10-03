@@ -6,14 +6,14 @@ export async function action({ request }) {
     console.log('Inside Sales action')
     // Get the formData from the form
     const formData = await request.formData()
-    let url = 'http://localhost:5500/admin/sales/imageless'
+    let url = 'https://api.mobilium.info/admin/sales/imageless'
    
 
     // Get the image name 
     const imageName = formData.get('image').name
 
     if (imageName !== '') {
-        url = 'http://localhost:5500/admin/sales/'
+        url = 'https://api.mobilium.info/admin/sales/'
     }
 
      try {

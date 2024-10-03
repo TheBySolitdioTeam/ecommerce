@@ -12,7 +12,7 @@ export async function loader({ request }) {
     console.log(date)
   try {
     const response = await fetch(
-      `http://localhost:5500/orders/filter/${date}?cursor=&limit=5`,
+      `https://api.mobilium.info/orders/filter/${date}?cursor=&limit=5`,
       {
         method: 'GET',
         credentials: 'include',
@@ -36,14 +36,17 @@ export async function action({ request }) {
     
 
   try {
-    const response = await fetch(`http://localhost:5500/orders/${bodyObj.id}`, {
-      method: 'PATCH',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(bodyObj),
-    })
+    const response = await fetch(
+      `https://api.mobilium.info/orders/${bodyObj.id}`,
+      {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bodyObj),
+      }
+    )
     const data = await response.json()
     return data
   } catch (error) {
@@ -81,7 +84,7 @@ export default function FilterOrders() {
   const fetchMoreData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5500/orders/filter/${date}?cursor=${cursor}&limit=5`,
+        `https://api.mobilium.info/orders/filter/${date}?cursor=${cursor}&limit=5`,
         {
           method: 'GET',
           credentials: 'include',

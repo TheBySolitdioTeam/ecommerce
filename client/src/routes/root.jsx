@@ -4,21 +4,24 @@ import { Outlet, useLoaderData } from "react-router-dom"
 
 export async function loader() {
     try {
-      const response = await fetch('http://localhost:5500/auth/login/status', {
+      const response = await fetch(
+        'https://api.mobilium.info/auth/login/status',
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+        const potUser = await response.json()
+      if (potUser.msg) return [potUser, {}]
+      const cartResponse = await fetch(`https://api.mobilium.info/cart/`, {
         method: 'GET',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
-      })
-        const potUser = await response.json()
-      if (potUser.msg) return [potUser, {}]
-      const cartResponse = await fetch(`http://localhost:5500/cart/`, {
-        method: "GET",
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        }
       })
       const cart = await cartResponse.json()
       console.log(cart)

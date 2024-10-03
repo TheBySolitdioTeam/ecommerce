@@ -11,8 +11,8 @@ export default function SalesCardClient({ item }) {
       <figure>
         <img
           src={
-            'http://localhost:5500/sales/' + item.image ||
-            'http://localhost:5500/sales/default.webp'
+            'https://api.mobilium.info/sales/' + item.image ||
+            'https://api.mobilium.info/sales/default.webp'
           }
           alt="Shoes"
         />

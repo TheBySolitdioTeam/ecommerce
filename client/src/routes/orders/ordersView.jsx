@@ -8,13 +8,16 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import toast, {Toaster} from 'react-hot-toast'
 export async function loader() {
     try {
-        const response = await fetch(`http://localhost:5500/orders/?cursor=&limit=5`, {
-            method: "GET",
+        const response = await fetch(
+          `https://api.mobilium.info/orders/?cursor=&limit=5`,
+          {
+            method: 'GET',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+              'Content-Type': 'application/json',
+            },
+          }
+        )
         const data = await response.json()
         return data
         
@@ -28,14 +31,17 @@ export async function action({request }) {
   const bodyObj = Object.fromEntries(formData)
 
   try {
-    const response = await fetch(`http://localhost:5500/orders/${bodyObj.id}`, {
-      method: 'PATCH',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(bodyObj),
-    })
+    const response = await fetch(
+      `https://api.mobilium.info/orders/${bodyObj.id}`,
+      {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bodyObj),
+      }
+    )
     const data = await response.json()
     return data
   } catch (error) {
@@ -72,7 +78,7 @@ export default function ViewOrder() {
     const fetchMoreData = async () => {
         try {
             const response = await fetch(
-              `http://localhost:5500/orders/?cursor=${cursor}&limit=5`,
+              `https://api.mobilium.info/orders/?cursor=${cursor}&limit=5`,
               {
                 method: 'GET',
                 credentials: 'include',

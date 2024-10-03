@@ -11,7 +11,7 @@ export default function AdminRoot() {
         async function getUser() {
             try {
                  const response = await fetch(
-                   'http://localhost:5500/auth/login/status',
+                   'https://api.mobilium.info/auth/login/status',
                    {
                      method: 'GET',
                      credentials: 'include',

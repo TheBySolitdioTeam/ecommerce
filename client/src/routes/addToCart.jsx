@@ -4,11 +4,11 @@ export async function action({ request }) {
     const bodyObj = Object.fromEntries(formData)
 
     try {
-        const response = await fetch('http://localhost:5500/cart/', {
-            method: "POST",
-            credentials: 'include',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(bodyObj)
+        const response = await fetch('https://api.mobilium.info/cart/', {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(bodyObj),
         })
         const message = await response.json()
         if (message.msg) return redirect(bodyObj.prevLocation)

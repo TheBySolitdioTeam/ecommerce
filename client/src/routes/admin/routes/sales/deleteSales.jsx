@@ -9,7 +9,7 @@ export async function action({ params }) {
 
   try {
     const response = await fetch(
-      `http://localhost:5500/admin/sales/${id}`,
+      `https://api.mobilium.info/admin/sales/${id}`,
       {
         method: 'DELETE',
         credentials: 'include',

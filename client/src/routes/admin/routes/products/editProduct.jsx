@@ -14,7 +14,7 @@ export async function loader({ request,params }) {
 
     try {
         const response = await fetch(
-          `http://localhost:5500/admin/product/${id}?type=${type}`,
+          `https://api.mobilium.info/admin/product/${id}?type=${type}`,
           {
             method: 'GET',
             credentials: 'include',
@@ -36,7 +36,7 @@ export async function action({ request, params }) {
      const {id} = params
     const formData = await request.formData()
 
-    const url = `http://localhost:5500/admin/product/${id}`
+    const url = `https://api.mobilium.info/admin/product/${id}`
     let methodName = 'PUT'
     let bodyObj = formData
     let headersObj = {}

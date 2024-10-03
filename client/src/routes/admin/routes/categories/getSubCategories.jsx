@@ -5,14 +5,16 @@ export async function loader({ params }) {
     const { parent_id } = params
 
     try {
-        const response = await fetch(`http://localhost:5500/admin/category/subs/${parent_id}`, {
+        const response = await fetch(
+          `https://api.mobilium.info/admin/category/subs/${parent_id}`,
+          {
             method: 'GET',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
-            }
-
-        }) 
+              'Content-Type': 'application/json',
+            },
+          }
+        ) 
         const subs = await response.json()
         return subs
         
@@ -31,9 +33,7 @@ export default function GetSubCategories() {
           <div className="flex-1">
             <a className="btn btn-ghost text-xl">SubCategories</a>
           </div>
-          <div className="flex-none gap-2">
-           
-          </div>
+          <div className="flex-none gap-2"></div>
         </div>
 
         <div className="overflow-x-auto">
@@ -58,14 +58,13 @@ export default function GetSubCategories() {
                 </tr>
               ) : (
                 subs.map((item) => (
-                  
-                    <tr key={item._id}>
-                      <th>
-                        <label>
-                          <Form
-                            method="post"
-                            action={`/admin/categories/delete/${item._id}`}
-                            /*onSubmit={(event) => {
+                  <tr key={item._id}>
+                    <th>
+                      <label>
+                        <Form
+                          method="post"
+                          action={`/admin/categories/delete/${item._id}`}
+                          /*onSubmit={(event) => {
                           if (
                             !confirm(
                               'Please confirm you want to delete this record.'
@@ -74,50 +73,46 @@ export default function GetSubCategories() {
                             event.preventDefault()
                           }
                         }}*/
-                          >
-                            <button className="btn bg-red-700 btn-rounded border-none btn-sm">
-                              {navigation.state === 'submitting' ? (
-                                <span className="loading loading-infinity loading-sm"></span>
-                              ) : (
-                                <FaX className="h-6 w-6 text-white" />
-                              )}
-                            </button>
-                          </Form>
-                        </label>
-                      </th>
-                      <td>
-                        <div className="flex items-center gap-3">
-                          <div className="avatar">
-                            <div className="mask mask-squircle h-12 w-12">
-                              <img
-                                src={
-                                  item.image
-                                    ? `http://localhost:5500/categories/${item.image}`
-                                    : 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp'
-                                }
-                                alt={`Image of ${item.name}`}
-                              />
-                            </div>
-                          </div>
-                          <div>
-                            <div className="font-bold text-xl">
-                              {' '}
-                              {item.name}{' '}
-                            </div>
+                        >
+                          <button className="btn bg-red-700 btn-rounded border-none btn-sm">
+                            {navigation.state === 'submitting' ? (
+                              <span className="loading loading-infinity loading-sm"></span>
+                            ) : (
+                              <FaX className="h-6 w-6 text-white" />
+                            )}
+                          </button>
+                        </Form>
+                      </label>
+                    </th>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle h-12 w-12">
+                            <img
+                              src={
+                                item.image
+                                  ? `https://api.mobilium.info/categories/${item.image}`
+                                  : 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp'
+                              }
+                              alt={`Image of ${item.name}`}
+                            />
                           </div>
                         </div>
-                      </td>
+                        <div>
+                          <div className="font-bold text-xl"> {item.name} </div>
+                        </div>
+                      </div>
+                    </td>
 
-                      <td>
-                        <Link
-                          to={`/admin/categories/edit/${item._id}`}
-                          className="btn bg-yellow-500 btn-rounded border-none btn-sm"
-                        >
-                          <FaPen className="h-6 w-6 text-white" />
-                        </Link>
-                      </td>
-                    </tr>
-                  
+                    <td>
+                      <Link
+                        to={`/admin/categories/edit/${item._id}`}
+                        className="btn bg-yellow-500 btn-rounded border-none btn-sm"
+                      >
+                        <FaPen className="h-6 w-6 text-white" />
+                      </Link>
+                    </td>
+                  </tr>
                 ))
               )}
 

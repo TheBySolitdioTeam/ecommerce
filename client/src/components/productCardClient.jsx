@@ -12,7 +12,9 @@ export default function ProductCardClient({ item }) {
         <Link to={`/singleProduct/${item._id}`}>
           <img
             className="max-h-80"
-            src={'http://localhost:5500/products/' + item.images.split(';')[0]}
+            src={
+              'https://api.mobilium.info/products/' + item.images.split(';')[0]
+            }
             alt="Shoes"
           />
         </Link>
@@ -59,7 +61,11 @@ export default function ProductCardClient({ item }) {
               name="prevLocation"
             />
             <input type="hidden" value={1} name="qty" />
-            <button disabled={item.qty <= 0 } type="submit" className="btn btn-primary text-white w-full">
+            <button
+              disabled={item.qty <= 0}
+              type="submit"
+              className="btn btn-primary text-white w-full"
+            >
               <FaCartShopping />
               {fetcher.state !== 'submitting' ? (
                 'Add To Cart'

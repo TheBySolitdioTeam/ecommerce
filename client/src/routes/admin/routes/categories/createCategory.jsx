@@ -12,11 +12,11 @@ export async function action({ request }) {
   if (fileName.trim() === "") {
     const bodyObject = Object.fromEntries(formData)
     delete bodyObject.image
-    url = 'http://localhost:5500/admin/category'
+    url = 'https://api.mobilium.info/admin/category'
     bodyForm = JSON.stringify(bodyObject)
 
   } else {
-     url = 'http://localhost:5500/admin/category/multer'
+     url = 'https://api.mobilium.info/admin/category/multer'
      bodyForm = formData
   }
   console.log(bodyForm)

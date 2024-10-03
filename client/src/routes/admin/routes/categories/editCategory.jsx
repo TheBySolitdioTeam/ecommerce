@@ -9,13 +9,16 @@ export async function loader({ params }) {
     
     try {
 
-        const response = await fetch(`http://localhost:5500/admin/category/${id}`, {
+        const response = await fetch(
+          `https://api.mobilium.info/admin/category/${id}`,
+          {
             method: 'GET',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+              'Content-Type': 'application/json',
+            },
+          }
+        )
 
         const category = await response.json()
         return category
@@ -31,7 +34,7 @@ export async function action({ request, params }) {
     const bodyObject = Object.fromEntries(formData)
     console.log(bodyObject)
     const { id } = params
-    const url = `http://localhost:5500/admin/category/${id}`
+    const url = `https://api.mobilium.info/admin/category/${id}`
     const method = fileName.trim() === '' ? 'PATCH' : 'PUT'
     const finalBody = fileName.trim() === '' ? JSON.stringify(bodyObject) : formData
      const headersContent = fileName.trim() === '' ? {'Content-Type':'application/json'} : {}
@@ -78,7 +81,9 @@ export default function  EditCategory(){
        {category.image ? (
          <div className="avatar">
            <div className="w-24 rounded">
-             <img src={'http://localhost:5500/categories/'+category.image} />
+             <img
+               src={'https://api.mobilium.info/categories/' + category.image}
+             />
            </div>
          </div>
        ) : (

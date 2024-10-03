@@ -52,7 +52,7 @@ export default function CartDropdown({ cart,user }) {
                                 <div className="mask mask-squircle h-12 w-12">
                                   <img
                                     src={
-                                      'http://localhost:5500/products/' +
+                                      'https://api.mobilium.info/products/' +
                                       item.image
                                     }
                                     alt="Product Image"
@@ -140,16 +140,15 @@ export default function CartDropdown({ cart,user }) {
                                   value={cart._id}
                                   name="cartId"
                                 />
-                              <select
-                                
-                                name="size"
+                                <select
+                                  name="size"
                                   onChange={(e) => {
                                     fetcher.submit(e.currentTarget.form)
                                   }}
                                   className="select select-bordered select-xs w-full max-w-xs"
                                 >
                                   {item.size.split(',').map((size) => (
-                                    <option 
+                                    <option
                                       key={
                                         size + (Math.random() * 10e9).toString()
                                       }
@@ -160,7 +159,6 @@ export default function CartDropdown({ cart,user }) {
                                     </option>
                                   ))}
                                 </select>
-                               
                               </fetcher.Form>
                             ) : (
                               'None'
@@ -206,7 +204,11 @@ export default function CartDropdown({ cart,user }) {
                 : 0}{' '}
             </span>
             <div className="card-actions">
-              <Link to={user.msg ? "" : `/addresses`} className="btn btn-primary btn-block" disabled={user.msg || !cart.items.length > 0}>
+              <Link
+                to={user.msg ? '' : `/addresses`}
+                className="btn btn-primary btn-block"
+                disabled={user.msg || !cart.items.length > 0}
+              >
                 {' '}
                 {fetcher.state !== 'idle' ? (
                   <span className="loading loading-infinity loading-md"></span>

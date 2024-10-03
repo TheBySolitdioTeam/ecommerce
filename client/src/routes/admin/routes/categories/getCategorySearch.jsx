@@ -7,7 +7,7 @@ export async function loader({ request }) {
     const q = url.searchParams.get('q') || ''
     try {
       const response = await fetch(
-        `http://localhost:5500/admin/category/search?q=${q}`,
+        `https://api.mobilium.info/admin/category/search?q=${q}`,
         {
           method: 'GET',
           credentials: 'include',

@@ -5,13 +5,16 @@ import SalesCard from '../../components/salesCard';
 
 export async function loader() {
     try {
-        const response = await fetch(`http://localhost:5500/admin/sales/infinity?cursor=&limit=5`, {
+        const response = await fetch(
+          `https://api.mobilium.info/admin/sales/infinity?cursor=&limit=5`,
+          {
             method: 'GET',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+              'Content-Type': 'application/json',
+            },
+          }
+        )
         const data = await response.json()
         console.log(data)
         return data
@@ -32,13 +35,18 @@ export default function InfinitySales() {
     
     const fetchMoreData = async () => {
         try {
-            const response = await fetch(`http://localhost:5500/admin/sales/infinity?cursor=${cursor||''}&limit=5`, {
+            const response = await fetch(
+              `https://api.mobilium.info/admin/sales/infinity?cursor=${
+                cursor || ''
+              }&limit=5`,
+              {
                 method: 'GET',
                 credentials: 'include',
                 headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+                  'Content-Type': 'application/json',
+                },
+              }
+            )
             const newData = await response.json()
             setItems((prevItems) => [...prevItems, ...newData])
             newData.length > 0 ? setHasMore(true): setHasMore(false)

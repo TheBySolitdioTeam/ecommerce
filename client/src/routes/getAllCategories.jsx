@@ -1,12 +1,11 @@
 export async function loader() {
     try {
-        const response = await fetch(`http://localhost:5500/categories/`, {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-
+        const response = await fetch(`https://api.mobilium.info/categories/`, {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         })
         const categories = await response.json()
         return categories

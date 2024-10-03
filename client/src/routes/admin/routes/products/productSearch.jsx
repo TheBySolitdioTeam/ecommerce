@@ -8,13 +8,16 @@ export async function loader({ request }) {
     const q = url.searchParams.get('q') || ''
 
     try {
-        const response = await fetch(`http://localhost:5500/admin/product/search?q=${q}`, {
+        const response = await fetch(
+          `https://api.mobilium.info/admin/product/search?q=${q}`,
+          {
             maethod: 'GET',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+              'Content-Type': 'application/json',
+            },
+          }
+        )
 
         const allProducts = await response.json()
         return [allProducts, q]

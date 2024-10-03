@@ -8,13 +8,18 @@ export async function loader({ request }) {
     const name = url.searchParams.get('name')
     const price = url.searchParams.get('price')
     try {
-        const response = await fetch(`http://localhost:5500/product/?type=${name}&cursor=&limit=5&price=${price||''}`, {
+        const response = await fetch(
+          `https://api.mobilium.info/product/?type=${name}&cursor=&limit=5&price=${
+            price || ''
+          }`,
+          {
             method: 'GET',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+              'Content-Type': 'application/json',
+            },
+          }
+        )
         const items = await response.json()
         console.log(items)
         return [items,name,price]
@@ -66,9 +71,9 @@ export default function ProductType() {
     const fetchMoreData = async (cursor,price) => {
         try {
             const response = await fetch(
-              `http://localhost:5500/product/?type=${name}&cursor=${
+              `https://api.mobilium.info/product/?type=${name}&cursor=${
                 cursor || ''
-              }&limit=5&price=${price||''}`,
+              }&limit=5&price=${price || ''}`,
               {
                 method: 'GET',
                 credentials: 'include',

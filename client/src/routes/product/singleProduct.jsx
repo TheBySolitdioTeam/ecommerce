@@ -4,13 +4,16 @@ import { useLocation, useLoaderData, useFetcher } from 'react-router-dom'
 export async function loader({ params }) {
   const { id } = params
   try {
-    const response = await fetch(`http://localhost:5500/product/single/${id}`, {
-      mathod: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
+    const response = await fetch(
+      `https://api.mobilium.info/product/single/${id}`,
+      {
+        mathod: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       }
-    })
+    )
     const product = await response.json()
     return product
     
@@ -31,7 +34,7 @@ export default function SingleProduct() {
             className="carousel-item max-h-screen"
           >
             <img
-              src={'http://localhost:5500/products/' + image}
+              src={'https://api.mobilium.info/products/' + image}
               className="rounded-box"
               alt="Tailwind CSS Carousel component"
             />

@@ -8,7 +8,7 @@ export default function ProductCard({ item }) {
         <figure>
           <img
             className="max-h-80"
-            src={'http://localhost:5500/products/' + item.images.split(';')[0]}
+            src={'https://api.mobilium.info/products/' + item.images.split(';')[0]}
             alt="Shoes"
           />
         </figure>

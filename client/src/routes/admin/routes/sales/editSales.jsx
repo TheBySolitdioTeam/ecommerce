@@ -10,13 +10,16 @@ export async function loader({ params }) {
    
     
     try {
-        const response = await fetch(`http://localhost:5500/admin/sales/${id}`, {
+        const response = await fetch(
+          `https://api.mobilium.info/admin/sales/${id}`,
+          {
             method: 'GET',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+              'Content-Type': 'application/json',
+            },
+          }
+        )
         const data = await response.json()
         console.log(data)
         return data
@@ -32,11 +35,14 @@ export async function action({ params, request }) {
     const { id } = params
     
     try {
-        const response = await fetch(`http://localhost:5500/admin/sales/${id}`, {
+        const response = await fetch(
+          `https://api.mobilium.info/admin/sales/${id}`,
+          {
             method: imageName === '' ? 'PATCH' : 'PUT',
             credentials: 'include',
-            body:  formData
-        }) 
+            body: formData,
+          }
+        ) 
         const data = await response.json()
         return data
     } catch (error) {

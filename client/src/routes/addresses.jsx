@@ -6,13 +6,13 @@ export async function action({ request }) {
     const formData = await request.formData()
     const bodyObject = Object.fromEntries(formData)
     try {
-        const response = await fetch(`http://localhost:5500/addresses/`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(bodyObject)
+        const response = await fetch(`https://api.mobilium.info/addresses/`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(bodyObject),
         })
         const newAddress = await response.json()
         return newAddress
@@ -24,13 +24,12 @@ export async function action({ request }) {
 }
 export async function loader() {
      try {
-       const response = await fetch(`http://localhost:5500/addresses/`, {
+       const response = await fetch(`https://api.mobilium.info/addresses/`, {
          method: 'GET',
          credentials: 'include',
          headers: {
            'Content-Type': 'application/json',
          },
-        
        })
        const addresses = await response.json()
        return addresses

@@ -7,7 +7,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 export async function loader() {
   try {
     const response = await fetch(
-      `http://localhost:5500/admin/category/infiniteScroll?cursor=&limit=${5}`,
+      `https://api.mobilium.info/admin/category/infiniteScroll?cursor=&limit=${5}`,
       {
         method: 'GET',
         credentials: 'include',
@@ -47,7 +47,7 @@ export default function  InfinitePrimes(){
      const fetchMoreData = async () => {
        try {
          const response = await fetch(
-           `http://localhost:5500/admin/category/infiniteScroll?cursor=${
+           `https://api.mobilium.info/admin/category/infiniteScroll?cursor=${
              cursor || ''
            }&limit=${5}`,
            {

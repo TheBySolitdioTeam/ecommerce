@@ -5,7 +5,7 @@ export async function action({ request }) {
 
   try {
     const response = await fetch(
-      `http://localhost:5500/cart/size/${bodyObj.cartId}`,
+      `https://api.mobilium.info/cart/size/${bodyObj.cartId}`,
       {
         method: 'PATCH',
         credentials: 'include',

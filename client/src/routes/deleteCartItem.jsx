@@ -6,13 +6,16 @@ export async function action({ params,request }) {
     const bodyObj = Object.fromEntries(formData)
 
     try {
-        const response = await fetch(`http://localhost:5500/cart/${id}?itemId=${bodyObj.itemId}`, {
+        const response = await fetch(
+          `https://api.mobilium.info/cart/${id}?itemId=${bodyObj.itemId}`,
+          {
             method: 'DELETE',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+              'Content-Type': 'application/json',
+            },
+          }
+        )
         const msg = await response.json()
         if (!msg.error) return redirect(bodyObj.prevLocation)
         throw new Error(msg.error)

@@ -7,12 +7,12 @@ export async function action({request}) {
 
   console.log(bodyObject);
   try {
-    const response = await fetch('http://localhost:5500/auth/login/email', {
+    const response = await fetch('https://api.mobilium.info/auth/login/email', {
       method: 'POST',
       mode: 'cors',
       //credentials: 'include',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(bodyObject),
     })

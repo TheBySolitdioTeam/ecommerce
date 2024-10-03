@@ -11,7 +11,7 @@ const stripePromise = loadStripe(
 
 export async function loader() {
   try {
-    const response = await fetch(`http://localhost:5500/cart/`, {
+    const response = await fetch(`https://api.mobilium.info/cart/`, {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -40,20 +40,24 @@ export default function Checkout() {
         navigate("/admin/orders")
      }
     // Create PaymentIntent as soon as the page loads
-    fetch(`http://localhost:5500/stripe/create-payment-intent?addressId=${address}`, {
-      method: 'POST',
-      credentials:'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({}),
-    })
+    fetch(
+      `https://api.mobilium.info/stripe/create-payment-intent?addressId=${address}`,
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
-        if(data.error) console.log(data.error);
-        console.log("client secret: "+data.clientSecret);
+        if (data.error) console.log(data.error)
+        console.log('client secret: ' + data.clientSecret)
         setClientSecret(data.clientSecret)
         // [DEV] For demo purposes only
         setDpmCheckerLink(data.dpmCheckerLink)
-      }).catch(error => console.log(error))
+      })
+      .catch((error) => console.log(error))
   }, [cart])
 
   const appearance = {
@@ -89,7 +93,7 @@ export default function Checkout() {
                               <div className="mask mask-squircle h-12 w-12">
                                 <img
                                   src={
-                                    'http://localhost:5500/products/' +
+                                    'https://api.mobilium.info/products/' +
                                     item.image
                                   }
                                   alt="Product Image"
@@ -134,10 +138,9 @@ export default function Checkout() {
           <div className="card p-5 m-5 bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
             {clientSecret && (
               <Elements options={options} stripe={stripePromise}>
-               <Outlet/>
+                <Outlet />
               </Elements>
             )}
-           
           </div>
         </>
       ) : (

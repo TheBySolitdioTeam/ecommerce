@@ -12,11 +12,14 @@ export async function action({request}) {
    
     console.log(httpMethod)
     try {
-        const response = await fetch(`http://localhost:5500/profile/${bodyObj.id}`, {
+        const response = await fetch(
+          `https://api.mobilium.info/profile/${bodyObj.id}`,
+          {
             method: httpMethod,
             credentials: 'include',
-            body: formData
-        })
+            body: formData,
+          }
+        )
         const message = await response.json()
         return message
     } catch (error) {

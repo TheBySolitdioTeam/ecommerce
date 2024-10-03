@@ -10,13 +10,18 @@ export async function loader({ params, request }) {
   const price = url.searchParams.get("price")
     
     try {
-        const response = await fetch(`http://localhost:5500/product/${category_id}?cursor=&limit=5&price=${price ||''}`, {
+        const response = await fetch(
+          `https://api.mobilium.info/product/${category_id}?cursor=&limit=5&price=${
+            price || ''
+          }`,
+          {
             method: 'GET',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+              'Content-Type': 'application/json',
+            },
+          }
+        )
         const data = await response.json()
         return [data, price]
     } catch (error) {
@@ -74,13 +79,18 @@ export default function CategoryProducts() {
 
     const fetchMoreData = async (cursor, price) => {
         try {
-              const response = await fetch(`http://localhost:5500/product/${category_id}?cursor=${cursor || ''}&limit=5&price=${price || ''}`, {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+              const response = await fetch(
+                `https://api.mobilium.info/product/${category_id}?cursor=${
+                  cursor || ''
+                }&limit=5&price=${price || ''}`,
+                {
+                  method: 'GET',
+                  credentials: 'include',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                }
+              )
             const data = await response.json()
             setItems(prev => [...prev, ...data])
             data.length > 0 ? setHasMore(true): setHasMore(false)

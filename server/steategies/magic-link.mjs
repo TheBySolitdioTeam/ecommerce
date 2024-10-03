@@ -19,7 +19,7 @@ passport.use(
       verifyUserAfterToken: true,
     },
     function send(user, token) {
-      var link = 'http://localhost:5500/auth/login/email/verify?token=' + token
+      var link = 'https://api.mobilium.info/auth/login/email/verify?token=' + token
       var msg = {
         to: user.email,
         from: process.env.EMAIL,

@@ -13,7 +13,7 @@ const checkIfConnected = (req, res, next) => {
     : res.send({ error: 'Your are not an connected!' })
 }
 
-router.use(checkIfConnected)
+//router.use(checkIfConnected)
 
 // Add item to cart
 router.use(express.json())

@@ -136,7 +136,7 @@ export default function AdminHeader() {
         </div>
         <div className="flex-1">
           <Link to="/" className="btn btn-ghost text-xl">
-            <img src={'/logo.png'} width={60} alt="logo" />
+            <img src={'/logo.png'} width={100} alt="logo" />
           </Link>
         </div>
         <div className="flex-none">

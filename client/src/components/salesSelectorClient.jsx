@@ -7,7 +7,7 @@ export default function SalesSelectorClient() {
 
   useEffect(() => {
     if (fetcher.state === 'idle' && !fetcher.data) {
-      fetcher.load('/admin/sales/loader')
+      fetcher.load('/sales/loader')
     }
   }, [fetcher])
 

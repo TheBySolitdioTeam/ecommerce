@@ -62,7 +62,7 @@ import FilterOrders, {
 } from './routes/orders/filterOrders'
 import UserProfile, {action as profileAction} from './routes/admin/userProfile'
 import HomePage from './routes/homePage'
-import {loader as last6Loader} from './routes/product/last6Loader'
+//import {loader as last6Loader} from './routes/product/last6Loader'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
 
@@ -79,12 +79,10 @@ const router = createBrowserRouter([
         index: true,
         element: <HomePage />,
         errorElement: <ErrorPage />,
-  
       },
       {
-        path: "/sales/loader",
-        lazy: () => import("./lazyloaders/getHomeSales")
-
+        path: '/sales/loader',
+        lazy: () => import('./lazyloaders/getHomeSales'),
       },
       {
         path: '/product',
@@ -140,7 +138,7 @@ const router = createBrowserRouter([
           },
           {
             path: '/product/last6/loader',
-            loader: last6Loader,
+            lazy: () => import('./routes/product/last6Loader')
           },
         ],
       },

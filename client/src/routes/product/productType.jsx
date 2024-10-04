@@ -1,9 +1,9 @@
 import {useState, useEffect, useRef} from 'react'
-import { useLoaderData, useLocation,useOutletContext } from "react-router-dom"
+import { useLoaderData, useLocation,useOutletContext, useNavigation } from "react-router-dom"
 import ProductCardClient from "../../components/productCardClient"
 import InfiniteScroll from 'react-infinite-scroll-component'
 //import AnimatedLayout from '../../animation/animatedLayout'
-export async function loader({ request }) {
+/*export async function loader({ request }) {
     const url = new URL(request.url)
     
     const name = url.searchParams.get('name')
@@ -27,7 +27,7 @@ export async function loader({ request }) {
     } catch (error) {
         return {error: error.message}
     }
-}
+}*/
 //THIS IS THE CUSTOM HOOK
 
 const usePrevLocation = (location) => {
@@ -45,6 +45,7 @@ return prevLocRef.current
 }
 
 export default function ProductType() {
+  const navigation = useNavigation()
    const [price, setPrice] = useOutletContext()[0]
    const location = useLocation()
   const prevLocation = usePrevLocation(location)
@@ -96,30 +97,58 @@ export default function ProductType() {
     }
     
   return (
-       <>
-        {items.length > 0 ? (
-                <InfiniteScroll
-                    className='w-full'
-            dataLength={items.length}
-            hasMore={hasMore}
-            next={()=> setCursor(itemIds[itemIds.length - 1])}
-            loader={
-              <span className="loading loading-infinity loading-lg"></span>
-            }
-            endMessage={
-              <p style={{ textAlign: 'center' }}>
-                <b>Yay! You have seen it all</b>
-              </p>
-            }
-          >
-                    <div className="flex w-full flex-row items-start flex-wrap lg:p-5 lg:m-5">
-                        {items.map(item => <ProductCardClient key={item._id} item={item} />)}
-            </div>
-          </InfiniteScroll>
-        ) : (
-          'No Product Found!'
-        )}
-      </>  
-    )
+    <>
+      {' '}
+      {navigation.state === 'loading' ? (
+        <div className="flex justify-between flex-row flex-wrap w-full">
+          <div className="flex w-52 flex-col m-2 gap-4">
+            <div className="skeleton h-32 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+          </div>
+          <div className="flex w-52 flex-col m-2 gap-4">
+            <div className="skeleton h-32 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+          </div>
+          <div className="flex w-52 flex-col m-2 gap-4">
+            <div className="skeleton h-32 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+          </div>
+        </div>
+      ) : (
+        <>
+          {items.length > 0 ? (
+            <InfiniteScroll
+              className="w-full"
+              dataLength={items.length}
+              hasMore={hasMore}
+              next={() => setCursor(itemIds[itemIds.length - 1])}
+              loader={
+                <span className="loading loading-infinity loading-lg"></span>
+              }
+              endMessage={
+                <p style={{ textAlign: 'center' }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
+            >
+              <div className="flex w-full flex-row items-start flex-wrap lg:p-5 lg:m-5">
+                {items.map((item) => (
+                  <ProductCardClient key={item._id} item={item} />
+                ))}
+              </div>
+            </InfiniteScroll>
+          ) : (
+            'No Product Found!'
+          )}
+        </>
+      )}
+    </>
+  )
     
 }

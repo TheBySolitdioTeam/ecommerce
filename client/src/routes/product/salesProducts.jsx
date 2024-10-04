@@ -93,35 +93,58 @@ export default function SalesProductsClient() {
 
   return (
     <>
-      {' '}
-      {items.length ? (
-        <div className="w-full">
-          <InfiniteScroll
-            className="w-full"
-            dataLength={items.length}
-            hasMore={hasMore}
-            next={() => setCursor(itemIds[itemIds.length - 1])}
-            loader={
-              <span className="loading loading-infinity loading-lg"></span>
-            }
-            endMessage={
-              <p style={{ textAlign: 'center' }}>
-                <b>Yay! You have seen it all</b>
-              </p>
-            }
-          >
-            <div className="flex w-full flex-row items-start flex-wrap lg:p-5 lg:m-5">
-              {items.map((item) => (
-                <ProductCardClient key={item._id} item={item} />
-              ))}
-            </div>
-          </InfiniteScroll>
+      {navigation.state === 'loading' ? (
+        <div className="flex justify-between flex-row flex-wrap w-full">
+          <div className="flex w-52 flex-col m-2 gap-4">
+            <div className="skeleton h-32 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+          </div>
+          <div className="flex w-52 flex-col m-2 gap-4">
+            <div className="skeleton h-32 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+          </div>
+          <div className="flex w-52 flex-col m-2 gap-4">
+            <div className="skeleton h-32 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-full"></div>
+          </div>
         </div>
-      ) : navigation.state === 'idle' ? (
-        <span>No Products</span>
       ) : (
-        <span className="loading loading-infinity loading-lg"></span>
-      )}
+        <>
+          {' '}
+          {items.length ? (
+            <div className="w-full">
+              <InfiniteScroll
+                className="w-full"
+                dataLength={items.length}
+                hasMore={hasMore}
+                next={() => setCursor(itemIds[itemIds.length - 1])}
+                loader={
+                  <span className="loading loading-infinity loading-lg"></span>
+                }
+                endMessage={
+                  <p style={{ textAlign: 'center' }}>
+                    <b>Yay! You have seen it all</b>
+                  </p>
+                }
+              >
+                <div className="flex w-full flex-row items-start flex-wrap lg:p-5 lg:m-5">
+                  {items.map((item) => (
+                    <ProductCardClient key={item._id} item={item} />
+                  ))}
+                </div>
+              </InfiniteScroll>
+            </div>
+          ) : (
+            <span>No Products</span>
+          )}
+        </>
+      )}{' '}
     </>
   )
 }

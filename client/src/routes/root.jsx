@@ -2,7 +2,7 @@ import Navbar from "../components/navbar"
 import Footer from "../components/footer"
 import { useLoaderData } from "react-router-dom"
 import AnimatedOutlet from "../animation/animatedOutlet"
-
+import { UserContext } from './admin/UserContext'
 export async function loader() {
     try {
       const response = await fetch(
@@ -32,12 +32,15 @@ export async function loader() {
     }
 }
 export default function Root() {
-    const [user,cart] = useLoaderData()
-    return (
-      <>
-        <Navbar user={user} cart={cart} />
-        <AnimatedOutlet context={[user]} />
-        <Footer />
-      </>
-    )
+  const [user, cart] = useLoaderData()
+  //const navigation = useNavigation()
+  return (
+    <>
+      <Navbar user={user} cart={cart} />
+      <UserContext.Provider value={user}>
+        <AnimatedOutlet />
+      </UserContext.Provider>
+      <Footer />
+    </>
+  )
 }

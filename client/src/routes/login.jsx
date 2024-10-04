@@ -1,6 +1,7 @@
-import { useEffect } from "react"
-import { useFetcher, useOutletContext, useNavigate } from "react-router-dom"
+import { useEffect , useContext } from "react"
+import { useFetcher, useNavigate } from "react-router-dom"
 import toast, { Toaster } from 'react-hot-toast'
+import { UserContext } from "./admin/UserContext"
 export async function action({request}) {
   const formData = await request.formData()
   const bodyObject = Object.fromEntries(formData)
@@ -29,7 +30,7 @@ export async function action({request}) {
 export default function Login() {
   const fetcher = useFetcher()
   const navigate = useNavigate()
-  const user = useOutletContext()[0]
+  const user = useContext(UserContext)
  
   useEffect(() => {
      if (!user.msg) navigate('/admin/products/view')

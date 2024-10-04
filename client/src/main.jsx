@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 import Root, {loader as rootUserLoader} from './routes/root'
 import AdminRoot from './routes/admin/adminRoot'
 import Login, { action as loginAction } from './routes/login'
@@ -62,6 +62,7 @@ import FilterOrders, {
 } from './routes/orders/filterOrders'
 import UserProfile, {action as profileAction} from './routes/admin/userProfile'
 import HomePage from './routes/homePage'
+import App from './routes/App'
 //import {loader as last6Loader} from './routes/product/last6Loader'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
@@ -368,6 +369,6 @@ const router = createBrowserRouter([
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} fallBackElement={<span className="loading loading-infinity loading-lg m-auto"></span>} />
+   <App router={router} />
   </React.StrictMode>,
 )

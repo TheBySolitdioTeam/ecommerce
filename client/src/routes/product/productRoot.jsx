@@ -3,6 +3,7 @@ import { Form, useSubmit, Outlet, useLocation } from 'react-router-dom'
 import AllCategoriesVertical from '../../components/allCategoriesVertical'
 //import SalesSelector from '../admin/components/salesSelector'
 import SalesSelectorClient from '../../components/salesSelectorClient'
+import AnimatedLayout from '../../animation/animatedLayout'
 export default function ProductRootClient() {
   const submit = useSubmit()
   const [query, setQuery] = useState(null)
@@ -13,7 +14,8 @@ export default function ProductRootClient() {
   const q = location.search.includes('?q=')
     ? location.search.split('=')[1].split('&')[0]
     : null
-    return (
+  return (
+    <AnimatedLayout>
       <div className="flex flex-col lg:flex-row">
         <div className="drawer lg:drawer-open m-5 w-96">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -84,7 +86,7 @@ export default function ProductRootClient() {
               </li>
               <li>
                 {' '}
-               <SalesSelectorClient/>
+                <SalesSelectorClient />
               </li>
               <AllCategoriesVertical />
             </ul>
@@ -120,7 +122,6 @@ export default function ProductRootClient() {
                   {q ? <input type="hidden" name="q" value={q} /> : ''}
                   {name ? <input type="hidden" name="name" value={name} /> : ''}
                   <select
-                    
                     name="price"
                     onChange={(e) => {
                       setSortBy(e.target.value)
@@ -145,5 +146,6 @@ export default function ProductRootClient() {
           />
         </div>
       </div>
-    )
+    </AnimatedLayout>
+  )
 }

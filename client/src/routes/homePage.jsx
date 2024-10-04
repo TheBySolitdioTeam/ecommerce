@@ -1,9 +1,10 @@
 import HomePageSales from "../components/homePageSales";
 import {Link} from "react-router-dom"
 import HomePageLast6 from "../components/last6Carousel";
+import AnimatedLayout from "../animation/animatedLayout";
 export default function HomePage() {
     return (
-      <>
+      <AnimatedLayout>
         <div
           className="hero min-h-1/2"
           style={{
@@ -31,6 +32,6 @@ export default function HomePage() {
         <HomePageSales />
        
         <HomePageLast6 />
-      </>
+      </AnimatedLayout>
     )
 }

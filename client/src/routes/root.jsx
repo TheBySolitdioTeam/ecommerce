@@ -1,6 +1,7 @@
 import Navbar from "../components/navbar"
 import Footer from "../components/footer"
-import { Outlet, useLoaderData } from "react-router-dom"
+import { useLoaderData } from "react-router-dom"
+import AnimatedOutlet from "../animation/animatedOutlet"
 
 export async function loader() {
     try {
@@ -32,9 +33,11 @@ export async function loader() {
 }
 export default function Root() {
     const [user,cart] = useLoaderData()
-    return (<>
+    return (
+      <>
         <Navbar user={user} cart={cart} />
-        <Outlet context={[user]}/>
-        <Footer/>
-    </>)
+        <AnimatedOutlet context={[user]} />
+        <Footer />
+      </>
+    )
 }

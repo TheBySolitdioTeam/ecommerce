@@ -33,14 +33,14 @@ import EditProduct, { loader as editProductLoader, action as editProdcutAction }
 import DeleteProduct, {action as deleteAction} from './routes/admin/routes/products/deleteProduct'
 import SalesRoot from './routes/admin/routes/sales/salesRoot'
 import CreateSales, { action as createSalesAction } from './routes/admin/routes/sales/createSales'
-import {loader as getAllSalesLoader} from './routes/admin/routes/sales/getAllSalesLoader'
+//import {loader as getAllSalesLoader} from './routes/admin/routes/sales/getAllSalesLoader'
 import ViewSalesRoot from './routes/admin/routes/sales/viewSalesRoot'
 import InfinitySales, {loader as infinitySalesLoader} from './routes/admin/routes/sales/infinitySales'
 import EditSales, {loader as editSalesLoader, action as editSalesAction} from './routes/admin/routes/sales/editSales'
 import DeleteSales, {action as deleteSalesAction} from './routes/admin/routes/sales/deleteSales'
 import SearchSales, {loader as searchSalesLoader} from './routes/admin/routes/sales/searchSales'
 import ProductRootClient from './routes/product/productRoot'
-import ProductType, { loader as productTypeLoader } from './routes/product/productType'
+import ProductType from './routes/product/productType'
 import {action as addToCartAction} from './routes/addToCart'
 import {action as changeQtyAction} from './routes/changeQty'
 import {action as changeSizeAction} from './routes/changeSize'
@@ -79,6 +79,12 @@ const router = createBrowserRouter([
         index: true,
         element: <HomePage />,
         errorElement: <ErrorPage />,
+  
+      },
+      {
+        path: "/sales/loader",
+        lazy: () => import("./lazyloaders/getHomeSales")
+
       },
       {
         path: '/product',
@@ -89,7 +95,7 @@ const router = createBrowserRouter([
             path: '/product/type',
             element: <ProductType />,
             errorElement: <ErrorPage />,
-            loader: productTypeLoader,
+            lazy: () => import('./lazyloaders/productTypeLoader'),
           },
           {
             path: '/product/search',
@@ -325,7 +331,7 @@ const router = createBrowserRouter([
           },
           {
             path: '/admin/sales/loader',
-            loader: getAllSalesLoader,
+            lazy: () => import('./routes/admin/routes/sales/getAllSalesLoader'),
           },
           {
             path: '/admin/sales/view',
@@ -364,6 +370,6 @@ const router = createBrowserRouter([
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} fallBackElement={<span className="loading loading-infinity loading-lg m-auto"></span>} />
   </React.StrictMode>,
 )

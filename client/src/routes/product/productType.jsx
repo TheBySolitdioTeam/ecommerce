@@ -2,6 +2,7 @@ import {useState, useEffect, useRef} from 'react'
 import { useLoaderData, useLocation,useOutletContext } from "react-router-dom"
 import ProductCardClient from "../../components/productCardClient"
 import InfiniteScroll from 'react-infinite-scroll-component'
+//import AnimatedLayout from '../../animation/animatedLayout'
 export async function loader({ request }) {
     const url = new URL(request.url)
     
@@ -46,8 +47,12 @@ return prevLocRef.current
 export default function ProductType() {
    const [price, setPrice] = useOutletContext()[0]
    const location = useLocation()
-   const prevLocation = usePrevLocation(location)
+  const prevLocation = usePrevLocation(location)
+  
+  
   const [initialItems, name, initPrice] = useLoaderData()
+
+  
    
     const [cursor, setCursor] = useState(null)
     const [items, setItems] = useState(initialItems)
@@ -90,8 +95,8 @@ export default function ProductType() {
         }
     }
     
-    return (
-      <>
+  return (
+       <>
         {items.length > 0 ? (
                 <InfiniteScroll
                     className='w-full'
@@ -114,7 +119,7 @@ export default function ProductType() {
         ) : (
           'No Product Found!'
         )}
-      </>
+      </>  
     )
     
 }

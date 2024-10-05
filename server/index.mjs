@@ -20,8 +20,8 @@ import salesClientRouter from './routes/saleClient.mjs'
 
 const corsOptions = {
   origin: [
+    "https://www.mobilium.info",
     'https://mobilium.info',
-    'https://www.mobilium.info',
     'http://localhost:5173',
   ],
 

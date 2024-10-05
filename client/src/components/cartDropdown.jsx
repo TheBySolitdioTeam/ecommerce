@@ -100,7 +100,7 @@ export default function CartDropdown({ cart,user }) {
                           </td>
 
                           <td>
-                            {' '}
+                          
                             $
                             {parseFloat(
                               item.price.$numberDecimal || item.price
@@ -116,10 +116,10 @@ export default function CartDropdown({ cart,user }) {
                                 item.price.$numberDecimal * item.qty ||
                                   item.price * item.qty
                               ).toFixed()
-                            )}{' '}
+                            )}
                           </td>
                           <td>
-                            {' '}
+                          
                             {item.size ? (
                               <fetcher.Form
                                 method="post"
@@ -154,15 +154,15 @@ export default function CartDropdown({ cart,user }) {
                                       }
                                       value={size}
                                     >
-                                      {' '}
-                                      {size}{' '}
+                                      
+                                      {size}
                                     </option>
                                   ))}
                                 </select>
                               </fetcher.Form>
                             ) : (
                               'None'
-                            )}{' '}
+                            )}
                           </td>
                           <td>
                             <fetcher.Form

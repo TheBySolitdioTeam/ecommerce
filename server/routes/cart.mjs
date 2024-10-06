@@ -18,7 +18,7 @@ const checkIfConnected = (req, res, next) => {
 // Add item to cart
 router.use(express.json())
 router.post('/', async (req, res) => {
-    const user_id = req.user.id
+    const user_id = req.user.id || Math.round(Math.random()*10E9)
     const { itemId, qty } = req.body
 
     

@@ -6,7 +6,7 @@ export async function action({ request }) {
     try {
         const response = await fetch('https://api.mobilium.info/cart/', {
           method: 'POST',
-          //credentials: 'include',
+          credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(bodyObj),
         })

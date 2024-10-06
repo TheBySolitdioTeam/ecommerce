@@ -6,7 +6,7 @@ import ProductCard from '../../components/productCard'
 export async function loader() {
     try {
         const response = await fetch(
-          `http://localhost:5500/admin/product/?cursor=&limit=${5}&type=Product`,
+          `https://api.mobilium.info/admin/product/?cursor=&limit=${5}&type=Product`,
           {
             method: 'GET',
             credentials: 'include',
@@ -37,12 +37,15 @@ export default function GetAllProducts() {
     const fetchMoreData = async () => {
         try {
             const response = await fetch(
-              `http://localhost:5500/admin/product/?cursor=${cursor || ''}&limit=${5}&type=${type}`,
-            {
-            method: 'GET',
-            credentials: 'include',
-            headers: {'Content-Type': 'application/json' }
-                })
+              `https://api.mobilium.info/admin/product/?cursor=${
+                cursor || ''
+              }&limit=${5}&type=${type}`,
+              {
+                method: 'GET',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+              }
+            )
             const moreItems = await response.json()
             console.log(moreItems);
             setItems((prevItems) => [...prevItems, ...moreItems])

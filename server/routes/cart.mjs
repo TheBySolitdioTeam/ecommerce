@@ -3,6 +3,7 @@ import Cart from '../models/cart.mjs'
 import Product from '../models/products/products.mjs'
 import Furniture from '../models/products/furniture.mjs'
 import Clothing from '../models/products/clothing.mjs'
+import mongoose from 'mongoose'
 
 const router = Router()
 
@@ -18,7 +19,7 @@ const checkIfConnected = (req, res, next) => {
 // Add item to cart
 router.use(express.json())
 router.post('/', async (req, res) => {
-    const user_id = req.user ? req.user.id : 'guest'+Math.round(Math.random()*10E9)
+    const user_id = req.user ? req.user.id : new mongoose.Types.ObjectId()
     const { itemId, qty } = req.body
 
     

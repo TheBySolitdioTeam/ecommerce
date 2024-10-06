@@ -1,8 +1,9 @@
 import {redirect} from 'react-router-dom'
 export async function action({ request }) {
     const formData = await request.formData()
-    const bodyObj = Object.fromEntries(formData)
-    bodyObj.user_id= localStorage.getItem("user_id") || null
+  const bodyObj = Object.fromEntries(formData)
+  const user_id =localStorage.getItem("user_id") 
+  bodyObj.user_id= user_id !== "undefined" ? user_id: null
     try {
         const response = await fetch('https://api.mobilium.info/cart/', {
           method: 'POST',

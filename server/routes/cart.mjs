@@ -21,7 +21,7 @@ router.use(express.json())
 router.post('/', async (req, res) => {
     const user_id = req.user
       ? req.user.id
-      : req.body.user_id
+      : req.body.user_id 
       ? mongoose.Types.ObjectId.createFromHexString(req.body.user_id)
       : new mongoose.Types.ObjectId()
     const { itemId, qty } = req.body

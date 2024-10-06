@@ -72,7 +72,7 @@ router.post('/', async (req, res) => {
             const items = [newItem]
             const newCart = new Cart({ user_id, items, subtotal })
             await newCart.save()
-            return res.send({msg: 'Cart created!'})
+            return res.send({msg: 'Cart created!',user_id})
         } catch (error) {
             return res.send({error: error.message})
         }

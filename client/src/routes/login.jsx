@@ -2,6 +2,7 @@ import { useEffect , useContext } from "react"
 import { useFetcher, useNavigate } from "react-router-dom"
 import toast, { Toaster } from 'react-hot-toast'
 import { UserContext } from "./admin/UserContext"
+import AnimatedLayout from "../animation/animatedLayout"
 export async function action({request}) {
   const formData = await request.formData()
   const bodyObject = Object.fromEntries(formData)
@@ -46,7 +47,8 @@ export default function Login() {
    
     
   }, [fetcher])
-    return (
+  return (
+      <AnimatedLayout>
       <div className="hero bg-base-200 m-5">
         <div className="hero-content flex-col">
           <div className="text-center ">
@@ -86,5 +88,6 @@ export default function Login() {
           </div>
         </div>
       </div>
+    </AnimatedLayout>
     )
 }

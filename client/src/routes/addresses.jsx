@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useFetcher, useLoaderData, Link, useNavigate } from "react-router-dom"
 import { FaMapPin } from "react-icons/fa6"
 import toast, {Toaster} from 'react-hot-toast'
+import AnimatedLayout from "../animation/animatedLayout"
 export async function action({ request }) {
     const formData = await request.formData()
     const bodyObject = Object.fromEntries(formData)
@@ -60,7 +61,8 @@ export default function Addresses() {
             : ''
      }
     }, [fetcher])
-    return (
+  return (
+    <AnimatedLayout>
       <div className="flex flex-col w-full justify-center items-center lg:flex-row p-5 ">
         {addresses.length > 0 ? (
           <>
@@ -72,7 +74,10 @@ export default function Addresses() {
                   className="card bg-base-100 w-96 shadow-xl m-2"
                 >
                   <div className="card-body">
-                    <h2 className="card-title"> <FaMapPin/> {item.name} </h2>
+                    <h2 className="card-title">
+                      {' '}
+                      <FaMapPin /> {item.name}{' '}
+                    </h2>
                     <ul className="menu w-56 p-0 [&_li>*]:rounded-none">
                       <li>
                         <span> {item.addressLines} </span>
@@ -88,7 +93,10 @@ export default function Addresses() {
                       </li>
                     </ul>
                     <div className="card-actions justify-end">
-                      <Link to={`/checkout/${item._id}`} className="btn btn-outline btn-primary">
+                      <Link
+                        to={`/checkout/${item._id}`}
+                        className="btn btn-outline btn-primary"
+                      >
                         Choose
                       </Link>
                     </div>
@@ -175,5 +183,6 @@ export default function Addresses() {
           <Toaster />
         </div>
       </div>
-    )
+    </AnimatedLayout>
+  )
 }

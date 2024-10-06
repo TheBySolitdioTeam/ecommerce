@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
-import { useLoaderData, Outlet, useParams, useNavigate } from 'react-router-dom'
+import { useLoaderData, Outlet, useParams, } from 'react-router-dom'
 
 
 
@@ -30,15 +30,13 @@ export default function Checkout() {
   //console.log(address)
   const cart = useLoaderData()[0]
   //console.log(cart)
-  const navigate = useNavigate()
+  //const navigate = useNavigate()
 
   const [clientSecret, setClientSecret] = useState('')
   const [dpmCheckerLink, setDpmCheckerLink] = useState('')
  console.log(dpmCheckerLink);
   useEffect(() => {
-    if (cart.items.length <= 0) {
-        navigate("/admin/orders")
-     }
+    
     // Create PaymentIntent as soon as the page loads
     fetch(
       `https://api.mobilium.info/stripe/create-payment-intent?addressId=${address}`,
@@ -58,7 +56,7 @@ export default function Checkout() {
         setDpmCheckerLink(data.dpmCheckerLink)
       })
       .catch((error) => console.log(error))
-  }, [cart])
+  }, [])
 
   const appearance = {
     theme: 'stripe',

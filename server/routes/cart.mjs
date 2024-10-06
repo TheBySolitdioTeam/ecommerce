@@ -81,9 +81,16 @@ router.post('/', async (req, res) => {
 })
 
 router.get("/", async (req, res) => {
-    
+  const { guest } = req.query
+  const query = {user_id : 'twenty_four_charactersz$'}
+  if (guest) {
+    query.user_id = guest
+  }
+  if (req.user) {
+     query.user_id = req.user.id
+  }
     try {
-        const cart = await Cart.find({ user_id: req.user.id })
+        const cart = await Cart.find(query)
         return res.send(cart)
     } catch (error) {
         return res.send({error: error.message})

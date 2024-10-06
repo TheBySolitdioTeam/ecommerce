@@ -10,9 +10,13 @@ export async function action({ request }) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(bodyObj),
         })
-        const message = await response.json()
-        if (message.msg) return redirect(bodyObj.prevLocation)
-       throw new Error(message.error)
+      const message = await response.json()
+        
+      if (message.msg) {
+        localStorage.setItem("user_id", message.user_id.toString())
+        return redirect(bodyObj.prevLocation) 
+      }
+      throw new Error(message.error)
     } catch (error) {
        throw new Error(error.message)
     }

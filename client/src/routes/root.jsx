@@ -16,8 +16,9 @@ export async function loader() {
         }
       )
         const potUser = await response.json()
-      if (potUser.msg) return [potUser, {}]
-      const cartResponse = await fetch(`https://api.mobilium.info/cart/`, {
+      //if (potUser.msg) return [potUser, {}]
+      const guestSession = localStorage.getItem("user_id") || ''
+      const cartResponse = await fetch(`https://api.mobilium.info/cart/?guest=${guestSession}`, {
         method: 'GET',
         credentials: 'include',
         headers: {

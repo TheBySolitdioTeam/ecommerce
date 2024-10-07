@@ -15,7 +15,6 @@ router.post("/login/email", passport.authenticate('magiclink', { action: 'reques
    res.send({ msg: 'Email sent!' })
 })
 
-
 // verifying link send by email
 
 router.get("/login/email/verify", passport.authenticate('magiclink', { successReturnToOrRedirect: 'https://mobilium.info/' , failureMessage: 'Token Invalid'}))

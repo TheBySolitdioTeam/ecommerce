@@ -59,9 +59,10 @@ app.use(passport.session())
 app.use(express.static('public'))
 app.use('/stripe', stripeRouter)
 app.use('/profile', profileRouter)
-app.use(express.json())
+
 app.use('/auth', authRouter)
 app.use('/admin', adminRouter)
+app.use(express.json())
 app.use('/product', productRouter)
 
 app.use('/cart', cartRouter)

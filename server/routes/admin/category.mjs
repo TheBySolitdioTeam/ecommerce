@@ -60,7 +60,7 @@ const router = Router()
 
 // category CRUD Section
 
-router.use(express.json())
+
 
 // Create Category with image upload in multer
 router.post(
@@ -110,6 +110,7 @@ router.put(
     }
   }
 )
+router.use(express.json())
 // Edit Category without image
 
 router.patch('/:id', checkSchema(categoryValidationSchema,['body']), async (req, res) => {

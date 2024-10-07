@@ -16,7 +16,7 @@ export default function CartDropdown({ cart,user }) {
             <div className="indicator">
               <FaCartShopping className="text-xl" />
               <span className="badge badge-sm bg-primary text-white indicator-item">
-                {cart.items ? cart.items.length : 0}
+                {!cart.error ? cart.items.length : 0}
               </span>
             </div>
           </div>
@@ -28,7 +28,7 @@ export default function CartDropdown({ cart,user }) {
           <div className="card-body">
             <span className="text-lg font-bold">
               {' '}
-              {cart.items ? cart.items.length : 0} Items
+              {!cart.error ? cart.items.length : 0} Items
             </span>
             <div className="overflow-x-auto">
               <table className="table table-xs table-pin-rows table-pin-cols">
@@ -43,7 +43,7 @@ export default function CartDropdown({ cart,user }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {cart.items
+                  {!cart.error
                     ? cart.items.map((item) => (
                         <tr key={item.id}>
                           <td>
@@ -100,7 +100,6 @@ export default function CartDropdown({ cart,user }) {
                           </td>
 
                           <td>
-                          
                             $
                             {parseFloat(
                               item.price.$numberDecimal || item.price
@@ -119,7 +118,6 @@ export default function CartDropdown({ cart,user }) {
                             )}
                           </td>
                           <td>
-                          
                             {item.size ? (
                               <fetcher.Form
                                 method="post"
@@ -154,7 +152,6 @@ export default function CartDropdown({ cart,user }) {
                                       }
                                       value={size}
                                     >
-                                      
                                       {size}
                                     </option>
                                   ))}
@@ -199,7 +196,7 @@ export default function CartDropdown({ cart,user }) {
             </div>
             <span className="font-semibold text-xl">
               Subtotal: $
-              {cart.items
+              {!cart.error
                 ? parseFloat(cart.subtotal.$numberDecimal).toFixed(2)
                 : 0}{' '}
             </span>
@@ -207,7 +204,7 @@ export default function CartDropdown({ cart,user }) {
               <Link
                 to={user.msg ? '/login' : `/addresses`}
                 className="btn btn-primary btn-block"
-                disabled={ cart.items.length === 0}
+                disabled={Boolean(cart.error)}
               >
                 {' '}
                 {fetcher.state !== 'idle' ? (

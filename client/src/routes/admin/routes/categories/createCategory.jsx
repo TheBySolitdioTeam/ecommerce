@@ -31,8 +31,9 @@ export async function action({ request }) {
       headers: contentHeaders,
       body: bodyForm,
     })
-
-    const category = await response.json()
+    
+    const category = await response.text()
+    console.log(category)
     return category
   } catch (error) {
     return {error: error.message }

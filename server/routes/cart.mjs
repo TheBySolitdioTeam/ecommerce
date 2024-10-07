@@ -87,7 +87,7 @@ router.post('/', async (req, res) => {
 
 router.get("/", async (req, res) => {
   const { guest } = req.query
-  const query = {user_id : ''}
+  const query = {user_id: null}
   if (guest) {
     query.user_id = guest
   }

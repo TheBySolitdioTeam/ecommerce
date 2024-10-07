@@ -95,8 +95,10 @@ router.get("/", async (req, res) => {
      query.user_id = req.user.id
   }
     try {
-        const cart = await Cart.findOne(query)
-        return res.send(cart)
+      const cart = await Cart.findOne(query)
+      if(!cart) return res.send({error: 'No items!'})
+      return res.send(cart)
+
     } catch (error) {
         return res.send({error: error.message})
     }

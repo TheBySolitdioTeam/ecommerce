@@ -27,7 +27,7 @@ export async function loader() {
       })
       const cart = await cartResponse.json()
       console.log(cart)
-      return [potUser, cart.length >0 ? cart[0] : {}]
+      return [potUser, cart ? cart : {}]
     } catch (error) {
       return { msg: error.message }
     }

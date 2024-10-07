@@ -108,7 +108,7 @@ export default function Navbar({ user, cart }) {
         <div className="navbar-end mx-5">
           <CartDropdown user={user} cart={cart} />
           {user.msg ? (
-            <a className="btn">Button</a>
+           ''
           ) : (
             <Form method="post" action="/logout">
               <button className="btn btn-base btn-sm">Logout</button>

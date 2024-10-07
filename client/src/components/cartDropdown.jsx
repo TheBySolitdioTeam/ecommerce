@@ -205,9 +205,9 @@ export default function CartDropdown({ cart,user }) {
             </span>
             <div className="card-actions">
               <Link
-                to={user.msg ? '' : `/addresses`}
+                to={user.msg ? '/login' : `/addresses`}
                 className="btn btn-primary btn-block"
-                disabled={user.msg || !cart.items.length > 0}
+                disabled={ cart.items.length === 0}
               >
                 {' '}
                 {fetcher.state !== 'idle' ? (

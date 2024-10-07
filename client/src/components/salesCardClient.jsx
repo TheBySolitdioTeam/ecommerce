@@ -7,7 +7,7 @@ export default function SalesCardClient({ item }) {
   let difference = expiryDate.getTime() - today.getTime()
 
   return (
-    <div className="card bg-base-100 m-3 image-full w-96 shadow-xl">
+    <div className="card bg-base-100 m-3 image-full  w-48 lg:w-96 shadow-xl">
       <figure>
         <img
           src={

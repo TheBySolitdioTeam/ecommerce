@@ -3,6 +3,7 @@ import MagicLink from 'passport-magic-link'
 import sendgrid from '@sendgrid/mail'
 import Users from '../models/users.mjs'
 import {} from 'dotenv/config'
+import mongoose from 'mongoose'
 
 const MagicLinkStrategy = MagicLink.Strategy
  
@@ -14,7 +15,7 @@ passport.use(
   new MagicLinkStrategy(
     {
       secret: 'keyboard cat',
-      userFields: ['email'],
+      userFields: ['email','id'],
       tokenField: 'token',
       verifyUserAfterToken: true,
     },
@@ -25,10 +26,10 @@ passport.use(
         from: process.env.EMAIL,
         subject: 'Sign in to bySolitdio',
         text:
-          'Hello! Click the link below to finish signing in to bySolitdio.\r\n\r\n' +
+          'Hello! Click the link below to finish signing in to Mobilium.\r\n\r\n' +
           link,
         html:
-          '<h3>Hello!</h3><p>Click the link below to finish signing in to bySolitdio.</p><p><a href="' +
+          '<h3>Hello!</h3><p>Click the link below to finish signing in to Mobilium.</p><p><a href="' +
           link +
           '">Sign in</a></p>',
       }
@@ -38,7 +39,11 @@ passport.use(
       try {
         const check = await Users.findOne({ email: user.email })
         if (!check) {
-          const newUser = new Users({ email: user.email })
+          const userPrototype = { email: user.email }
+          if (user.id) {
+            userPrototype._id = mongoose.Types.ObjectId.createFromHexString(user.id)
+          }
+          const newUser = new Users(userPrototype)
           await newUser.save()
           return new Promise(function (resolve, reject) {
             return resolve(newUser)

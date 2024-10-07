@@ -9,7 +9,7 @@ import fs from 'node:fs'
 
 //gets your app's root path
 const root = path.resolve()
-const destinacion = path.join(root, '/public/categories/')
+const destinacion = path.join(root, '../public/categories/')
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, destinacion)

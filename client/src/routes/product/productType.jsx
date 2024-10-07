@@ -137,7 +137,7 @@ export default function ProductType() {
                 </p>
               }
             >
-              <div className="flex w-full flex-row items-start flex-wrap lg:p-5 lg:m-5">
+              <div className="flex w-full flex-row items-start justify-center flex-wrap lg:p-5 lg:m-5">
                 {items.map((item) => (
                   <ProductCardClient key={item._id} item={item} />
                 ))}

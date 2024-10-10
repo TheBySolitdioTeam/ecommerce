@@ -29,7 +29,10 @@ export async function action({request}) {
 
 }
 export default function Login() {
-  const guest = localStorage.getItem("user_id") || null
+  const guest =
+    Boolean(localStorage.getItem('user_id')) === true
+      ? localStorage.getItem('user_id')
+      : null
   const fetcher = useFetcher()
   const navigate = useNavigate()
   const user = useContext(UserContext)

@@ -40,7 +40,7 @@ passport.use(
         const check = await Users.findOne({ email: user.email })
         if (!check) {
           const userPrototype = { email: user.email }
-          console.log(user.id)
+          console.log(user)
           if (Boolean(user.id) !== false) {
             user.id = mongoose.Types.ObjectId.createFromHexString(user.id)
           } else {

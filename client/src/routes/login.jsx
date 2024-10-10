@@ -7,7 +7,7 @@ export async function action({request}) {
   const formData = await request.formData()
   const bodyObject = Object.fromEntries(formData)
  
-  console.log(bodyObject)
+  console.log(Boolean(bodyObject.id))
   try {
     const response = await fetch('https://api.mobilium.info/auth/login/email', {
       method: 'POST',

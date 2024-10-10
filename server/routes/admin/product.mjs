@@ -126,7 +126,7 @@ router.get("/", async (req, res) => {
   try {
    
     //console.log(initialProducts);
-    const allProducts = await Clothing(type,query, limit)
+    const allProducts = await allProductsQuery(type,query, limit)
     //console.log(allProducts)
     /*const allProducts = await Product.find(
       query

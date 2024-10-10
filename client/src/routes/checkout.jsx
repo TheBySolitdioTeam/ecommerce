@@ -68,7 +68,7 @@ export default function Checkout() {
   
   return (
     <div className="flex flex-col justify-center items-center lg:flex-row">
-      {cart.items ? (
+      {!cart.error ? (
         <>
           <div className="card p-5 m-5 bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
             <table className="table table-xs table-pin-rows table-pin-cols">
@@ -82,7 +82,7 @@ export default function Checkout() {
                 </tr>
               </thead>
               <tbody>
-                {cart.items
+                {!cart.error
                   ? cart.items.map((item) => (
                       <tr key={item.id}>
                         <td>
@@ -128,7 +128,7 @@ export default function Checkout() {
             </table>
             <span className="font-semibold text-xl">
               Subtotal: $
-              {cart.items
+              {!cart.error
                 ? parseFloat(cart.subtotal.$numberDecimal).toFixed(2)
                 : 0}{' '}
             </span>

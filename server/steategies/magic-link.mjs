@@ -40,9 +40,14 @@ passport.use(
         const check = await Users.findOne({ email: user.email })
         if (!check) {
           const userPrototype = { email: user.email }
-          if (user.id) {
-            userPrototype._id = mongoose.Types.ObjectId.createFromHexString(user.id)
+          if (user.id !== "") {
+            user.id = mongoose.Types.ObjectId.createFromHexString(user.id)
+          } else {
+            user.id = new mongoose.Types.ObjectId()
           }
+          userPrototype._id = mongoose.Types.ObjectId.createFromHexString(
+            user.id
+          )
           const newUser = new Users(userPrototype)
           await newUser.save()
           return new Promise(function (resolve, reject) {

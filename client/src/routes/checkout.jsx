@@ -28,7 +28,7 @@ export async function loader() {
 export default function Checkout() {
   const { address } = useParams()
   //console.log(address)
-  const cart = useLoaderData()[0]
+  const cart = useLoaderData()
   //console.log(cart)
   //const navigate = useNavigate()
 

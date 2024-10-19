@@ -52,7 +52,7 @@ export default function CartDropdown({ cart,user }) {
                                 <div className="mask mask-squircle h-12 w-12">
                                   <img
                                     src={
-                                      'https://api.mobilium.info/products/' +
+                                      'https://api.mobilium.info/' +
                                       item.image
                                     }
                                     alt="Product Image"

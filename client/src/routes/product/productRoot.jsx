@@ -25,7 +25,7 @@ export default function ProductRootClient() {
               htmlFor="my-drawer-2"
               className="btn btn-sm btn-primary drawer-button lg:hidden"
             >
-              Filter
+              Filtrer
             </label>
           </div>
           <div className="drawer-side z-40">
@@ -50,23 +50,10 @@ export default function ProductRootClient() {
                             e.target.checked ? submit(e.currentTarget.form) : ''
                           }}
                         />
-                        Product
+                        Produit
                       </a>
                     </li>
-                    <li>
-                      <a>
-                        <input
-                          type="radio"
-                          name="name"
-                          className="radio checked:bg-blue-500"
-                          value={'clothing'}
-                          onChange={(e) => {
-                            e.target.checked ? submit(e.currentTarget.form) : ''
-                          }}
-                        />
-                        Clothing
-                      </a>
-                    </li>
+                    
                     <li>
                       <a>
                         <input
@@ -78,7 +65,7 @@ export default function ProductRootClient() {
                             e.target.checked ? submit(e.currentTarget.form) : ''
                           }}
                         />
-                        Furnitures
+                        Fournitures
                       </a>
                     </li>
                   </Form>
@@ -130,9 +117,9 @@ export default function ProductRootClient() {
                     className="select select-bordered w-full max-w-xs"
                     defaultValue={sortBy || ''}
                   >
-                    <option value={''}>Sort by (None)</option>
-                    <option value="asc">Price Asc</option>
-                    <option value="desc">Price Desc</option>
+                    <option value={''}>Trier par </option>
+                    <option value="asc">Prix Asc</option>
+                    <option value="desc">Prix Desc</option>
                   </select>
                 </div>
               </Form>

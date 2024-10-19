@@ -17,7 +17,7 @@ export default function AllCategorySelector({ defaultValue, name }) {
       className="select select-bordered w-full max-w-xs"
       name={name}
     >
-      <option value={''}>No Category</option>
+      <option value={''}>Pas de Categorie</option>
       {fetcher.data.map((item) => (
         <option key={item._id} value={item._id}>
           {' '}

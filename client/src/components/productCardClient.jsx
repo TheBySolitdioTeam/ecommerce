@@ -68,7 +68,7 @@ export default function ProductCardClient({ item }) {
             >
               <FaCartShopping />
               {fetcher.state !== 'submitting' ? (
-                'Add To Cart'
+                'Ajouter au Panier'
               ) : (
                 <span className="loading loading-infinity loading-md"></span>
               )}

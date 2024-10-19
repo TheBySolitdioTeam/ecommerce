@@ -42,7 +42,8 @@ export default function SingleProduct() {
               >
                 <img
                   src={'https://api.mobilium.info/products/' + image}
-                  className="rounded-box"
+                  className="rounded-box max-w-96"
+
                   alt="Tailwind CSS Carousel component"
                 />
               </div>
@@ -158,7 +159,7 @@ export default function SingleProduct() {
                 >
                   <FaCartShopping />
                   {fetcher.state !== 'submitting' ? (
-                    'Add To Cart'
+                    'Ajoutez au Panier'
                   ) : (
                     <span className="loading loading-infinity loading-md"></span>
                   )}

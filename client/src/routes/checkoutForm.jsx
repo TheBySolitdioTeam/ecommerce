@@ -73,15 +73,15 @@ export default function CheckoutForm({ dpmCheckerLink }) {
       {/* [DEV]: Display dynamic payment methods annotation and integration checker */}
       <div id="dpm-annotation">
         <p>
-          Payment methods are dynamically displayed based on customer location,
-          order amount, and currency.&nbsp;
+          Les modes de paiement sont affichés dynamiquement en fonction de la
+          localisation du client, montant de la commande et devise.&nbsp;
           <a
             href={dpmCheckerLink}
             target="_blank"
             rel="noopener noreferrer"
             id="dpm-integration-checker"
           >
-            Preview payment methods by transaction
+            Aperçu des modes de paiement par transaction.
           </a>
         </p>
       </div>

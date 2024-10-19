@@ -23,16 +23,17 @@ export default function HomePage() {
               <div className="hero-overlay bg-opacity-60"></div>
               <div className="hero-content text-neutral-content text-center">
                 <div className="max-w-md">
-                  <h1 className="mb-5 text-5xl font-bold">Welcome</h1>
+                  <h1 className="mb-5 text-5xl font-bold">Bienvenue</h1>
                   <p className="mb-5">
-                    Explore all of our product catalogue and filter or sort as
-                    you discover the most amazing website!
+                    Explorez l&apos;ensemble de notre catalogue de produits et
+                    filtrez ou triez par ordre vous découvrez le site le plus
+                    étonnant!
                   </p>
                   <Link
                     to={'/product/type?name=product'}
                     className="btn btn-primary"
                   >
-                    Get Started
+                    Commencer
                   </Link>
                 </div>
               </div>

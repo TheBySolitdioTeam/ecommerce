@@ -14,7 +14,7 @@ export default function HomePageLast6() {
 
     return fetcher.data ? (
       <div className=" bg-base-200 p-10 w-full">
-        <h1 className="text-4xl m-6 font-bold"> New Products </h1>
+        <h1 className="text-4xl m-6 font-bold"> Nouveaux Produits </h1>
        
         <div className="carousel carousel-center w-full space-x-4">
           {fetcher.data.map((item) => (

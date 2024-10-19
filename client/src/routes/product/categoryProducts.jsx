@@ -4,7 +4,6 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import ProductCardClient from '../../components/productCardClient'
 
 export async function loader({ params, request }) {
-  
   const { category_id } = params
   const url = new URL(request.url)
   const price = url.searchParams.get("price")
@@ -138,7 +137,7 @@ export default function CategoryProducts() {
                 }
                 endMessage={
                   <p style={{ textAlign: 'center' }}>
-                    <b>Yay! You have seen it all</b>
+                    <b>Yay! Vous avez tout vu!</b>
                   </p>
                 }
               >

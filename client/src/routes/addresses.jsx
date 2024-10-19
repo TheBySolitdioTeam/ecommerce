@@ -97,14 +97,14 @@ export default function Addresses() {
                         to={`/checkout/${item._id}`}
                         className="btn btn-outline btn-primary"
                       >
-                        Choose
+                        Choisir
                       </Link>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="divider lg:divider-horizontal">OR</div>
+            <div className="divider lg:divider-horizontal">OU</div>
           </>
         ) : (
           ''
@@ -114,7 +114,7 @@ export default function Addresses() {
           <fetcher.Form method="post" className="card-body">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Address Name</span>
+                <span className="label-text">Nom de l&apos;adresse</span>
               </label>
               <input
                 type="text"
@@ -126,7 +126,7 @@ export default function Addresses() {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Address Line</span>
+                <span className="label-text">Adresse Complet</span>
               </label>
               <textarea
                 name="addressLines"
@@ -136,7 +136,7 @@ export default function Addresses() {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Country</span>
+                <span className="label-text">Pays</span>
               </label>
               <input
                 type="text"
@@ -148,7 +148,7 @@ export default function Addresses() {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">City</span>
+                <span className="label-text">Ville</span>
               </label>
               <input
                 type="text"
@@ -175,7 +175,7 @@ export default function Addresses() {
                 {fetcher.state === 'submitting' ? (
                   <span className="loading loading-infinity loading-md"></span>
                 ) : (
-                  'Create'
+                  'Créer'
                 )}
               </button>
             </div>

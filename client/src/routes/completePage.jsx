@@ -108,7 +108,7 @@ export default function CompletePage() {
           rel="noopener noreferrer"
           target="_blank"
         >
-          View details
+          Voir plus
           <FaSquareArrowUpRight />
         </a>
       )}

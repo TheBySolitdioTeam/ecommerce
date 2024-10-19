@@ -74,7 +74,7 @@ export default function AllCategoriesVertical() {
                           </li>
                         )
                     }
-                }): <li>No Categories</li>
+                }): <li>Pas de Catégories</li>
         }
        
       </ul>

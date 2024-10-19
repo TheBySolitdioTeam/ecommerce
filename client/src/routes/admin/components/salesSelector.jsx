@@ -17,7 +17,7 @@ export default function SalesSelector({ defaultValue, name }) {
       className="select select-bordered w-full max-w-xs my-3"
       name={name}
     >
-      <option value={''}>No sales</option>
+      <option value={''}>Pas de promotions</option>
       {fetcher.data.map((item) => (
         <option key={item._id} value={item._id}>
           {' '}

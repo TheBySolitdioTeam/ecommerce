@@ -32,7 +32,7 @@ export default function SalesCardClient({ item }) {
               to={`/product/sales/${item._id}`}
               className="btn btn-primary m-2"
             >
-              Explore
+              Découvrer
             </Link>
           </div>
         </div>

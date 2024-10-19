@@ -46,7 +46,7 @@ export default function AdminHeader() {
                     }
                   >
                     <FaChartArea className="h-5 w-5" />
-                    Dashboard
+                    Tableau de Bord
                   </NavLink>
                 </li>
                 {user.isAdmin ? (
@@ -63,7 +63,7 @@ export default function AdminHeader() {
                         }
                       >
                         <FaStore className="h-5 w-5" />
-                        Products
+                        Produits
                       </NavLink>
                     </li>
                     <li>
@@ -78,7 +78,7 @@ export default function AdminHeader() {
                         }
                       >
                         <FaTable className="h-5 w-5" />
-                        Categories
+                        Catégories
                       </NavLink>
                     </li>
                     <li>
@@ -93,7 +93,7 @@ export default function AdminHeader() {
                         }
                       >
                         <FaTags className="h-5 w-5" />
-                        Sales
+                        Promotions
                       </NavLink>
                     </li>
                   </>
@@ -112,7 +112,7 @@ export default function AdminHeader() {
                     }
                   >
                     <FaUser className="h-5 w-5" />
-                    Profile
+                    Profil
                   </NavLink>
                 </li>
                 <li>
@@ -127,7 +127,7 @@ export default function AdminHeader() {
                     }
                   >
                     <FaBagShopping className="h-5 w-5" />
-                    Orders
+                    Commandes
                   </NavLink>
                 </li>
               </ul>
@@ -164,11 +164,11 @@ export default function AdminHeader() {
                 </a>
               </li>
               <li>
-                <a>Settings</a>
+                <a>Paramètres</a>
               </li>
               <li>
                 <Form method="post" action="/logout">
-                  <button className="btn btn-base btn-sm">Logout</button>
+                  <button className="btn btn-base btn-sm">Se Deconnecter</button>
                 </Form>
               </li>
             </ul>

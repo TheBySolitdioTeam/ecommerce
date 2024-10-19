@@ -57,7 +57,7 @@ export default function AdminRoot() {
                       }
                     >
                       <FaChartArea className="h-5 w-5" />
-                      Dashboard
+                      Tableau de Bord
                     </NavLink>
                   </li>
                   {user.isAdmin ? (
@@ -74,7 +74,7 @@ export default function AdminRoot() {
                           }
                         >
                           <FaStore className="h-5 w-5" />
-                          Products
+                          Produits
                         </NavLink>
                       </li>
                       <li>
@@ -89,7 +89,7 @@ export default function AdminRoot() {
                           }
                         >
                           <FaTable className="h-5 w-5" />
-                          Categories
+                          Catégories
                         </NavLink>
                       </li>
                       <li>
@@ -104,7 +104,7 @@ export default function AdminRoot() {
                           }
                         >
                           <FaTags className="h-5 w-5" />
-                          Sales
+                          Promotions
                         </NavLink>
                       </li>
                     </>
@@ -123,7 +123,7 @@ export default function AdminRoot() {
                       }
                     >
                       <FaUser className="h-5 w-5" />
-                      Profile
+                      Profil
                     </NavLink>
                     </li>
                   <li>
@@ -138,7 +138,7 @@ export default function AdminRoot() {
                       }
                     >
                       <FaBagShopping className="h-5 w-5" />
-                      Orders
+                      Commandes
                     </NavLink>
                   </li>
                 </ul>

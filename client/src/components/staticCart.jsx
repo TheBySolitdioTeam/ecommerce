@@ -5,11 +5,11 @@ export default function StaticCart({ cart }) {
         <table className="table table-xs my-5 table-pin-rows table-pin-cols">
           <thead>
             <tr>
-              <td>Name</td>
-              <td>Qty</td>
-              <td>Price</td>
+              <td>Nom</td>
+              <td>Qté</td>
+              <td>Prix</td>
               <td>Sub</td>
-              <td>Size</td>
+              <td>Taille</td>
             </tr>
           </thead>
           <tbody>

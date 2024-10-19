@@ -14,7 +14,7 @@ export default function SalesSelectorClient() {
   return fetcher.data ? (
     <ul className="menu bg-base-200 rounded-box w-56">
       <li>
-        <h2 className="menu-title">Sales</h2>{' '}
+        <h2 className="menu-title">Promotions</h2>{' '}
       </li>
 
       {fetcher.data.map((item) => (

@@ -69,7 +69,7 @@ export default function UserProfile() {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Full Name</span>
+                <span className="label-text">Nom Complet</span>
               </label>
               <input
                 type="text"
@@ -82,7 +82,7 @@ export default function UserProfile() {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Picture</span>
+                <span className="label-text">Photo</span>
               </label>
               <input
                 name="picture"
@@ -93,7 +93,7 @@ export default function UserProfile() {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Phone</span>
+                <span className="label-text">Téléphone</span>
               </label>
               <input
                 type="tel"

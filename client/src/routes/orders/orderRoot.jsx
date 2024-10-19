@@ -11,7 +11,7 @@ export default function OrderRoot(
     <div className="flex flex-col">
       <div className="navbar bg-base-100 p-5">
         <div className="flex-1">
-          <Link to="/admin/orders" className="btn btn-ghost text-xl">All Orders</Link>
+          <Link to="/admin/orders" className="btn btn-ghost text-xl">Commandes</Link>
         </div>
         <div className="flex-none gap-2">
           <Form className='flex flex-row items-center' method="get" action={"/admin/orders/filter"}>

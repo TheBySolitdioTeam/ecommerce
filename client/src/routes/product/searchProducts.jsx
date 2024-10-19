@@ -129,7 +129,7 @@ export default function SearchProductsClient() {
               }
               endMessage={
                 <p style={{ textAlign: 'center' }}>
-                  <b>Yay! You have seen it all</b>
+                  <b>Yay! Vous avez tout vu!</b>
                 </p>
               }
             >
@@ -140,7 +140,7 @@ export default function SearchProductsClient() {
               </div>
             </InfiniteScroll>
           ) : (
-            'No Product Found!'
+            'Pas de Produits!'
           )}
         </>
       )}{' '}

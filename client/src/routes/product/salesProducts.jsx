@@ -129,7 +129,7 @@ export default function SalesProductsClient() {
                 }
                 endMessage={
                   <p style={{ textAlign: 'center' }}>
-                    <b>Yay! You have seen it all</b>
+                    <b>Yay! Vous avez tout vu!</b>
                   </p>
                 }
               >
@@ -141,7 +141,7 @@ export default function SalesProductsClient() {
               </InfiniteScroll>
             </div>
           ) : (
-            <span>No Products</span>
+            <span>Pas de Produits</span>
           )}
         </>
       )}{' '}

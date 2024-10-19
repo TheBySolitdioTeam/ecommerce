@@ -34,12 +34,12 @@ export default function CartDropdown({ cart,user }) {
               <table className="table table-xs table-pin-rows table-pin-cols">
                 <thead>
                   <tr>
-                    <td>Name</td>
-                    <td>Qty</td>
-                    <td>Price</td>
+                    <td>Nom</td>
+                    <td>Qté</td>
+                    <td>Prix</td>
                     <td>Sub</td>
-                    <td>Size</td>
-                    <td>Del</td>
+                    <td>Taille</td>
+                    <td>Suppr</td>
                   </tr>
                 </thead>
                 <tbody>

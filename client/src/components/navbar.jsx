@@ -43,10 +43,10 @@ export default function Navbar({ user, cart }) {
                     }
                     to="/login"
                   >
-                    Login
+                    Se Connecter
                   </NavLink>
                 ) : (
-                  <NavLink to="/admin/products/">Account</NavLink>
+                  <NavLink to="/admin/products/">Compte</NavLink>
                 )}
               </li>
               <li>
@@ -60,7 +60,7 @@ export default function Navbar({ user, cart }) {
                   }
                   to="/product"
                 >
-                  Product
+                  Produits
                 </NavLink>
               </li>
             </ul>
@@ -83,7 +83,7 @@ export default function Navbar({ user, cart }) {
                   }
                   to="/login"
                 >
-                  Login
+                  Se Connecter
                 </NavLink>
               ) : (
                 <NavLink to="/admin/products/">Account</NavLink>
@@ -100,7 +100,7 @@ export default function Navbar({ user, cart }) {
                 }
                 to="/product/type?name=product"
               >
-                Product
+                Produits
               </NavLink>
             </li>
           </ul>
@@ -111,7 +111,7 @@ export default function Navbar({ user, cart }) {
            ''
           ) : (
             <Form method="post" action="/logout">
-              <button className="btn btn-base btn-sm">Logout</button>
+              <button className="btn btn-base btn-sm">Se Deconnecter</button>
             </Form>
           )}
         </div>

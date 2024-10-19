@@ -112,7 +112,7 @@ export default function FilterOrders() {
           loader={<span className="loading loading-infinity loading-lg"></span>}
           endMessage={
             <p style={{ textAlign: 'center' }}>
-              <b>Yay! You have seen it all</b>
+              <b>Yay! Vous avez tout vu!</b>
             </p>
           }
         >
@@ -136,7 +136,7 @@ export default function FilterOrders() {
                   <fetcher.Form method="post" className="card-body">
                     <div className="form-control">
                       <label className="label">
-                        <span className="label-text">Shipping Link</span>
+                        <span className="label-text">Lien du Cargo</span>
                       </label>
                       <input
                         type="text"
@@ -148,16 +148,16 @@ export default function FilterOrders() {
                     </div>
                     <div className="form-control">
                       <label className="label">
-                        <span className="label-text">Order Status</span>
+                        <span className="label-text">Statut de la Commande</span>
                       </label>
                       <select
                         defaultValue={''}
                         name="status"
                         className="select select-bordered w-full max-w-xs"
                       >
-                        <option value="Received">Order Received</option>
-                        <option value="In Cargo">In Cargo</option>
-                        <option value="Delivered">Delivered</option>
+                        <option value="Received">Commande Reçu</option>
+                        <option value="In Cargo">Au Cargo</option>
+                        <option value="Delivered">Livrée</option>
                       </select>
                     </div>
                     <input type="hidden" value={item._id} name="id" />
@@ -182,7 +182,7 @@ export default function FilterOrders() {
                     target="_blank"
                     className="btn m-3 btn-sm btn-info"
                   >
-                    See Cargo
+                    Voir Position
                   </a>
                 </div>
               </div>

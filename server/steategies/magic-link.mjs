@@ -38,23 +38,22 @@ passport.use(
     async function verify(user) {
       try {
         const check = await Users.findOne({ email: user.email })
-        if (!check) {
-          const userPrototype = { email: user.email }
-          console.log(user)
-          if (Boolean(user.id) !== false) {
-            user.id = mongoose.Types.ObjectId.createFromHexString(user.id)
-          } else {
-            user.id = new mongoose.Types.ObjectId()
-          }
-          userPrototype._id = mongoose.Types.ObjectId.createFromHexString(
-            user.id
-          )
-          const newUser = new Users(userPrototype)
-          await newUser.save()
-          return new Promise(function (resolve, reject) {
-            return resolve(newUser)
-          })
-        }
+         if (!check) {
+           const userPrototype = { email: user.email }
+           console.log(user.id)
+           if (user.id !== 'no guest') {
+             user.id = mongoose.Types.ObjectId.createFromHexString(user.id)
+           } else {
+             user.id = new mongoose.Types.ObjectId()
+           }
+           userPrototype._id = user.id
+
+           const newUser = new Users(userPrototype)
+           await newUser.save()
+           return new Promise(function (resolve, reject) {
+             return resolve(newUser)
+           })
+         }
         return new Promise(function (resolve, reject) {
           return resolve(check)
         })

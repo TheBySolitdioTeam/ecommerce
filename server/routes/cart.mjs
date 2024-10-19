@@ -70,7 +70,7 @@ router.post('/', async (req, res) => {
     try {
       //console.log(existingCart.subtotal)
       await Cart.findByIdAndUpdate(existingCart._id, existingCart)
-      return res.send({ msg: 'Panier mis a jour' })
+      return res.send({ msg: 'Panier mis a jour', user_id })
     } catch (error) {
       return res.send({ error: error.message })
     }

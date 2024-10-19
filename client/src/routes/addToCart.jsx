@@ -13,12 +13,12 @@ export async function action({ request }) {
     })
     const message = await response.json()
 
-    if (message.msg) {
-      user_id === 'undefined' || Boolean(user_id) === false
-        ? localStorage.setItem('user_id', message.user_id.toString())
-        : ''
-      return redirect(bodyObj.prevLocation)
-    }
+     if (message.msg) {
+       user_id === 'undefined' || Boolean(user_id) === false
+         ? localStorage.setItem('user_id', message.user_id.toString())
+         : ''
+       return redirect(bodyObj.prevLocation)
+     }
     throw new Error(message.error)
   } catch (error) {
     throw new Error(error.message)

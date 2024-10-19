@@ -12,7 +12,7 @@ export default function SalesCard({ item }) {
         <figure>
           <img
             src={
-              'https://api.mobilium.info/sales/' + item.image ||
+              'https://api.mobilium.info/' + item.image ||
               'https://api.mobilium.info//sales/default.webp'
             }
             alt="Shoes"

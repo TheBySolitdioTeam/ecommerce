@@ -7,7 +7,7 @@ import { checkSchema, validationResult, matchedData } from 'express-validator'
 import salesValidationSchema from '../../validationShemas/salesValidationSchema.mjs'
 import fs from 'node:fs'
 const root = path.resolve()
-const destination = path.join(root, "/public/sales/")
+const destination = path.join(root, "/public/")
 
 
 // Initialize multer diskStorage
@@ -43,7 +43,7 @@ router.post('/', upload.single('image'), checkSchema(salesValidationSchema, ['bo
     try {
         const newSales = new Sales(data)
         await newSales.save()
-        res.send({msg: 'Sales created with success!'})
+        res.send({msg: 'Promotion crée avec succès!'})
         
     } catch (error) {
         return res.send({error: error.message})
@@ -72,7 +72,7 @@ router.post(
     try {
       const newSales = new Sales(data)
       await newSales.save()
-      return res.send({ msg: 'Sales created with success!' })
+      return res.send({ msg: 'Promotion crée avec succès!' })
     } catch (error) {
       return res.send({ error: error.message })
     }
@@ -123,7 +123,7 @@ router.get('/:id', async (req, res) => {
   
   try {
     const singleSale = await Sales.findById(id)
-    if (!singleSale) return res.send({ error: `Sales with ID:${id} does not exist!` })
+    if (!singleSale) return res.send({ error: `Promotion avec ID:${id}  n'existe pas!` })
     return res.send(singleSale)
   } catch (error) {
     return res.send({error: error.message})
@@ -135,7 +135,7 @@ router.put("/:id", upload.single("image"), checkSchema(salesValidationSchema), a
   const { id } = req.params
   // Get the sale to be modified
   const toBeModified = await Sales.findById(id)
-  if (!toBeModified) return res.send({ error: `No sales with ID: ${id}` })
+  if (!toBeModified) return res.send({ error: `Pas de promotion avec ID: ${id}` })
   
   // delete the image
   toBeModified.image !== "default.webp" ? fs.unlinkSync(destination + toBeModified.image) : ''
@@ -154,7 +154,7 @@ router.patch("/:id", upload.none("image"), checkSchema(salesValidationSchema),as
   const { id } = req.params
   // Get the sale to be modified
   const toBeModified = await Sales.findById(id)
-  if (!toBeModified) return res.send({ error: `No sales with ID: ${id}` })
+  if (!toBeModified) return res.send({ error: `Pas de promotion avec ID: ${id}` })
   //results of the validation
   const results = validationResult(req)
   if (!results.isEmpty()) return res.send({ error: results.array()[0].msg })
@@ -169,11 +169,11 @@ router.delete('/:id', async (req, res) => {
   // Get the sales to be deleted
   try {
     const sales = await Sales.findById(id)
-    if (!sales) return res.send({ error: `Sales with ID:${id} does not exist!` })
+    if (!sales) return res.send({ error: `Promotion avec ID:${id} n'existe pas!` })
     
     await Sales.findByIdAndDelete(id)
     sales.image !== "default.webp" ? fs.unlinkSync(destination + sales.image) : ''
-    return res.send({msg: `Sales with ID:${id} deleted!`})
+    return res.send({msg: `Promotion  avec ID:${id} supprimée!`})
   } catch (error) {
     res.send({error: error.message})
   }
@@ -190,7 +190,7 @@ const modifySales = async function(req,res,id,image){
   // Modify the data
   try {
     await Sales.findByIdAndUpdate(id, data)
-    return res.send({ msg: `Sales ID${id} has been modified with success!` })
+    return res.send({ msg: `Promotion avec ID:${id}  modifiée avec succès!` })
   } catch (error) {
     return res.send({ error: error.message })
   }

@@ -12,7 +12,7 @@ import fs from 'node:fs'
 
 // Setting the destination path for product photos
 const root = path.resolve()
-const destination = path.join(root, '/public/products/')
+const destination = path.join(root, '/public/')
 
 
 // Query all products collection

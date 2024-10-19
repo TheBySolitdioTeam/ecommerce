@@ -41,7 +41,7 @@ export default function SingleProduct() {
                 className="carousel-item max-h-screen"
               >
                 <img
-                  src={'https://api.mobilium.info/products/' + image}
+                  src={'https://api.mobilium.info/' + image}
                   className="rounded-box max-w-96"
 
                   alt="Tailwind CSS Carousel component"

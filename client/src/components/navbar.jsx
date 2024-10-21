@@ -7,7 +7,7 @@ import AllCategoriesNavbar from './allCategoriesNavbar'
 export default function Navbar({ user, cart }) {
  
   return (
-    <div className="navbar flex flex-col fixed top-0 z-40 lg:z-50">
+    <div className="navbar flex flex-col fixed glass top-0 z-40 lg:z-50">
       <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">

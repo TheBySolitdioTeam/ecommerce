@@ -82,7 +82,7 @@ export default function  EditCategory(){
          <div className="avatar">
            <div className="w-24 rounded">
              <img
-               src={'https://api.mobilium.info/categories/' + category.image}
+               src={'https://api.mobilium.info/' + category.image}
              />
            </div>
          </div>

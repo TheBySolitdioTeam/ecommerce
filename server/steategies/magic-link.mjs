@@ -24,14 +24,14 @@ passport.use(
       var msg = {
         to: user.email,
         from: process.env.EMAIL,
-        subject: 'Sign in to bySolitdio',
+        subject: 'Connectez-vous sur Mobilium',
         text:
-          'Hello! Click the link below to finish signing in to Mobilium.\r\n\r\n' +
+          'Salut! Cliquez sur le lien ci-dessous pour vous connecter sur Mobilium.\r\n\r\n' +
           link,
         html:
-          '<h3>Hello!</h3><p>Click the link below to finish signing in to Mobilium.</p><p><a href="' +
+          '<h3>Salut!</h3><p>Cliquez sur le lien ci-dessous pour vous connecter sur Mobilium.</p><p><a href="' +
           link +
-          '">Sign in</a></p>',
+          '">Cliquez ici</a></p>',
       }
       return sendgrid.send(msg)
     },

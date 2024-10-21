@@ -9,7 +9,7 @@ export default function AllCategoriesNavbar() {
     }
   }, [fetcher])
   return (
-    <div className="carousel fixed top-5 flex flex-row items-center justify-center carousel-center menu menu-horizontal  w-full space-x-4 p-4">
+    <div className="carousel flex flex-row items-center justify-center carousel-center menu menu-horizontal  w-full space-x-4 p-4">
       {fetcher.data
         ? fetcher.data.map((item) => {
             if (!item.parent_id) {

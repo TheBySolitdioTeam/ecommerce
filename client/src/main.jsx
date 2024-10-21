@@ -139,7 +139,11 @@ const router = createBrowserRouter([
           },
           {
             path: '/product/last6/loader',
-            lazy: () => import('./routes/product/last6Loader')
+            lazy: () => import('./routes/product/last6Loader'),
+          },
+          {
+            path: '/product/categories/last6/loader',
+            lazy: () => import('./lazyloaders/last6Categories'),
           },
         ],
       },

@@ -58,7 +58,7 @@ export default function Navbar({ user, cart }) {
                       ? ' bg-secondary'
                       : ''
                   }
-                  to="/product"
+                  to="/product/type?name=product"
                 >
                   Produits
                 </NavLink>
@@ -108,7 +108,7 @@ export default function Navbar({ user, cart }) {
         <div className="navbar-end mx-5">
           <CartDropdown user={user} cart={cart} />
           {user.msg ? (
-           ''
+            ''
           ) : (
             <Form method="post" action="/logout">
               <button className="btn btn-base btn-sm">Se Deconnecter</button>
@@ -117,7 +117,6 @@ export default function Navbar({ user, cart }) {
         </div>
       </div>
       <hr />
-      
     </>
   )
 }

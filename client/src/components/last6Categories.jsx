@@ -33,7 +33,7 @@ export default function HomePageCategoriesLast6() {
       slidesPerView={1}
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
-      navigation
+     
       mousewheel={{
         forceToAxis: true,
         sensitivity: 1,

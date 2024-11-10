@@ -63,7 +63,7 @@ export default function HomePageLast6() {
               }}
               pagination={{ clickable: true }}
               spaceBetween={50}
-              navigation
+             
               className="w-full"
               
             >

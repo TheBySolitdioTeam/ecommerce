@@ -2,13 +2,13 @@
 
 import { NavLink, Form, Link } from 'react-router-dom'
 import CartDropdown from './cartDropdown'
-import AllCategoriesNavbar from './allCategoriesNavbar'
+//import AllCategoriesNavbar from './allCategoriesNavbar'
 
 export default function Navbar({ user, cart }) {
  
   return (
     <>
-      <div className="navbar glass sticky top-0 z-40 lg:z-50">
+      <div className="navbar backdrop-blur-sm sticky top-0 z-40 lg:z-50">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -117,7 +117,7 @@ export default function Navbar({ user, cart }) {
         </div>
       </div>
       <hr />
-      <AllCategoriesNavbar />
+      
     </>
   )
 }

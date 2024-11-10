@@ -1,5 +1,20 @@
 import { useEffect } from 'react'
 import { useFetcher, Link } from 'react-router-dom'
+import { Swiper, SwiperSlide } from 'swiper/react'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+import 'swiper/css/autoplay'
+import 'swiper/css/scrollbar'
+import 'swiper/css/mousewheel'
+import {
+  Pagination,
+  Autoplay,
+  Navigation,
+  Scrollbar,
+  Mousewheel,
+} from 'swiper/modules'
 //import ProductCardClient from './productCardClient'
 
 // eslint-disable-next-line react/prop-types
@@ -13,16 +28,26 @@ export default function HomePageCategoriesLast6() {
   }, [fetcher])
 
   return fetcher.data ? (
-    <div className="carousel w-full">
+    <Swiper
+      modules={[Pagination, Autoplay, Scrollbar, Mousewheel, Navigation]}
+      slidesPerView={1}
+      pagination={{ clickable: true }}
+      scrollbar={{ draggable: true }}
+      navigation
+      mousewheel={{
+        forceToAxis: true,
+        sensitivity: 1,
+        releaseOnEdges: true,
+      }}
+      autoplay={{
+        delay: 5000,
+        disableOnInteraction: false,
+      }}
+    >
       {fetcher.data.map((item) => (
-        <div
-          id={`slide${item._id}`}
-          key={item._id}
-          className="carousel-item w-full"
-        >
-          
+        <SwiperSlide key={item._id}>
           <div
-            className="hero min-h-screen"
+            className="hero min-h-96 lg:min-h-screen"
             style={{
               backgroundImage: `url(https://api.mobilium.info/${item.image})`,
             }}
@@ -45,9 +70,9 @@ export default function HomePageCategoriesLast6() {
               </div>
             </div>
           </div>
-        </div>
+        </SwiperSlide>
       ))}
-    </div>
+    </Swiper>
   ) : (
     <>
       <div

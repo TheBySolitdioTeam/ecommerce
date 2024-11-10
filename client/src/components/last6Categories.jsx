@@ -34,11 +34,7 @@ export default function HomePageCategoriesLast6() {
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
      
-      mousewheel={{
-        forceToAxis: true,
-        sensitivity: 1,
-        releaseOnEdges: true,
-      }}
+      
       autoplay={{
         delay: 5000,
         disableOnInteraction: false,

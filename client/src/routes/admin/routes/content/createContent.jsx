@@ -82,7 +82,7 @@ export default function CreateContent() {
               <option value="Projet" disabled>
                 Choisis le Type
               </option>
-              <option value="Projet">Projet</option>
+              <option value="Project">Projet</option>
               <option value="Collection">Collection</option>
             </select>
           </div>

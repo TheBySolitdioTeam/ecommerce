@@ -6,7 +6,8 @@ import {
   FaBars,
   FaBagShopping,
   FaTags,
-  FaUser
+  FaUser,
+  FaDiagramProject
 } from 'react-icons/fa6'
 import { UserContext } from '../UserContext'
 import { NavLink, Link , Form} from 'react-router-dom'
@@ -130,6 +131,21 @@ export default function AdminHeader() {
                     Commandes
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink
+                    to={'/admin/content/create'}
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? 'text-lg bg-primary text-base-100'
+                        : isPending
+                        ? 'text-lg bg-secondary'
+                        : ''
+                    }
+                  >
+                    <FaDiagramProject className="h-5 w-5" />
+                    Projets/Collections
+                  </NavLink>
+                </li>
               </ul>
             </div>
           </div>
@@ -168,7 +184,9 @@ export default function AdminHeader() {
               </li>
               <li>
                 <Form method="post" action="/logout">
-                  <button className="btn btn-base btn-sm">Se Deconnecter</button>
+                  <button className="btn btn-base btn-sm">
+                    Se Deconnecter
+                  </button>
                 </Form>
               </li>
             </ul>

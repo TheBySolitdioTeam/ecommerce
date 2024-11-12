@@ -63,6 +63,7 @@ import FilterOrders, {
 import UserProfile, {action as profileAction} from './routes/admin/userProfile'
 import HomePage from './routes/homePage'
 import App from './routes/App'
+import CreateContent, {action as createContentAction} from './routes/admin/routes/content/createContent'
 //import {loader as last6Loader} from './routes/product/last6Loader'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
@@ -194,6 +195,12 @@ const router = createBrowserRouter([
     element: <AdminRoot />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "/admin/content/create",
+        element: <CreateContent />,
+        errorElement: <ErrorPage />,
+        action: createContentAction
+    },
       {
         path: '/admin/profile',
         element: <UserProfile />,

@@ -159,7 +159,7 @@ export default function CreateProduct() {
               {fetcher.state === 'submitting' ? (
                 <span className="loading loading-infinity loading-md"></span>
               ) : (
-                'Create'
+                'Creer'
               )}
             </button>
           </div>

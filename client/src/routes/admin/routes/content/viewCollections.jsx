@@ -32,7 +32,7 @@ export default function GetAllCollections() {
 
   useEffect(() => {
     cursor ? fetchMoreData() : ''
-  }, [cursor])
+  }, [cursor, firstItems])
 
   const fetchMoreData = async () => {
     try {

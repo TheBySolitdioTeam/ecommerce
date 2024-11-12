@@ -39,7 +39,7 @@ router.post("/", upload.array('images', 6), async (req, res) => {
     }
 })
 // update the content
-router.put("/:id", upload('images', 6), async (req, res) => {
+router.put("/:id", upload.array('images', 6), async (req, res) => {
     const { id } = req.params
     const dataFields = req.body
     const images = req.files.map((item) => item.filename)

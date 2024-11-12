@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useLoaderData } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { FaEye, FaPencil, FaPlus } from 'react-icons/fa6'
+import { FaEye, FaPencil, FaPlus, FaX } from 'react-icons/fa6'
 //import ProductCard from '../../components/productCard'
 
 export async function loader() {
@@ -105,6 +105,13 @@ export default function GetAllProjects() {
                     >
                       {' '}
                       <FaPencil className="h-5 w-5" /> Edit
+                    </Link>
+                    <Link
+                      to={`/admin/content/delete/${item._id}`}
+                      className="btn btn-error"
+                    >
+                      {' '}
+                      <FaX className="h-5 w-5" /> Delete
                     </Link>
                   </div>
                 </div>

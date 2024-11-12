@@ -80,7 +80,7 @@ router.get("/:id", async (req, res) => {
     const { id } = req.params 
     try {
         const singleContent = await Content.findById(id)
-        if (!singleContent) return res.send({ error: 'Content not found!' })
+        if (!singleContent) return res.send({ error: "Contenu n'existe pas" })
         return res.send(singleContent)
         
     } catch (error) {
@@ -103,6 +103,27 @@ router.get("/", async (req, res) => {
    } catch (error) {
      return res.send({ error: error.message })
    }
+})
+
+router.delete("/:id", async (req, res) => {
+    const { id } = req.params 
+    try {
+      const toBeDeleted = await Content.findById(id)
+      if (!toBeDeleted) return res.send({ error: "Contenu n'existe pas!" })
+        // delete old images
+        try {
+            await Content.findByIdAndDelete(id)
+             toBeDeleted.images.forEach((el) => {
+               fs.unlinkSync(destination + el)
+             })
+            return res.send({msg: `${toBeDeleted.type} supprime!`})
+        } catch (error) {
+            return {error: error.message}
+        }
+     
+    } catch (error) {
+        return res.send({error: error.message})
+    }
 })
 
 export default router

@@ -66,7 +66,8 @@ import App from './routes/App'
 import CreateContent, {action as createContentAction} from './routes/admin/routes/content/createContent'
 import GetAllProjects, {loader as viewProjectsLoader} from './routes/admin/routes/content/viewProjects'
 import GetAllCollections, {loader as viewCollectionsLoader} from './routes/admin/routes/content/viewCollections'
-import EditContent, {action as editContentAction, loader as editContentLoader} from './routes/admin/routes/content/editContent'
+import EditContent, { action as editContentAction, loader as editContentLoader } from './routes/admin/routes/content/editContent'
+import {action as deleteContentAction} from './routes/admin/routes/content/deleteContent'
 //import {loader as last6Loader} from './routes/product/last6Loader'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
@@ -220,6 +221,12 @@ const router = createBrowserRouter([
         element: <EditContent />,
         action: editContentAction,
         loader: editContentLoader,
+        errorElement: <ErrorPage/>
+
+    },
+       {
+        path: "/admin/content/delete/:id",
+        action: deleteContentAction,
         errorElement: <ErrorPage/>
 
     },

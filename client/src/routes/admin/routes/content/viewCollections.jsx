@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useLoaderData } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { FaEye, FaPencil, FaPlus } from 'react-icons/fa6'
+import { FaEye, FaPencil, FaPlus, FaX } from 'react-icons/fa6'
 //import ProductCard from '../../components/productCard'
 
 export async function loader() {
@@ -62,7 +62,10 @@ export default function GetAllCollections() {
           {' '}
           <FaPlus /> Ajouter{' '}
         </Link>{' '}
-        <Link to={'/admin/content/viewProject'} className="btn mx-2 btn-accent text-white">
+        <Link
+          to={'/admin/content/viewProject'}
+          className="btn mx-2 btn-accent text-white"
+        >
           {' '}
           <FaEye /> Project
         </Link>
@@ -95,9 +98,19 @@ export default function GetAllCollections() {
                   <h2 className="card-title">{item.name}</h2>
 
                   <div className="card-actions justify-end">
-                    <Link to={`/admin/content/edit/${item._id}`} className="btn btn-warning">
+                    <Link
+                      to={`/admin/content/edit/${item._id}`}
+                      className="btn btn-warning"
+                    >
                       {' '}
                       <FaPencil className="h-5 w-5" /> Edit
+                    </Link>
+                    <Link
+                      to={`/admin/content/delete/${item._id}`}
+                      className="btn btn-error"
+                    >
+                      {' '}
+                      <FaX className="h-5 w-5" /> Delete
                     </Link>
                   </div>
                 </div>

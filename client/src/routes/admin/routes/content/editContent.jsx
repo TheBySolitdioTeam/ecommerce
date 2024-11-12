@@ -116,7 +116,6 @@ export default function EditContent() {
             className="file-input file-input-bordered file-input-primary w-full max-w-xs"
             name="images"
             multiple
-            required
           />
         </div>
         <div className="form-control mb-5">

@@ -7,7 +7,7 @@ import { FaEye, FaPencil, FaPlus } from 'react-icons/fa6'
 export async function loader() {
   try {
     const response = await fetch(
-      `https://api.mobilium.info/admin/content/?cursor=&limit=${5}&type=Project`,
+      `https://api.mobilium.info/admin/content/?cursor=&limit=${5}&type=Collection`,
       {
         method: 'GET',
         credentials: 'include',
@@ -22,16 +22,15 @@ export async function loader() {
   }
 }
 
-export default function GetAllProjects() {
+export default function GetAllCollections() {
   const firstItems = useLoaderData()
-  
+
   const [items, setItems] = useState(firstItems)
   const itemsIds = items.map((item) => item._id).sort()
   const [cursor, setCursor] = useState(null)
   const [hasMore, setHasMore] = useState(true)
 
   useEffect(() => {
-   
     cursor ? fetchMoreData() : ''
   }, [cursor])
 
@@ -40,7 +39,7 @@ export default function GetAllProjects() {
       const response = await fetch(
         `https://api.mobilium.info/admin/content/?cursor=${
           cursor || ''
-        }&limit=${5}&type=Project`,
+        }&limit=${5}&type=Collection`,
         {
           method: 'GET',
           credentials: 'include',
@@ -63,9 +62,9 @@ export default function GetAllProjects() {
           {' '}
           <FaPlus /> Ajouter{' '}
         </Link>{' '}
-        <Link to={'/admin/content/viewCollection'} className="btn btn-accent text-white">
+        <Link to={'/admin/content/viewProject'} className="btn btn-accent text-white">
           {' '}
-          <FaEye /> Collection
+          <FaEye /> Project
         </Link>
       </div>
       {items.length > 0 ? (

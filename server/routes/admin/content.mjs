@@ -68,7 +68,8 @@ router.patch("/:id", async (req, res) => {
     
     // ınsert new object
     try {
-      const newContent = { ...oldContent,...dataFields }
+        const newContent = { ...oldContent, ...dataFields }
+        console.log(newContent)
       await Content.findByIdAndUpdate(id, newContent)
       return res.send({ msg: `${newContent.type} mis a jour!` })
     } catch (error) {

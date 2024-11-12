@@ -14,9 +14,9 @@ export async function loader() {
         headers: { 'Content-Type': 'application/json' },
       }
     )
-    const allProducts = await response.json()
-    console.log(allProducts)
-    return allProducts
+    const allProjects = await response.json()
+    console.log(allProjects)
+    return allProjects
   } catch (error) {
     return { error: error.message }
   }
@@ -57,8 +57,11 @@ export default function GetAllProjects() {
     }
   }
   return (
-      <div className="flex flex-col justify-center">
-          <Link to={"/admin/content/create"} className="btn btn-primary"> <FaPlus/> Ajouter </Link>
+    <div className="flex flex-col justify-center">
+      <Link to={'/admin/content/create'} className="btn btn-primary">
+        {' '}
+        <FaPlus /> Ajouter{' '}
+      </Link>
       {items.length > 0 ? (
         <InfiniteScroll
           dataLength={items.length || 0}
@@ -73,18 +76,24 @@ export default function GetAllProjects() {
         >
           <div className="flex flex-row flex-wrap">
             {items.map((item) => (
-              <div key={item._id} className="card bg-base-100 image-full w-96 shadow-xl">
+              <div
+                key={item._id}
+                className="card bg-base-100 image-full w-96 lg:w-108 m-2 shadow-xl"
+              >
                 <figure>
                   <img
-                    src={"https://mobilium.info/"+item.images[0]}
+                    src={'https://api.mobilium.info/' + item.images[0]}
                     alt="Shoes"
                   />
                 </figure>
                 <div className="card-body">
                   <h2 className="card-title">{item.name}</h2>
-                 
+
                   <div className="card-actions justify-end">
-                    <button className="btn btn-warning"> <FaPencil className="h-5 w-5"/> Edit</button>
+                    <button className="btn btn-warning">
+                      {' '}
+                      <FaPencil className="h-5 w-5" /> Edit
+                    </button>
                   </div>
                 </div>
               </div>
@@ -92,7 +101,7 @@ export default function GetAllProjects() {
           </div>
         </InfiniteScroll>
       ) : (
-        'No Products!'
+        'No Projects!'
       )}
     </div>
   )

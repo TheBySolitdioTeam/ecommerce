@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData, Form, useNavigation } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { FaEye, FaPencil, FaPlus, FaX } from 'react-icons/fa6'
 //import ProductCard from '../../components/productCard'
@@ -24,7 +24,7 @@ export async function loader() {
 
 export default function GetAllCollections() {
   const firstItems = useLoaderData()
-
+  const navigation = useNavigation()
   const [items, setItems] = useState(firstItems)
   const itemsIds = items.map((item) => item._id).sort()
   const [cursor, setCursor] = useState(null)
@@ -105,13 +105,21 @@ export default function GetAllCollections() {
                       {' '}
                       <FaPencil className="h-5 w-5" /> Edit
                     </Link>
-                    <Link
-                      to={`/admin/content/delete/${item._id}`}
-                      className="btn btn-error"
+                    <Form
+                      action={`/admin/content/delete/${item._id}`}
+                      method="post"
                     >
-                      {' '}
-                      <FaX className="h-5 w-5" /> Delete
-                    </Link>
+                      <button type="submit" className="btn btn-error">
+                        {' '}
+                        {navigation.state === 'idle' ? (
+                          <>
+                            <FaX className="h-5 w-5" /> Delete
+                          </>
+                        ) : (
+                          <span className="loading loading-infinity"></span>
+                        )}
+                      </button>
+                    </Form>
                   </div>
                 </div>
               </div>

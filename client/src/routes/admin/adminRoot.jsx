@@ -143,7 +143,7 @@ export default function AdminRoot() {
                   </li>
                   <li>
                     <NavLink
-                      to={'/admin/content/create'}
+                      to={'/admin/content/viewProject'}
                       className={({ isActive, isPending }) =>
                         isActive
                           ? 'text-lg bg-primary text-base-100'

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { FaPencil } from 'react-icons/fa6'
+import { FaPencil, FaPlus } from 'react-icons/fa6'
 //import ProductCard from '../../components/productCard'
 
 export async function loader() {
@@ -22,7 +22,7 @@ export async function loader() {
   }
 }
 
-export default function GetAllProducts() {
+export default function GetAllProjects() {
   const firstItems = useLoaderData()
   
   const [items, setItems] = useState(firstItems)
@@ -57,7 +57,8 @@ export default function GetAllProducts() {
     }
   }
   return (
-    <div>
+      <div className="flex flex-col justify-center">
+          <Link to={"/admin/content/create"} className="btn btn-primary"> <FaPlus/> Ajouter </Link>
       {items.length > 0 ? (
         <InfiniteScroll
           dataLength={items.length || 0}

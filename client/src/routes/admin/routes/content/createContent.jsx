@@ -40,7 +40,8 @@ export default function CreateContent() {
        //navigate('/admin/products/view')
      }, [fetcher])
     return (
-      <div className="card my-5 mx-auto bg-base-100 w-full max-w-sm shrink-0 ">
+        <div className="card my-5 mx-auto bg-base-100 w-full max-w-sm shrink-0 ">
+            <h1 className="text-2xl mb-5 m-auto">Ajouter Projet/Collection</h1>
         <fetcher.Form
           method="post"
           className="card-body"

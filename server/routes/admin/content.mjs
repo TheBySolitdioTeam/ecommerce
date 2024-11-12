@@ -75,6 +75,17 @@ router.patch("/:id", async (req, res) => {
       return res.send({ error: error.message })
     }
 })
+router.get("/:id", async (req, res) => {
+    const { id } = req.params 
+    try {
+        const singleContent = await Content.findById(id)
+        if (!singleContent) return res.send({ error: 'Content not found!' })
+        return res.send(singleContent)
+        
+    } catch (error) {
+        return {error: error.message}
+    }
+})
 
 router.get("/", async (req, res) => {
    const { cursor, limit, type } = req.query

@@ -77,7 +77,6 @@ export default function CreateContent() {
             </label>
             <select
               name="type"
-              defaultValue="product"
               className="select select-bordered w-full max-w-xs"
             >
               <option value="Projet" disabled>

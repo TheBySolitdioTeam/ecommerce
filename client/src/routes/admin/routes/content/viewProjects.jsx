@@ -58,12 +58,12 @@ export default function GetAllProjects() {
   }
   return (
     <div className="flex flex-col justify-center">
-      <div className="flex justify-between">
-        <Link to={'/admin/content/create'} className="btn btn-primary">
+      <div className="flex justify-center">
+        <Link to={'/admin/content/create'} className="btn mx-2 btn-primary">
           {' '}
           <FaPlus /> Ajouter{' '}
         </Link>{' '}
-        <Link to={'/admin/content/viewCollection'} className="btn btn-accent text-white">
+        <Link to={'/admin/content/viewCollection'} className="btn btn-accent mx-2 text-white">
           {' '}
           <FaEye /> Collection
         </Link>

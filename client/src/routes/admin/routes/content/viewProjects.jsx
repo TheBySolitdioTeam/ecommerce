@@ -63,7 +63,10 @@ export default function GetAllProjects() {
           {' '}
           <FaPlus /> Ajouter{' '}
         </Link>{' '}
-        <Link to={'/admin/content/viewCollection'} className="btn btn-accent mx-2 text-white">
+        <Link
+          to={'/admin/content/viewCollection'}
+          className="btn btn-accent mx-2 text-white"
+        >
           {' '}
           <FaEye /> Collection
         </Link>
@@ -96,10 +99,13 @@ export default function GetAllProjects() {
                   <h2 className="card-title">{item.name}</h2>
 
                   <div className="card-actions justify-end">
-                    <button className="btn btn-warning">
+                    <Link
+                      to={`/admin/content/edit/${item._id}`}
+                      className="btn btn-warning"
+                    >
                       {' '}
                       <FaPencil className="h-5 w-5" /> Edit
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>

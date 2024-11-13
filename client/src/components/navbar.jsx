@@ -11,14 +11,19 @@ export default function Navbar({ user, cart }) {
     <>
       <div className="navbar backdrop-blur-sm sticky top-0 z-40 lg:z-50">
         <div className="navbar-start">
-          <div className="drawer">
+          <div className="drawer lg:hidden">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
               {/* Page content here */}
-              <FaBars
+              <label
                 htmlFor="my-drawer"
-                className="drawer-button h-5 w-5 lg:hidden"
-              />
+                className="btn btn-primary drawer-button"
+              >
+                <FaBars
+                 
+                  className=" h-5 w-5"
+                />
+              </label>
             </div>
             <div className="drawer-side">
               <label

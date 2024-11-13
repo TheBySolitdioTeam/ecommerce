@@ -50,7 +50,7 @@ export default function SingleContent() {
             slidesPerView={1}
             pagination={{ clickable: true }}
             spaceBetween={50}
-            className="w-full max-h-[500px]"
+            className="w-full flex items-center justify-center max-h-[500px]"
           >
             {singleContent.images.map((item) => (
               <SwiperSlide key={item}>

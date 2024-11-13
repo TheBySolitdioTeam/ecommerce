@@ -94,7 +94,7 @@ export default function Navbar({ user, cart }) {
             </div>
           </div>
 
-          <Link to={'/'} className="btn btn-ghost text-xl">
+          <Link to={'/'} className="btn btn-ghost text-xl m-2">
             <img width={80} src={'/logo.png'} alt="logo" />
           </Link>
         </div>

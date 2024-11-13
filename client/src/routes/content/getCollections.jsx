@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLoaderData } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { FaEye } from 'react-icons/fa6'
+import AnimatedLayout from '../../animation/animatedLayout'
 //import ProductCard from '../../components/productCard'
 
 export async function loader() {
@@ -54,55 +55,59 @@ export default function GetAllClientCollections() {
       console.log(error)
     }
   }
-  return (
-    <div className="flex flex-col justify-center">
-      <div className="flex justify-center">
-        <h1 className="text-2xl"> Nos Collections</h1>
-      </div>
-      {items.length > 0 ? (
-        <InfiniteScroll
-          dataLength={items.length || 0}
-          next={() => setCursor(itemsIds[itemsIds.length - 1])}
-          hasMore={hasMore}
-          loader={<span className="loading loading-infinity loading-lg"></span>}
-          endMessage={
-            <p style={{ textAlign: 'center' }}>
-              <b>Yay! You have seen it all</b>
-            </p>
-          }
-        >
-          <div className="flex flex-row flex-wrap">
-            {items.map((item) => (
-              <div
-                key={item._id}
-                className="card bg-base-100 image-full w-96 lg:w-108 m-2 shadow-xl"
-              >
-                <figure>
-                  <img
-                    src={'https://api.mobilium.info/' + item.images[0]}
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">{item.name}</h2>
-
-                  <div className="card-actions justify-end">
-                    <Link
-                      to={`/content/single/${item._id}`}
-                      className="btn btn-info"
-                    >
-                      {' '}
-                      <FaEye className="h-5 w-5" />{' '}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
+    return (
+      <AnimatedLayout>
+        <div className="flex flex-col justify-center my-5">
+          <div className="flex justify-center">
+            <h1 className="text-2xl"> Nos Collections</h1>
           </div>
-        </InfiniteScroll>
-      ) : (
-        'Pas de Collections!'
-      )}
-    </div>
-  )
+          {items.length > 0 ? (
+            <InfiniteScroll
+              dataLength={items.length || 0}
+              next={() => setCursor(itemsIds[itemsIds.length - 1])}
+              hasMore={hasMore}
+              loader={
+                <span className="loading loading-infinity loading-lg"></span>
+              }
+              endMessage={
+                <p style={{ textAlign: 'center' }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
+            >
+              <div className="flex flex-row flex-wrap">
+                {items.map((item) => (
+                  <div
+                    key={item._id}
+                    className="card bg-base-100 image-full w-96 lg:w-108 m-2 shadow-xl"
+                  >
+                    <figure>
+                      <img
+                        src={'https://api.mobilium.info/' + item.images[0]}
+                        alt="Shoes"
+                      />
+                    </figure>
+                    <div className="card-body">
+                      <h2 className="card-title">{item.name}</h2>
+
+                      <div className="card-actions justify-end">
+                        <Link
+                          to={`/content/single/${item._id}`}
+                          className="btn btn-info"
+                        >
+                          {' '}
+                          <FaEye className="h-5 w-5" />{' '}
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </InfiniteScroll>
+          ) : (
+            'Pas de Collections!'
+          )}
+        </div>
+      </AnimatedLayout>
+    )
 }

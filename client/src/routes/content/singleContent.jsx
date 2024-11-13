@@ -48,16 +48,18 @@ export default function SingleContent() {
           slidesPerView={1}
           pagination={{ clickable: true }}
           spaceBetween={50}
-          className="w-full max-h-96"
+          className="w-full max-h-screen"
         >
           {singleContent.images.map((item) => (
             <SwiperSlide key={item}>
               <img src={'https://api.mobilium.info/' + item} />
             </SwiperSlide>
           ))}
-            </Swiper>
-            <h1 className="text-2xl my-3"> {singleContent.name} </h1>
-            <p className=""> {singleContent.details} </p>
+        </Swiper>
+        <div className="p-10">
+          <h1 className="text-2xl my-3"> {singleContent.name} </h1>
+          <p className=""> {singleContent.details} </p>
+        </div>
       </div>
     )
 }

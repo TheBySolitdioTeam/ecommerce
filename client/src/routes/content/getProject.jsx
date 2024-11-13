@@ -59,7 +59,10 @@ export default function GetAllClientProjects() {
       <AnimatedLayout>
         <div className="flex flex-col justify-center my-5 p-5 lg:p-10">
           <div className="flex justify-center">
-            <h1 className="text-2xl"> Nos Projets</h1>
+            <h1 className="text-3xl my-3 border-b-2 border-primary font-bold lg:text-5xl">
+              {' '}
+              Nos Projets
+            </h1>
           </div>
           {items.length > 0 ? (
             <InfiniteScroll

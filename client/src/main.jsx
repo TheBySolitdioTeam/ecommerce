@@ -72,6 +72,7 @@ import GetAllClientProjects, {loader as clientProjectsLoader} from './routes/con
 import GetAllClientCollections, {
   loader as clientCollectionsLoader,
 } from './routes/content/getCollections'
+import SingleContent, {loader as singleContentLoader} from './routes/content/singleContent'
 //import {loader as last6Loader} from './routes/product/last6Loader'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
@@ -105,6 +106,12 @@ const router = createBrowserRouter([
         element: <GetAllClientCollections />,
         errorElement: <ErrorPage />,
         loader: clientCollectionsLoader
+      },
+      {
+        path: "/content/single/:id",
+        element: <SingleContent/>,
+        errorElement: <ErrorPage />,
+        loader: singleContentLoader
       },
       {
         path: '/product',

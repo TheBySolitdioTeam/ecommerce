@@ -17,7 +17,7 @@ export default function Navbar({ user, cart }) {
               {/* Page content here */}
               <label
                 htmlFor="my-drawer"
-                className="btn btn-primary drawer-button"
+                className="btn btn-outline hover:bg-primary drawer-button"
               >
                 <FaBars
                  

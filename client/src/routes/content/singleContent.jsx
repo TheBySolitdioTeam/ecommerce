@@ -54,7 +54,7 @@ export default function SingleContent() {
           >
             {singleContent.images.map((item) => (
               <SwiperSlide key={item}>
-                <img src={'https://api.mobilium.info/' + item} className="max-h-screen" />
+                <img src={'https://api.mobilium.info/' + item} className="m-auto max-h-screen" />
               </SwiperSlide>
             ))}
           </Swiper>

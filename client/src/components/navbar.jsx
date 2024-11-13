@@ -10,7 +10,7 @@ export default function Navbar({ user, cart }) {
   return (
     <>
       <div className="navbar backdrop-blur-sm sticky top-0 z-40 lg:z-50">
-        <div className="navbar-start flex">
+        <div className="navbar-start flex justify-between">
           <div className="drawer lg:hidden z-50">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">

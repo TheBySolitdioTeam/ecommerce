@@ -1,5 +1,15 @@
 import { FaCartShopping, FaPaintRoller, FaTextWidth, FaTextHeight } from 'react-icons/fa6'
 import { useLocation, useLoaderData, useFetcher, useNavigation } from 'react-router-dom'
+import { Swiper, SwiperSlide } from 'swiper/react'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+import 'swiper/css/autoplay'
+import 'swiper/css/scrollbar'
+import 'swiper/css/mousewheel'
+import { Pagination, Autoplay, Navigation } from 'swiper/modules'
+import AnimatedLayout from '../../animation/animatedLayout'
 
 export async function loader({ params }) {
   const { id } = params
@@ -27,28 +37,36 @@ export default function SingleProduct() {
   const fetcher = useFetcher()
   const product = useLoaderData()
   return (
-    <>
+    <AnimatedLayout>
       {navigation.state === 'loading' ? (
         <div className="flex justify-center w-full">
           <span className="loading loading-infinity loading-lg m-auto"></span>
         </div>
       ) : (
         <div className="flex flex-col lg:flex-row my-5 justify-center">
-          <div className="carousel carousel-center bg-neutral rounded-box  max-w-md space-x-4 p-4 m-auto lg:m-1">
+          <Swiper
+            modules={[Pagination, Navigation, Autoplay]}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            navigation
+            loop={true}
+            slidesPerView={1}
+            pagination={{ clickable: true }}
+            spaceBetween={50}
+            className="w-full flex items-center justify-center"
+          >
             {product.images.split(';').map((image) => (
-              <div
-                key={Math.random() * 10e9}
-                className="carousel-item max-h-screen"
-              >
+              <SwiperSlide key={Math.random() * 10e9}>
                 <img
                   src={'https://api.mobilium.info/' + image}
-                  className="rounded-box max-w-96"
-
+                  className="m-auto max-h-96"
                   alt="Tailwind CSS Carousel component"
                 />
-              </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
           <div className="card bg-base-100 p-5 lg:p-0 lg:max-w-96 shadow-xl">
             <div className="card-body">
               <h2 className="card-title">
@@ -170,6 +188,6 @@ export default function SingleProduct() {
           </div>
         </div>
       )}
-    </>
+    </AnimatedLayout>
   )
 }

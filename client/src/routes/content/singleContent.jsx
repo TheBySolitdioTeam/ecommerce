@@ -13,7 +13,7 @@ import AnimatedLayout from "../../animation/animatedLayout"
 export async function loader({ params }) {
   const { id } = params
 
-  //console.log(`http:localhost:5500/admin/product/${id}?type=${type}`)
+  
 
   try {
     const response = await fetch(
@@ -50,7 +50,7 @@ export default function SingleContent() {
             slidesPerView={1}
             pagination={{ clickable: true }}
             spaceBetween={50}
-            className="w-full max-h-screen"
+            className="w-full max-h-[500px]"
           >
             {singleContent.images.map((item) => (
               <SwiperSlide key={item}>

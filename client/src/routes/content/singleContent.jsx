@@ -57,7 +57,7 @@ export default function SingleContent() {
           ))}
         </Swiper>
         <div className="p-10">
-          <h1 className="text-2xl my-3 border-b-2 border-primary lg:text-4xl"> {singleContent.name} </h1>
+          <h1 className="text-3xl my-3 border-b-2 border-primary font-bold lg:text-5xl"> {singleContent.name} </h1>
           <p className=""> {singleContent.details} </p>
         </div>
       </div>

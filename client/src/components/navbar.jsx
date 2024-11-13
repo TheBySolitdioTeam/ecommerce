@@ -130,6 +130,34 @@ export default function Navbar({ user, cart }) {
               >
                 Produits
               </NavLink>
+              <li>
+                <NavLink
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? ' bg-primary text-base-100'
+                      : isPending
+                      ? ' bg-secondary'
+                      : ''
+                  }
+                  to="/content/projects"
+                >
+                  Projets
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? ' bg-primary text-base-100'
+                      : isPending
+                      ? ' bg-secondary'
+                      : ''
+                  }
+                  to="/content/collections"
+                >
+                  Collections
+                </NavLink>
+              </li>
             </li>
           </ul>
         </div>

@@ -57,7 +57,7 @@ export default function GetAllClientCollections() {
   }
     return (
       <AnimatedLayout>
-        <div className="flex flex-col justify-center my-5">
+        <div className="flex flex-col justify-center my-5 p-10">
           <div className="flex justify-center">
             <h1 className="text-2xl"> Nos Collections</h1>
           </div>

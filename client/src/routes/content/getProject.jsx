@@ -57,7 +57,7 @@ export default function GetAllClientProjects() {
   }
     return (
       <AnimatedLayout>
-        <div className="flex flex-col justify-center my-5">
+        <div className="flex flex-col justify-center my-5 p-10">
           <div className="flex justify-center">
             <h1 className="text-2xl"> Nos Projets</h1>
           </div>

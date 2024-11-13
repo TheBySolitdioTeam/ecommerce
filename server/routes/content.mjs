@@ -1,5 +1,5 @@
 import express, { Router } from 'express'
-import Content from '../../models/content.mjs'
+import Content from '../models/content'
 const router = Router()
 router.use(express.json())
 

@@ -15,6 +15,7 @@ import stripeRouter from './routes/stripe.mjs'
 import ordersRouter from './routes/orders.mjs'
 import profileRouter from './routes/userProfile.mjs'
 import salesClientRouter from './routes/saleClient.mjs'
+import contentRouter from './routes/content.mjs'
 
 
 
@@ -71,13 +72,13 @@ app.use('/categories', categoriesRouter)
 app.use('/addresses', addressesRouter)
 app.use('/orders', ordersRouter)
 app.use('/sales', salesClientRouter)
+app.use('/contents', contentRouter)
 const port = process.env.PORT || 5500
 
 app.get("/", (req, res) => {
     res.send("Hello, homepage here!")
 })
 
-
 app.listen(port, () => {
-    console.log("Listening to port 5500!");
+    console.log("Listening to port 5500!")
 })

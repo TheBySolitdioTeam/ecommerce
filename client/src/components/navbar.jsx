@@ -19,10 +19,7 @@ export default function Navbar({ user, cart }) {
                 htmlFor="my-drawer"
                 className="btn btn-outline hover:bg-primary drawer-button"
               >
-                <FaBars
-                 
-                  className=" h-5 w-5"
-                />
+                <FaBars className=" h-5 w-5" />
               </label>
             </div>
             <div className="drawer-side">
@@ -33,7 +30,7 @@ export default function Navbar({ user, cart }) {
               ></label>
               <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                 {/* Sidebar content here */}
-                <li>
+                <li className="border-y-2 p-1 text-xl">
                   {user.msg ? (
                     <NavLink
                       className={({ isActive, isPending }) =>
@@ -51,7 +48,7 @@ export default function Navbar({ user, cart }) {
                     <NavLink to="/admin/products/">Compte</NavLink>
                   )}
                 </li>
-                <li>
+                <li className="border-y-2 p-1 text-xl">
                   <NavLink
                     className={({ isActive, isPending }) =>
                       isActive

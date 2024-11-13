@@ -30,7 +30,7 @@ export default function Navbar({ user, cart }) {
               ></label>
               <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                 {/* Sidebar content here */}
-                <li className="border-y-2 p-1 text-xl">
+                <li className="border-primary border-y-2 p-1 text-xl">
                   {user.msg ? (
                     <NavLink
                       className={({ isActive, isPending }) =>
@@ -48,7 +48,7 @@ export default function Navbar({ user, cart }) {
                     <NavLink to="/admin/products/">Compte</NavLink>
                   )}
                 </li>
-                <li className="border-y-2 p-1 text-xl">
+                <li className="border-primary border-y-2 p-1 text-xl">
                   <NavLink
                     className={({ isActive, isPending }) =>
                       isActive
@@ -60,6 +60,34 @@ export default function Navbar({ user, cart }) {
                     to="/product/type?name=product"
                   >
                     Produits
+                  </NavLink>
+                </li>
+                <li className="border-primary border-y-2 p-1 text-xl">
+                  <NavLink
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? ' bg-primary text-base-100'
+                        : isPending
+                        ? ' bg-secondary'
+                        : ''
+                    }
+                    to="/content/projects"
+                  >
+                    Projets
+                  </NavLink>
+                </li>
+                <li className="border-primary border-y-2 p-1 text-xl">
+                  <NavLink
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? ' bg-primary text-base-100'
+                        : isPending
+                        ? ' bg-secondary'
+                        : ''
+                    }
+                    to="/content/collections"
+                  >
+                    Collections
                   </NavLink>
                 </li>
               </ul>

@@ -68,6 +68,10 @@ import GetAllProjects, {loader as viewProjectsLoader} from './routes/admin/route
 import GetAllCollections, {loader as viewCollectionsLoader} from './routes/admin/routes/content/viewCollections'
 import EditContent, { action as editContentAction, loader as editContentLoader } from './routes/admin/routes/content/editContent'
 import {action as deleteContentAction} from './routes/admin/routes/content/deleteContent'
+import GetAllClientProjects, {loader as clientProjectsLoader} from './routes/content/getProject'
+import GetAllClientCollections, {
+  loader as clientCollectionsLoader,
+} from './routes/content/getCollections'
 //import {loader as last6Loader} from './routes/product/last6Loader'
 //import loader from 'css-loader'
 //import loader from 'css-loader'
@@ -89,6 +93,18 @@ const router = createBrowserRouter([
       {
         path: '/sales/loader',
         lazy: () => import('./lazyloaders/getHomeSales'),
+      },
+      {
+        path: "/content/projects",
+        element: <GetAllClientProjects />,
+        errorElement: <ErrorPage />,
+        loader: clientProjectsLoader
+      },
+      {
+        path: "/content/collections",
+        element: <GetAllClientCollections />,
+        errorElement: <ErrorPage />,
+        loader: clientCollectionsLoader
       },
       {
         path: '/product',

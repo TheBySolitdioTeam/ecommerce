@@ -19,14 +19,10 @@ router.post("/login/email", passport.authenticate('magiclink', { action: 'reques
 
 router.get("/login/email/verify", passport.authenticate('magiclink', { successReturnToOrRedirect: 'https://mobilium.info/' , failureMessage: 'Token Invalid'}))
 
-
-
 // Get Login status
-
 router.get("/login/status", (req, res) => {
   req.user ? res.send(req.user) : res.send({msg: 'You are not logged in!'})
 })
-
 
 //logout
 router.post('/logout', function (req, res, next) {

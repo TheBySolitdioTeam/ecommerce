@@ -1,59 +1,77 @@
 import passport from 'passport'
 import MagicLink from 'passport-magic-link'
-import sendgrid from '@sendgrid/mail'
+import brevo from '@getbrevo/brevo'
 import Users from '../models/users.mjs'
 import {} from 'dotenv/config'
-import mongoose from 'mongoose'
 
 const MagicLinkStrategy = MagicLink.Strategy
- 
 
+// set the email parameters up
+let defaultClient = brevo.ApiClient.instance
 
-sendgrid.setApiKey(process.env.SENDGRID_API_KEY)
+let apiKey = defaultClient.authentications['api-key']
+
+let apiInstance = new brevo.TransactionalEmailsApi()
+
+apiKey.apiKey = process.env.BREVO_API_KEY
+
+let sendSmtpEmail = new brevo.SendSmtpEmail()
 
 passport.use(
   new MagicLinkStrategy(
     {
       secret: 'keyboard cat',
-      userFields: ['email','id'],
+      userFields: ['email', 'id'],
       tokenField: 'token',
       verifyUserAfterToken: true,
     },
     function send(user, token) {
-      var link = 'https://api.mobilium.info/auth/login/email/verify?token=' + token
-      var msg = {
-        to: user.email,
-        from: process.env.EMAIL,
-        subject: 'Connectez-vous sur Mobilium',
-        text:
-          'Salut! Cliquez sur le lien ci-dessous pour vous connecter sur Mobilium.\r\n\r\n' +
-          link,
-        html:
-          '<h3>Salut!</h3><p>Cliquez sur le lien ci-dessous pour vous connecter sur Mobilium.</p><p><a href="' +
-          link +
-          '">Cliquez ici</a></p>',
-      }
-      return sendgrid.send(msg)
+       var link = 'https://api.mobilium.info/auth/login/email/verify?token=' + token
+       sendSmtpEmail.subject = 'Login to Mobilium!'
+       sendSmtpEmail.htmlContent =
+         '<h3>Hello!</h3><p>Cliquez sur le lien ci-dessous pour vous connecter sur Mobilium.</p><p><a href="' +
+         link +
+         '">Connectez-vous</a></p>'
+       sendSmtpEmail.sender = {
+         name: 'Solitdio',
+         email: process.env.SENDER_EMAIL,
+       }
+       sendSmtpEmail.to = [{ email: user.email }]
+       sendSmtpEmail.replyTo = {
+         email: process.env.SENDER_EMAIL,
+         name: 'Solitdio',
+       }
+
+       apiInstance.sendTransacEmail(sendSmtpEmail).then(
+         function (data) {
+           console.log(
+             'API called successfully. Returned data: ' + JSON.stringify(data)
+           )
+         },
+         function (error) {
+           console.error(error)
+         }
+       )
     },
     async function verify(user) {
       try {
         const check = await Users.findOne({ email: user.email })
-         if (!check) {
-           const userPrototype = { email: user.email }
-           console.log(user.id)
-           if (user.id !== 'no guest') {
-             user.id = mongoose.Types.ObjectId.createFromHexString(user.id)
-           } else {
-             user.id = new mongoose.Types.ObjectId()
-           }
-           userPrototype._id = user.id
+        if (!check) {
+          const userPrototype = { email: user.email }
+          console.log(user.id)
+          if (user.id !== 'no guest') {
+            user.id = mongoose.Types.ObjectId.createFromHexString(user.id)
+          } else {
+            user.id = new mongoose.Types.ObjectId()
+          }
+          userPrototype._id = user.id
 
-           const newUser = new Users(userPrototype)
-           await newUser.save()
-           return new Promise(function (resolve, reject) {
-             return resolve(newUser)
-           })
-         }
+          const newUser = new Users(userPrototype)
+          await newUser.save()
+          return new Promise(function (resolve, reject) {
+            return resolve(newUser)
+          })
+        }
         return new Promise(function (resolve, reject) {
           return resolve(check)
         })
@@ -67,7 +85,14 @@ passport.use(
 )
 passport.serializeUser(function (user, cb) {
   process.nextTick(function () {
-    cb(null, { id: user.id, email: user.email, isAdmin: user.isAdmin, fullName: user.fullName, picture: user.picture, phone: user.phone })
+    cb(null, {
+      id: user.id,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      fullName: user.fullName,
+      picture: user.picture,
+      phone: user.phone,
+    })
   })
 })
 

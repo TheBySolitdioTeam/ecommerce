@@ -26,9 +26,8 @@ passport.use(
       verifyUserAfterToken: true,
     },
     function send(user, token) {
-      var link =
-        "http://localhost:5173/auth/login/email/verify?token=' + token"
-       /*var link = 'https://api.mobilium.info/auth/login/email/verify?token=' + token*/
+      
+       var link = 'https://api.mobilium.info/auth/login/email/verify?token=' + token
        sendSmtpEmail.subject = 'Login to Mobilium!'
        sendSmtpEmail.htmlContent =
          '<h3>Hello!</h3><p>Cliquez sur le lien ci-dessous pour vous connecter sur Mobilium.</p><p><a href="' +

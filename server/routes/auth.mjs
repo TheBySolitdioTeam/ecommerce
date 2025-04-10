@@ -21,7 +21,7 @@ router.get("/login/email/verify", passport.authenticate('magiclink', { successRe
 
 // Get Login status
 router.get("/login/status", (req, res) => {
-  console.log(req.headers.cookie);
+  console.log(req.headers);
   req.user ? res.send(req.user) : res.send({msg: `You are not logged in!`})
 })
 

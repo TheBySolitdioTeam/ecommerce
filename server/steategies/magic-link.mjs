@@ -21,7 +21,7 @@ let sendSmtpEmail = new brevo.SendSmtpEmail()
 passport.use(
   new MagicLinkStrategy(
     {
-      secret: 'yes',
+      secret: 'keyboard cat',
       userFields: ['email', 'id'],
       tokenField: 'token',
       verifyUserAfterToken: true,

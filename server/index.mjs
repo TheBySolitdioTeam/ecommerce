@@ -25,7 +25,7 @@ const corsOptions = {
     'https://mobilium.info',
     'http://localhost:5173',
   ],
-
+  
   credentials: true,
   optionsSuccessStatus: 200,
 }
@@ -43,14 +43,11 @@ try {
 const app = express()
 app.use(cors(corsOptions))
 
-app.use(cookieParser('yes'))
+app.use(cookieParser('keyboard cat'))
 app.use(
   session({
     secret: 'keyboard cat',
     resave: false,
-    cookie: {
-      sameSite: 'lax'
-    },
     saveUninitialized: false,
     store: MongoStore.create({
       client: mongoose.connection.getClient(),

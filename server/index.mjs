@@ -43,7 +43,7 @@ try {
 const app = express()
 app.use(cors(corsOptions))
 
-app.use(cookieParser('yes'))
+app.use(cookieParser('keyboard cat'))
 app.use(
   session({
     secret: 'keyboard cat',

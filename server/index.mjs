@@ -48,6 +48,9 @@ app.use(
   session({
     secret: 'keyboard cat',
     resave: false,
+    cookie: {
+      sameSite: 'lax'
+    },
     saveUninitialized: false,
     store: MongoStore.create({
       client: mongoose.connection.getClient(),

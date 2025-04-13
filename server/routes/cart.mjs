@@ -70,6 +70,7 @@ router.post('/', async (req, res) => {
     try {
       //console.log(existingCart.subtotal)
       await Cart.findByIdAndUpdate(existingCart._id, existingCart)
+      console.log(existingCart);
       return res.send({ msg: 'Panier mis a jour', user_id })
     } catch (error) {
       return res.send({ error: error.message })
@@ -79,7 +80,7 @@ router.post('/', async (req, res) => {
     const items = [newItem]
     const newCart = new Cart({ user_id, items, subtotal })
     await newCart.save()
-    console.log(user_id)
+    console.log(newCart)
     return res.send({ msg: 'Panier cree!', user_id })
   } catch (error) {
     return res.send({ error: error.message })
@@ -96,6 +97,7 @@ router.get('/', async (req, res) => {
     query.user_id = req.user.id
   }
   try {
+    //console.log(query)
     const cart = await Cart.findOne(query)
     if (!cart) return res.send({ error: 'Panier vide!' })
     return res.send(cart)

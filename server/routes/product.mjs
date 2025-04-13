@@ -26,24 +26,34 @@ router.get("/", async (req, res) => {
     const { cursor, limit, type, price } = req.query
    // console.log(price)
     const query = {}
-    let filter = null
+    let filter = {limit: Number(limit)}
     if (cursor) {
         query._id = {$gt: cursor}
     }
     if (price === 'asc') {
-      filter = { sort: { price: 1 } }
+      filter.sort = { sort: { price: 1 } }
     }
     if (price === 'desc') {
-     filter = { sort: { price: -1 } }
+     filter.sort = { sort: { price: -1 } }
     }
     //console.log(filter);
     try {
-        const items = await pickType(type).find(query,null,filter).limit(Number(limit))
+        const items = await Product.find(query,null,filter)
         return res.send(items)
         
     } catch (error) {
         return res.send({error: error.message})
     }
+})
+
+// just get all the products
+router.get("/all", async (req, res) => {
+  try {
+    const allProducts = await Product.find({}, null,{sort: {_id:-1}});
+    return res.send(allProducts)
+  } catch (error) {
+    return res.send({error: error.message})
+  }
 })
 
 // get by Search terms

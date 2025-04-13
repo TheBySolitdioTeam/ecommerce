@@ -37,7 +37,7 @@ const categoryAfterImgUpload = async (req, res) => {
   try {
     // Check for duplicates of name
     const duplicate = await Category.find({
-      name: { $regex: new RegExp(`^${data.name}$`), $options: 'i' },
+      name: { $regex: data.name },
     })
 
     if (duplicate.length !== 0)
@@ -46,6 +46,7 @@ const categoryAfterImgUpload = async (req, res) => {
     const category = new Category(data)
 
     await category.save()
+    console.log(category)
     return res.status(201).send(category)
   } catch (error) {
     return res.status(500).send({ error: error.message })
@@ -59,6 +60,7 @@ const router = Router()
 
 
 // category CRUD Section
+// Create category without an image
 
 
 
@@ -74,12 +76,7 @@ router.post(
   categoryAfterImgUpload
 )
 
-// Create category without an image
-router.post(
-  '/',
-  checkSchema(categoryValidationSchema, ['body']),
-  categoryAfterImgUpload
-)
+
 
 // Edit category with image
 router.put(
@@ -112,6 +109,11 @@ router.put(
 )
 router.use(express.json())
 // Edit Category without image
+router.post(
+  '/',
+  checkSchema(categoryValidationSchema, ['body']),
+  categoryAfterImgUpload
+)
 
 router.patch('/:id', checkSchema(categoryValidationSchema,['body']), async (req, res) => {
   const { id } = req.params

@@ -10,8 +10,13 @@ const router = Router()
 
 router.get("/", async (req, res) => {
     try {
-        const allCategories = await Category.find()
-        return res.send(allCategories)
+      const allCategories = await Category.find()
+      const data = allCategories.map(item => {
+        item.image = "http://localhost:5500/" + item.image
+        return item
+      })
+      /*console.log(data);*/
+        return res.send(data)
     } catch (error) {
         return res.send({error: error.message})
     }

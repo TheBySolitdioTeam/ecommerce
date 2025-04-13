@@ -83,7 +83,6 @@ toast.dismiss()
                 type="file"
                 className="file-input file-input-bordered w-full max-w-xs"
                 name="image"
-                
               />
             </div>
             <div className="form-control">

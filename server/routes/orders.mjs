@@ -7,17 +7,14 @@ const router = Router()
 
 
 router.get("/", async (req, res) => {
-    const { cursor, limit } = req.query
     const query = {}
     if (!req.user.isAdmin) {
         query['user.user_id'] = req.user.id
     }
-    if (cursor) {
-        query._id = {$gt: cursor}
-    }
+   
     
     try {
-        const data = await Orders.find(query,null, {limit: Number(limit), sort: {_id: -1}})
+        const data = await Orders.find(query,null, { sort: {_id: -1}})
         return res.send(data)
         
     } catch (error) {

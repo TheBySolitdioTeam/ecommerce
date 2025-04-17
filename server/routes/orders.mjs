@@ -11,10 +11,9 @@ router.get("/", async (req, res) => {
     if (!req.user.isAdmin) {
         query['user.user_id'] = req.user.id
     }
-   
-    
     try {
         const data = await Orders.find(query,null, { sort: {_id: -1}})
+        console.log(data)
         return res.send(data)
         
     } catch (error) {

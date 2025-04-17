@@ -138,7 +138,12 @@ router.put("/:id", upload.single("image"), checkSchema(salesValidationSchema), a
   if (!toBeModified) return res.send({ error: `Pas de promotion avec ID: ${id}` })
   
   // delete the image
-  toBeModified.image !== "default.webp" ? fs.unlinkSync(destination + toBeModified.image) : ''
+  try {
+    toBeModified.image !== "default.webp" ? fs.unlinkSync(destination + toBeModified.image) : ''
+  } catch (error) {
+    
+  }
+ 
   // validation results
   const results = validationResult(req)
 

@@ -86,6 +86,21 @@ router.patch("/:id", async (req, res) => {
     
 })
 
+router.delete("/:id", async(req,res) => {
+    const {id} = req.params 
+
+    const order = await Orders.findById(id)
+    if(!order) return res.send({error: 'Order does not exist'})
+
+    try {
+        await Orders.findByIdAndDelete(id)
+        return res.send({msg: 'Order deleted!'})
+    } catch (error) {
+        return res.send({error: error.message})
+    }
+
+})
+
 
 
 export default router

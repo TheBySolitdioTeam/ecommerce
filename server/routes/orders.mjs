@@ -13,8 +13,7 @@ router.get("/", async (req, res) => {
     }
     try {
         const data = await Orders.find(query,null, { sort: {_id: -1}})
-       //console.log(data)
-       
+        //console.log(data)
         return res.send(data)
         
     } catch (error) {

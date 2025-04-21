@@ -121,9 +121,9 @@ router.get('/sales/:salesId', async (req, res) => {
   }
 })
 // Get last 6 products
-router.get("/last6", async (req, res) => {
+router.get("/last10", async (req, res) => {
   try {
-    const last6 = await Product.find().sort({ _id: -1 }).limit(6)
+    const last6 = await Product.find().sort({ _id: -1 }).limit(10)
     return res.send(last6)
     
   } catch (error) {

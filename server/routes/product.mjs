@@ -81,6 +81,29 @@ router.get("/search", async (req, res) => {
         return res.send({error: error.message})
     }
 })
+
+router.get("/sales", async(req,res) => {
+  const { cursor, limit, price } = req.query
+
+  const query =  {onSale: {$ne: null}}
+  const filter = { limit: Number(limit) }
+  if (cursor) {
+    query._id = { $gt: cursor }
+  }
+  if (price === 'asc') {
+    filter.sort = { price: 1 }
+  }
+  if (price === 'desc') {
+    filter.sort = { price: -1 }
+  }
+  try {
+    const allProductsOnSale = await  Product(query, null, filter)
+    return res.send(allProductsOnSale)
+    
+  } catch (error) {
+    return res.send({error: error.message})
+  }
+})
 //
 router.get("/single/:id", async (req, res) => {
   const { id } = req.params

@@ -97,7 +97,7 @@ router.get("/sales", async(req,res) => {
     filter.sort = { price: -1 }
   }
   try {
-    const allProductsOnSale = await  Product(query, null, filter)
+    const allProductsOnSale = await Product.find(query, null, filter)
     console.log(allProductsOnSale)
     return res.send(allProductsOnSale)
     

@@ -98,6 +98,7 @@ router.get("/sales", async(req,res) => {
   }
   try {
     const allProductsOnSale = await  Product(query, null, filter)
+    console.log(allProductsOnSale)
     return res.send(allProductsOnSale)
     
   } catch (error) {

@@ -96,7 +96,12 @@ router.put(
       const checkCategory = await Category.findById(id)
       if (!checkCategory) return res.status(404).send({ error: 'Category not found!' })
       // Delete previous image if exists
+    try {
       checkCategory.image ? fs.unlinkSync(destinacion + checkCategory.image) : ''
+    } catch (error) {
+      
+    }
+      
       
       
       await Category.findByIdAndUpdate(id,data)

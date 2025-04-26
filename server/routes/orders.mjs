@@ -36,7 +36,8 @@ router.post("/", checkIfConnected, async (req, res) => {
     };
 
     // get cart from user._id
-    const cart = await Cart.find({ user_id: req.user.id })[0];
+    let cart = await Cart.find({ user_id: req.user.id });
+    cart = cart[0];
     const items = cart.items;
     const total = calculateOrderAmount(items);
     const payment = "cash";
